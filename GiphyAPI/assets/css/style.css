@@ -1,0 +1,27 @@
+body {
+   
+    /* IMPORTANT you are in the CSS folder when the CSS is loaded.  You have to go back to the root directory to access the images folder */
+    background-image: url("../images/dust_scratches.png");
+}
+.card{
+   /* letter-spacing: 10px;  */
+    font-family: 'Arial', Times, 'Times New Roman', serif;
+    font-size: 15px;
+    font-weight: normal;
+    padding: 15px 15px 15px 15px;
+}
+
+#buttons{
+    padding: 10px 10px 10px 10px; 
+
+}
+
+.buttons{
+     padding: 15px 50px 15px 50px;
+     margin: 15px;
+}
+
+.jumbotron {
+    padding: 5px 0px 5px 0px; 
+    margin: 0px;
+}
