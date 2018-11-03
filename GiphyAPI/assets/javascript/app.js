@@ -1,5 +1,7 @@
-//Creates the topics array.  In this case the topics is animals.
-var topics = ['cat', 'dog', 'mouse'];
+//Creates the topics array.  In this case the topics chosen is animals.
+var topics = ['horse', 'chicken', 'sheep'];
+//The default number of results your want to retrieve from the API.
+var numOfResults = 10;
 
 window.onload = function () {
     //Creates the buttons upon initial load.
@@ -12,7 +14,7 @@ function renderButtons() {
 
     //Clears the buttons section
     $("#buttons").empty();
-    
+
     //Loop through the topics array and create the buttons
     for (i = 0; i < topics.length; i++) {
         var btn = $("<button>");
@@ -33,7 +35,7 @@ function renderButtons() {
 
         //Create the query string for AJAX.
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            animal + "&api_key=a384HNqs84h74YB4YqRBw48a61eThTGS&limit=10";
+            animal + "&api_key=a384HNqs84h74YB4YqRBw48a61eThTGS&limit=" + numOfResults;
 
         $.ajax({
             url: queryURL,
@@ -45,51 +47,75 @@ function renderButtons() {
             //Loop through the array object.
             for (var i = 0; i < results.length; i++) {
                 //Sets up the tabular formatting 
-                var $animalDivRow = $("<div>");
-                $animalDivRow.addClass("row");
-                
-                var $animalDiv = $("<div>");
-                $animalDiv.addClass("col-lg-4 card ");
-    
-                var  $animalTagsDiv = $("<div>");
-                $animalTagsDiv.addClass("col-lg-8 card text-left");
+                var $imageDivRow = $("<div>");
+                $imageDivRow.addClass("row");
 
-                var $animalImage = $("<img>");
+                var $imageDiv = $("<div>");
+                $imageDiv.addClass("col-lg-4 card ");
+
+                var $imagePropertiesDiv = $("<div>");
+                $imagePropertiesDiv.addClass("col-lg-8 card text-left");
+
+                var $image = $("<img>");
                 //Retrieves the "still" (non animated image from the object
-                $animalImage.attr("src", results[i].images.fixed_height_still.url);
-                '
+                $image.attr("src", results[i].images.fixed_height_still.url);
+                // Sets the data-state attribute for the image as "still".  The data-state
+                // attribute will be used to store the current toggle value of "still"
+                // or "animate" depending on user intervention.
+                $image.attr("data-state", "still");
+                // Sets the data-still attribute to the still image retreived from the object.
+                $image.attr("data-still", results[i].images.fixed_height_still.url);
+                // Sets the data-still attribute to the animated image retreived from the object.
+                $image.attr("data-animate", results[i].images.fixed_height.url);
+                // Sets ID.
+                $image.attr("id", "animal-img");
+                //Appends to the the div that displays the image.
+                $imageDiv.append($image);
+                //Retrieves various properties from the object and appends them to the div that 
+                //displays the properties.
+                $imagePropertiesDiv.append("Title: " + results[i].title + "<br>");
+                $imagePropertiesDiv.append("Rating: " + results[i].rating + "<br>");
+                $imagePropertiesDiv.append("Image Type: " + results[i].type + "<br>");
+                $imagePropertiesDiv.append("ID: " + results[i].id + "<br>");
+                $imagePropertiesDiv.append("Source: " + results[i].source + "<br>");
+                $imagePropertiesDiv.append("Still Image: " + results[i].images.fixed_height_still.url + "<br>");
+                $imagePropertiesDiv.append("Still Image Dimensions: " + results[i].images.fixed_height_still.width + "px (w) x " + results[i].images.fixed_height_still.height + "px (h)<br>");
+                $imagePropertiesDiv.append("Animated Image: " + results[i].images.fixed_height.url + "<br>");
+                $imagePropertiesDiv.append("Animated Image Dimensions: " + results[i].images.fixed_height.width + "px (w) x " + results[i].images.fixed_height.height + "px (h)<br>");
+                $imagePropertiesDiv.append("Import Date and Time: " + results[i].import_datetime + "<br>");
                 
-                $animalImage.attr("data-state", "still");
-                $animalImage.attr("data-still", results[i].images.fixed_height_still.url);
-                $animalImage.attr("data-animate", results[i].images.fixed_height.url);
-                $animalImage.attr("id", "animal-img");
-                $animalDiv.append($animalImage);
+                //Appends the image div to the main row div
+                $imageDivRow.append($imageDiv);
 
-                $animalTagsDiv.append("Title: " + results[i].title + "<br>");
-                $animalTagsDiv.append("Rating: " + results[i].rating + "<br>");
-                $animalTagsDiv.append("Image Type: " + results[i].type + "<br>");
-                $animalTagsDiv.append("Source: " + results[i].source + "<br>");
-                $animalTagsDiv.append("Still image: " + results[i].images.fixed_height_still.url + "<br>");
-                $animalTagsDiv.append("Animated image: " + results[i].images.fixed_height.url + "<br>");
-                 
-                $animalDivRow.append($animalDiv);
-                $animalDivRow.append($animalTagsDiv);
-
-                $("#gifs-appear-here").append($animalDivRow);
-                   
-                
-
+                //Appends the image properties div to the main row div.
+                $imageDivRow.append($imagePropertiesDiv);
+                //Appends the row to the section that diplays the image and image properties.
+                $("#gifs-appear-here").append($imageDivRow);
 
             } // End of For loop
-            
+
+            //Add the on click event to the images.
             $("img").on("click", function () {
-      
+
+                //If the data state attribute of the image is "still"
                 if ($(this).attr("data-state") === "still") {
+                    //Set the data state attribute to "animate". 
+                    //The data-state attribute is a toggle between "still" and "animate"
                     $(this).attr("data-state", "animate");
+                    //Set the image source to the url with the animate image that was set earlier
+                    //in the data-animate attribute.
                     $(this).attr("src", $(this).attr("data-animate"));
 
-                } else {
+                }
+                //If the data state attribute of the image is not "still" 
+                //The only other option is "animate" so this is
+                //If the data state attribute of the image is "attribute"
+                else {
+                    //Set the data state attribute to "still". 
+                    //The data-state attribute is a toggle between "still" and "animate"
                     $(this).attr("data-state", "still");
+                    //Set the image source to the url with the still image that was set earlier
+                    //in the data-still attribute.
                     $(this).attr("src", $(this).attr("data-still"));
 
                 }
@@ -102,22 +128,25 @@ function renderButtons() {
 
 } // End of renderButtons function
 
-//Add the input text as a button.
+//Add the input text as a button upon click of the Add button
 $("#add-animal").on("click", function (event) {
     event.preventDefault();
-
     // This line grabs the input from the textbox
     var animal = $("#input-animal").val().trim();
 
-    // The movie from the textbox is then added to our array
-    topics.push(animal);
+    if (animal !== '') {
 
-    // Calling renderButtons which handles the processing of our movie array
-    renderButtons();
+        // The animal name from the textbox is then added to the topics array
+        topics.push(animal);
+
+        // Calling renderButtons which handles the processing of the topics array.
+        renderButtons();
+    }
 });
 
+//Clear the current GIFs displayed in the GIF display section upon click of the Clear button.
 $("#clear-gifs").on("click", function (event) {
     event.preventDefault();
-
+    //Clears the GIF display section.
     $("#gifs-appear-here").empty();
 });

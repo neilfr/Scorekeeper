@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Animal Buttons</title>
-   
+
   <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
@@ -12,17 +12,18 @@
 
 <body>
 
-    <div class="jumbotron">
-        <h1 class="text-center"> Giphy API</h1>
-    
-      </div>
-    
-  
+  <div class="jumbotron">
+    <h1 class="text-center"> Giphy API</h1>
+
+  </div>
+
+
   <div class="container">
-  <div class="row">
+    <div class="row">
       <div class="col-lg-8">
         <div class="card text-center">
-          <b>List of Animals - Click on an animal name to show the related GIFs retrieved from Giphy API.</b>
+          <b>List of Animals </b> <br>Click on an animal name to show the related GIFs retrieved from Giphy API. Note that newer
+          images will appear at the bottom.
           <div id="buttons">
 
           </div>
@@ -31,42 +32,46 @@
       </div>
 
       <div class="col-lg-4">
-          <div class="card text-center">
-           
-           
-                <label for="input">Enter an animal into the box below that you would like added to the list and click the green Add button.</label>
-                <input type="text" id="input-animal"><br>
-          
-                <!-- Button triggers new movie to be added -->
-                <input id="add-animal" class="btn btn-success" type="submit" value="Add"><br>
-                <input id="clear-gifs" class="btn btn-danger" type="submit" value="Clear current GIFs">
-          </div>
-  
+        <div class="card text-center">
+
+
+          <label for="input">Enter an animal into the box below that you would like added to the list and click the
+            green Add button.</label>
+          <input type="text" id="input-animal"><br>
+
+          <!-- Button triggers new movie to be added -->
+          <input id="add-animal" class="btn btn-success" type="submit" value="Add"><br>
+
+          <label for="clear-gifs">Click the "Clear current GIFs" button below to clear the current GIFs that are displayed.</label>
+
+          <input id="clear-gifs" class="btn btn-danger" type="submit" value="Clear">
         </div>
+
+      </div>
 
     </div> <!-- end of row -->
 
     <div class="row">
 
-          <div class="col-lg-12">
-              <div class="card text-center">
-                <b>GIFs will appear below - You can toggle the GIF animation by clicking on the image. </b>
-              <div id="gifs-appear-here">
-                
-                           
-              </div>
+      <div class="col-lg-12">
+        <div class="card text-center">
+          <b>GIFs will appear below </b> <br> You can toggle the animation of the GIF by clicking on the image.
+          <div id="gifs-appear-here">
+
+
+          </div>
         </div>
 
       </div> <!-- end of row -->
 
-  </div> <!-- end of container-->
+    </div> <!-- end of container-->
 
 
-  <!-- jQuery -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <!-- Script -->
-  <script type="text/javascript" src="./assets/javascript/app.js"></script>
+    <!-- Script -->
+    <script type="text/javascript" src="./assets/javascript/app.js"></script>
 
 </body>
 
