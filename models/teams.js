@@ -1,57 +1,47 @@
-module.exports = function(sequelize, DataTypes) {
-    var Teams = sequelize.define("teams", {
-  
-      teamName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [1]
-        }
-      },
-     
-    });
-  
-    Teams.associate = function(models) {
-      models.Teams.hasMany(models.Players,{
-        //onDelete: "cascade"
-      });
-    };
-  
-    Teams.associate = function(models) {
-      models.Teams.hasMany(models.Goals,{
-        //onDelete: "cascade"
-      });
-    };
+module.exports = function (sequelize, DataTypes) {
+  var Teams = sequelize.define("Teams", {
 
-    Teams.associate = function(models) {
-        models.Teams.hasMany(models.Penalties,{
-          //onDelete: "cascade"
-        });
-      };
+    teamName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+
+  });
+
+  Teams.associate = function (models) {
     
-    Teams.associate = function(models) {
-        models.Teams.hasMany(models.Games,{
-          //onDelete: "cascade"
-         foreignKey: 'homeTeamId'
-        });
-      };
+    models.Teams.hasMany(models.Players, {
 
-      Teams.associate = function(models) {
-        models.Teams.hasMany(models.Games,{
-          //onDelete: "cascade"
-         foreignKey: 'visitorTeamId'
-        });
-      };
+    });
+ 
 
 
-//       Team.hasOne(Game, {as: 'HomeTeam', foreignKey : 'homeTeamId'});
-// Team.hasOne(Game, {as: 'AwayTeam', foreignKey : 'awayTeamId'});
+    models.Teams.hasMany(models.Goals, {
+      
+    });
 
-//Game.belongsTo(Team);
-   
-  
-        
-      return Teams;
-  };
-  
-  
+    // models.Teams.belongsTo(models.Games, {
+      
+    // });
+
+
+  // models.Teams.hasMany(models.Penalties, {
+  //   //onDelete: "cascade"
+  // });
+
+
+};
+
+
+  //       Team.hasOne(Game, {as: 'HomeTeam', foreignKey : 'homeTeamId'});
+  // Team.hasOne(Game, {as: 'AwayTeam', foreignKey : 'awayTeamId'});
+
+  //Game.belongsTo(Team);
+
+
+
+  return Teams;
+};

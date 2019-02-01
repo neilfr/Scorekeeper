@@ -1,8 +1,8 @@
 module.exports = function(sequelize, DataTypes) {
-    var Goals = sequelize.define("goals", {
+    var Goals = sequelize.define("Goals", {
   
-      time: {
-        type: DataTypes.DATETIME,
+      goalTime: {
+        type: DataTypes.DATE,
         allowNull: false,
         validate: {
           len: [1]
@@ -11,23 +11,24 @@ module.exports = function(sequelize, DataTypes) {
      
     });
   
-    Goals.associate = function(models) {
-      models.Goals.hasMany(models.Teams,{
-        //onDelete: "cascade"
-      });
-    };
-
-    Goals.associate = function(models) {
-        models.Goals.hasMany(models.Players,{
-          //onDelete: "cascade"
-        });
-      };
+     Goals.associate = function(models) {
     
-      Goals.associate = function(models) {
-        models.Goals.hasMany(models.Games,{
-          //onDelete: "cascade"
+      models.Goals.belongsTo(models.Teams,{
+        
+      });
+
+
+    
+        models.Goals.belongsTo(models.Players,{
+          
         });
-      };
+     
+    
+     
+    //     models.Goals.hasMany(models.Games,{
+    //       //onDelete: "cascade"
+    //     });
+       };
                 
     return Goals;
   };

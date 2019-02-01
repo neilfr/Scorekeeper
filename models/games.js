@@ -1,23 +1,27 @@
-module.exports = function(sequelize, DataTypes) {
-    var Games = sequelize.define("games", {
+module.exports = function (sequelize, DataTypes) {
+  var Games = sequelize.define("Games", {
+
+    gameDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+  });
+
+  // Games.associate = function (models) {
+  //   models.Games.belongsToMany(models.Teams, {
+  //       as: 'homeTeam'
+  //   });
+  //   models.Games.belongsToMany(models.Teams, {
+  //     as: 'visitorTeam'
+  // });
+  // };
+
   
-      date: {
-        type: DataTypes.DATETIME,
-        allowNull: false,
-        validate: {
-          len: [1]
-        }
-      },
-     
-    });
-  
-    Games.associate = function(models) {
-      models.Games.hasMany(models.Teams,{
-        //onDelete: "cascade"
-      });
-    };
-                
-    return Games;
-  };
-  
-  
+
+
+
+  return Games;
+};

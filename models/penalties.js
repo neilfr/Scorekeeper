@@ -1,8 +1,8 @@
 module.exports = function(sequelize, DataTypes) {
-    var Penalties = sequelize.define("penalties", {
+    var Penalties = sequelize.define("Penalties", {
   
-      time: {
-        type: DataTypes.DATETIME,
+      penaltyTime: {
+        type: DataTypes.DATE,
         allowNull: false,
         validate: {
           len: [1]
@@ -18,25 +18,25 @@ module.exports = function(sequelize, DataTypes) {
      
     });
   
-    Penalties.associate = function(models) {
-      models.Penalties.hasMany(models.Teams,{
-        //onDelete: "cascade"
-      });
-    };
+    // Penalties.associate = function(models) {
+    //   models.Penalties.hasMany(models.Teams,{
+    //     //onDelete: "cascade"
+    //   });
+  
 
-    Penalties.associate = function(models) {
-        models.Goals.hasMany(models.Players,{
-          //onDelete: "cascade"
-        });
-      };
+   
+    //     models.Goals.hasMany(models.Players,{
+    //       //onDelete: "cascade"
+    //     });
+      
     
-      Penalties.associate = function(models) {
-        models.Goals.hasMany(models.Games,{
-          //onDelete: "cascade"
-        });
-      };
+     
+    //     models.Goals.hasMany(models.Games,{
+    //       //onDelete: "cascade"
+    //     });
+    //   };
                 
-    return Goals;
+    return Penalties;
   };
   
   
