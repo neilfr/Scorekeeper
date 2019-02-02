@@ -2,7 +2,7 @@ var db = require("../models");
 
 module.exports = function(app) {
   // Load index page
- /* app.get("/teamManager", function(req, res) {
+  /* app.get("/teamManager", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
       res.render("index", {
         msg: "Welcome!",
@@ -51,7 +51,9 @@ module.exports = function(app) {
 
   // Load playerManager page and pass in a player by id
   app.get("/player/:id", function(req, res) {
-    db.Player.findOne({ where: { id: req.params.id } }).then(function(dbPlayer) {
+    db.Player.findOne({ where: { id: req.params.id } }).then(function(
+      dbPlayer
+    ) {
       res.render("playerManager", {
         player: dbPlayer
       });
@@ -76,6 +78,17 @@ module.exports = function(app) {
       });
     });
   });
+
+  // Load gamePicker page
+  app.get("/gamePicker", function(req, res) {
+    db.Game.findAll({}).then(function(dbGames) {
+      res.render("gamePicker", {
+        msg: "Welcome!",
+        games: dbGames
+      });
+    });
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");

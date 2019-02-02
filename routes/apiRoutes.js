@@ -1,27 +1,6 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
-
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
   // Get all teams
   app.get("/api/teams", function(req, res) {
     db.Team.findAll({}).then(function(dbTeams) {
@@ -73,7 +52,9 @@ module.exports = function(app) {
 
   // Delete a player by id
   app.delete("/api/players/:id", function(req, res) {
-    db.Player.destroy({ where: { id: req.params.id } }).then(function(dbPlayer) {
+    db.Player.destroy({ where: { id: req.params.id } }).then(function(
+      dbPlayer
+    ) {
       res.json(dbPlayer);
     });
   });
