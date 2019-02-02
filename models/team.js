@@ -15,8 +15,14 @@ module.exports = function(sequelize, DataTypes) {
   };
   Team.associate = function(models) {
     models.Team.hasMany(models.Game, {
-      onDelete: "cascade"
+      as: "homeTeam",
+      foreignKey: "homeTeamId"
+    });
+    models.Team.hasMany(models.Game, {
+      as: "visitingTeam",
+      foreignKey: "visitingTeamId"
     });
   };
+
   return Team;
 };
