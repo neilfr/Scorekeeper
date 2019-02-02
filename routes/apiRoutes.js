@@ -64,6 +64,13 @@ module.exports = function(app) {
     });
   });
 
+  // Get team by id
+  app.get("/api/players/:id", function(req, res) {
+    db.Team.findOne({ where: { id: req.params.id } }).then(function(dbPlayer) {
+      res.json(dbPlayer);
+    });
+  });
+
   // Delete a player by id
   app.delete("/api/players/:id", function(req, res) {
     db.Player.destroy({ where: { id: req.params.id } }).then(function(dbPlayer) {
@@ -78,6 +85,13 @@ module.exports = function(app) {
     });
   });
 
+  // Get a game by id
+  app.get("/api/games/:id", function(req, res) {
+    db.Game.findOne({ where: { id: req.params.id } }).then(function(dbGames) {
+      res.json(dbGames);
+    });
+  });
+
   // Create a new game
   app.post("/api/games", function(req, res) {
     db.Game.create(req.body).then(function(dbGame) {
@@ -86,7 +100,7 @@ module.exports = function(app) {
   });
 
   // Delete a game by id
-  app.delete("/api/game/:id", function(req, res) {
+  app.delete("/api/games/:id", function(req, res) {
     db.Game.destroy({ where: { id: req.params.id } }).then(function(dbGame) {
       res.json(dbGame);
     });

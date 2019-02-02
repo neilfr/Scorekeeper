@@ -6,20 +6,23 @@
         <h2>This is our Game Manager Page!</h2>
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
-            <label for="game-text">Game Text</label>
-            <input type="text" id="game-text" class="form-control" aria-describedby="game-text" placeholder="Enter Game Text">
+            <label for="game-name">Game Name</label>
+            <input type="text" id="game-name" class="form-control" aria-describedby="game-name" placeholder="Enter Game Name">
           </div>
+          
           <div class="form-group">
-            <label for="game-description">Game Description</label>
-            <textarea class="form-control" id="game-description" aria-describedby="game-description" placeholder="Enter Game Description"></textarea>
+            <label for="category">Select Team:</label>
+            <select class="custom-select" id="team">
+            </select>
           </div>
+
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
         <h3>Games:</h3>
         <ul id="game-list" class="list-group">
           {{#each games}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <a href="game/{{this.id}}">{{this.text}}</a>
+            <a href="api/games/{{this.id}}">{{this.text}}</a>
             <button class="btn btn-danger float-right delete">ｘ</button>
           </li>
           {{/each}}

@@ -38,7 +38,7 @@ var refreshplayers = function() {
     var $players = data.map(function(player) {
       var $a = $("<a>")
         .text(player.firstName + " " + player.lastName+", Jersey:"+player.jerseyNumber+", Team:"+player.TeamId)
-        .attr("href", "/player/" + player.id);
+        .attr("href", "/api/players/" + player.id);
 
       var $li = $("<li>")
         .attr({
