@@ -6,6 +6,7 @@ var $gameName = $("#game-name");
 var $submitBtn = $("#submit");
 var $gameList = $("#game-list");
 var $homeTeamSelect = $("#homeTeam");
+var $visitingTeamSelect = $("#visitingTeam");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -38,7 +39,13 @@ var refreshgames = function() {
   API.getgames().then(function(data) {
     var $games = data.map(function(game) {
       var $a = $("<a>")
-        .text(game.name+ " " + game.TeamId)
+        .text(
+          game.name +
+            ", Home:" +
+            game.homeTeamId +
+            ", Visitor:" +
+            game.visitingTeamId
+        )
         .attr("href", "/api/games/" + game.id);
 
       var $li = $("<li>")
@@ -69,11 +76,12 @@ var handleFormSubmit = function(event) {
 
   var game = {
     name: $gameName.val().trim(),
-    TeamId: $homeTeamSelect.val() //WHY IS THE FIELD CAPITALIZED IN THE DATABASE!!!!!
+    homeTeamId: $homeTeamSelect.val(),
+    visitingTeamId: $visitingTeamSelect.val()
   };
 
-  if (!(game.name && game.TeamId)) {
-    alert("You must enter game name and pick a team");
+  if (!(game.name && game.homeTeamId && game.visitingTeamId)) {
+    alert("You must enter game name and the home and visiting teams");
     return;
   }
 
@@ -83,6 +91,7 @@ var handleFormSubmit = function(event) {
 
   $gameName.val("");
   $homeTeamSelect.val("");
+  $visitingTeamSelect.val("");
 };
 
 // handleDeleteBtnClick is called when a game's delete button is clicked
@@ -110,26 +119,32 @@ function renderTeamList(data) {
     window.location.href = "/teamManager";
   }
 
-  var rowsToAdd = [];
+  var rowsToAdd1 = [];
+  var rowsToAdd2 = [];
   for (var i = 0; i < data.length; i++) {
-    rowsToAdd.push(createTeamRow(data[i]));
-    console.log("data[i] where i is:"+i);
+    rowsToAdd1.push(createTeamRow(data[i]));
+    rowsToAdd2.push(createTeamRow(data[i]));
+    console.log("data[i] where i is:" + i);
     console.log(data[i]);
   }
-  $homeTeamSelect.empty();
-  $homeTelect.append(rowsToAdd);
+  console.log("rowsToAdd1:");
+  console.log(rowsToAdd1);
+  console.log(rowsToAdd2);
+  console.log("showed the rows");
+  // $homeTeamSelect.empty();
+  //  $visitingTeamSelect.empty();
+
+  $homeTeamSelect.html(rowsToAdd1);
+  $visitingTeamSelect.html(rowsToAdd2);
 }
 
-// Creates the author options in the dropdown
+// Creates the team options in the dropdown
 function createTeamRow(team) {
   var listOption = $("<option>");
   listOption.attr("value", team.id);
   listOption.text(team.name);
   return listOption;
 }
-
-
-
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
