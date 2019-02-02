@@ -15,14 +15,12 @@ module.exports = function(sequelize, DataTypes) {
     });
   };
   */
-  
+
   Game.associate = function(models) {
     models.Game.belongsTo(models.Team, {
-      foreignKey: {
-        allowNull: false
-      }
+      as: "homeTeam"
     });
   };
-  
+
   return Game;
 };
