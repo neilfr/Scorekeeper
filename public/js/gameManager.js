@@ -5,7 +5,7 @@
 var $gameName = $("#game-name");
 var $submitBtn = $("#submit");
 var $gameList = $("#game-list");
-var $teamSelect = $("#team");
+var $homeTeamSelect = $("#homeTeam");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -69,7 +69,7 @@ var handleFormSubmit = function(event) {
 
   var game = {
     name: $gameName.val().trim(),
-    TeamId: $teamSelect.val() //WHY IS THE FIELD CAPITALIZED IN THE DATABASE!!!!!
+    TeamId: $homeTeamSelect.val() //WHY IS THE FIELD CAPITALIZED IN THE DATABASE!!!!!
   };
 
   if (!(game.name && game.TeamId)) {
@@ -81,10 +81,8 @@ var handleFormSubmit = function(event) {
     refreshgames();
   });
 
-//  $gameText.val("");
-//  $gameDescription.val("");
   $gameName.val("");
-  $teamSelect.val("");
+  $homeTeamSelect.val("");
 };
 
 // handleDeleteBtnClick is called when a game's delete button is clicked
@@ -98,8 +96,6 @@ var handleDeleteBtnClick = function() {
     refreshgames();
   });
 };
-
-
 
 // A function to get teams and then render our list of teams
 function getTeams() {
@@ -120,8 +116,8 @@ function renderTeamList(data) {
     console.log("data[i] where i is:"+i);
     console.log(data[i]);
   }
-  $teamSelect.empty();
-  $teamSelect.append(rowsToAdd);
+  $homeTeamSelect.empty();
+  $homeTelect.append(rowsToAdd);
 }
 
 // Creates the author options in the dropdown
