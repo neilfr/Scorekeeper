@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Team = sequelize.define("Team", {
+  var Teams = sequelize.define("Teams", {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -8,21 +8,21 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  Team.associate = function(models) {
-    models.Team.hasMany(models.Player, {
+  Teams.associate = function(models) {
+    models.Teams.hasMany(models.Players, {
       // onDelete: "cascade"
     });
   };
-  Team.associate = function(models) {
-    models.Team.hasMany(models.Game, {
+  Teams.associate = function(models) {
+    models.Teams.hasMany(models.Games, {
       as: "homeTeam",
       foreignKey: "homeTeamId"
     });
-    models.Team.hasMany(models.Game, {
+    models.Teams.hasMany(models.Games, {
       as: "visitingTeam",
       foreignKey: "visitingTeamId"
     });
   };
 
-  return Team;
+  return Teams;
 };

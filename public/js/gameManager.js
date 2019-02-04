@@ -1,6 +1,4 @@
 // Get references to page elements
-//var $gameText = $("#game-text");
-//var $gameDescription = $("#game-description");
 
 var $gameName = $("#game-name");
 var $submitBtn = $("#submit");

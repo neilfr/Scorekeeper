@@ -22,7 +22,7 @@ module.exports = function(app) {
 */
   // Load teamManager page
   app.get("/teamManager", function(req, res) {
-    db.Team.findAll({}).then(function(dbTeams) {
+    db.Teams.findAll({}).then(function(dbTeams) {
       res.render("teamManager", {
         msg: "Welcome!",
         teams: dbTeams
@@ -32,7 +32,7 @@ module.exports = function(app) {
 
   // Load teamManager page and pass in a team by id
   app.get("/team/:id", function(req, res) {
-    db.Team.findOne({ where: { id: req.params.id } }).then(function(dbTeam) {
+    db.Teams.findOne({ where: { id: req.params.id } }).then(function(dbTeam) {
       res.render("teamManager", {
         team: dbTeam
       });
@@ -41,7 +41,7 @@ module.exports = function(app) {
 
   // Load playerManager page
   app.get("/playerManager", function(req, res) {
-    db.Player.findAll({}).then(function(dbPlayers) {
+    db.Players.findAll({}).then(function(dbPlayers) {
       res.render("playerManager", {
         msg: "Welcome!",
         players: dbPlayers
@@ -51,7 +51,7 @@ module.exports = function(app) {
 
   // Load playerManager page and pass in a player by id
   app.get("/player/:id", function(req, res) {
-    db.Player.findOne({ where: { id: req.params.id } }).then(function(
+    db.Players.findOne({ where: { id: req.params.id } }).then(function(
       dbPlayer
     ) {
       res.render("playerManager", {
@@ -62,7 +62,7 @@ module.exports = function(app) {
 
   // Load gameManager page
   app.get("/gameManager", function(req, res) {
-    db.Game.findAll({}).then(function(dbGames) {
+    db.Games.findAll({}).then(function(dbGames) {
       res.render("gameManager", {
         msg: "Welcome!",
         games: dbGames
@@ -72,7 +72,7 @@ module.exports = function(app) {
 
   // Load gameManager page and pass in a game by id
   app.get("/game/:id", function(req, res) {
-    db.Game.findOne({ where: { id: req.params.id } }).then(function(dbGame) {
+    db.Games.findOne({ where: { id: req.params.id } }).then(function(dbGame) {
       res.render("gameManager", {
         game: dbGame
       });
@@ -81,7 +81,7 @@ module.exports = function(app) {
 
   // Load gamePicker page
   app.get("/gamePicker", function(req, res) {
-    db.Game.findAll({}).then(function(dbGames) {
+    db.Games.findAll({}).then(function(dbGames) {
       res.render("gamePicker", {
         msg: "Welcome!",
         games: dbGames
