@@ -58,8 +58,6 @@ var refreshTeams = function() {
   });
 };
 
-
-
 // handleFormSubmit is called whenever we submit a new team
 // Save the new team to the db and refresh the list
 var handleFormSubmit = function(event) {

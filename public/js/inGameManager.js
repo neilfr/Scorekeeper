@@ -18,16 +18,10 @@ var API = {
       data: JSON.stringify(game)
     });
   },
-  getgames: function() {
-    return $.ajax({
-      url: "api/games",
-      type: "GET"
-    });
-  },
-  deletegame: function(id) {
+  getGame: function(id) {
     return $.ajax({
       url: "api/games/" + id,
-      type: "DELETE"
+      type: "GET"
     });
   }
 };

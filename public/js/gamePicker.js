@@ -16,6 +16,12 @@ var API = {
       url: "api/games/" + id,
       type: "GET"
     });
+  },
+  inGameManager: function() {
+    return $.ajax({
+      url: "inGameManager/",
+      type: "GET"
+    });
   }
 };
 
@@ -66,6 +72,8 @@ var handleGamePickBtnClick = function() {
     //    refreshgames();
     console.log("picked a game!!");
     sessionStorage.setItem("gamePicked", idPicked);
+    //go to ingame manager
+    API.inGameManager();
   });
 };
 // Add event listeners to the submit and delete buttons
