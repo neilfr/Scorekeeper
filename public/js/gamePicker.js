@@ -26,6 +26,12 @@ var API = {
       url: "api/games",
       type: "GET"
     });
+  },
+  pickGame: function(id) {
+    return $.ajax({
+      url: "api/games/" + id,
+      type: "GET"
+    });
   } /*,
   deletegame: function(id) {
     return $.ajax({
@@ -104,9 +110,10 @@ var handleGamePickBtnClick = function() {
     .attr("data-id");
 
   //CHANGE DELETEGAME TO PICKGAME
-  API.deletegame(idPicked).then(function() {
+  API.pickGame(idPicked).then(function() {
     //    refreshgames();
     console.log("picked a game!!");
+    sessionStorage.setItem("gamePicked", idPicked);
   });
 };
 /*

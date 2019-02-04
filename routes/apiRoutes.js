@@ -36,6 +36,13 @@ module.exports = function(app) {
     });
   });
 
+  // Get team by id
+  app.get("/api/games/:id", function(req, res) {
+    db.Team.findOne({ where: { id: req.params.id } }).then(function(dbTeam) {
+      res.json(dbTeam);
+    });
+  });
+
   // Create a new player
   app.post("/api/players", function(req, res) {
     db.Player.create(req.body).then(function(dbPlayer) {
