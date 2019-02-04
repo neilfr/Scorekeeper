@@ -1,6 +1,5 @@
 $("#view-scoreboard").on("click", function(event) {
   event.preventDefault();
-  console.log("/api/games");
 
   $.get("/api/games", function(data) {
     console.log(data);
@@ -15,35 +14,33 @@ $("#view-scoreboard").on("click", function(event) {
       var visitorTeamGoals = 0;
 
       //Sets up the tabular formatting
-      var $gameBlankDivRow = $("<div>");
-      $gameBlankDivRow.addClass("row");
 
       var $gameDivRow = $("<div>");
       $gameDivRow.addClass("row");
 
       var $gameDiv = $("<div>");
-      $gameDiv.addClass("col-lg-5 card ");
+      $gameDiv.addClass("col-lg-12 card ");
 
       var $gameInfoDiv = $("<div>");
-      $gameInfoDiv.addClass("col-lg-7 card text-left");
+      $gameInfoDiv.addClass("col-lg-12 card text-left");
 
       var $gameHomeTeamPlayerGoalsDiv = $("<div>");
-      $gameHomeTeamPlayerGoalsDiv.addClass("col-lg-7 card text-left");
+      $gameHomeTeamPlayerGoalsDiv.addClass("col-lg-12 card text-left");
 
       var $gameVisitorTeamPlayerGoalsDiv = $("<div>");
-      $gameVisitorTeamPlayerGoalsDiv.addClass("col-lg-7 card text-left");
+      $gameVisitorTeamPlayerGoalsDiv.addClass("col-lg-12 card text-left");
 
       var $gameHomeTeamNameDiv = $("<div>");
-      $gameHomeTeamNameDiv.addClass("col-lg-7 card text-left");
+      $gameHomeTeamNameDiv.addClass("col-lg-12 card text-left");
 
       var $gameVisitorTeamNameDiv = $("<div>");
-      $gameVisitorTeamNameDiv.addClass("col-lg-7 card text-left");
+      $gameVisitorTeamNameDiv.addClass("col-lg-12 card text-left");
 
       var $gameHomeTeamScoreDiv = $("<div>");
-      $gameHomeTeamScoreDiv.addClass("col-lg-6 card text-left");
+      $gameHomeTeamScoreDiv.addClass("col-lg-12 card text-left");
 
       var $gameVisitorTeamScoreDiv = $("<div>");
-      $gameVisitorTeamScoreDiv.addClass("col-lg-6 card text-left");
+      $gameVisitorTeamScoreDiv.addClass("col-lg-12 card text-left");
 
       //Retrieves various properties from the object and appends them to the div that
       //displays the properties.
@@ -103,7 +100,7 @@ $("#view-scoreboard").on("click", function(event) {
       $gameVisitorTeamNameDiv.html(
         "<b>Team: " + data[i].VisitorTeam.teamName + " ( Visitor ) </b>"
       );
-    
+
       $gameVisitorTeamScoreDiv.html("<b>Goals: " + visitorTeamGoals + "</b>");
 
       $gameDiv.append($gameInfoDiv);
