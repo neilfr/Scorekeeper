@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Player = sequelize.define("Player", {
+  var Players = sequelize.define("Players", {
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -22,12 +22,12 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  Player.associate = function(models) {
-    models.Player.belongsTo(models.Team, {
+  Players.associate = function(models) {
+    models.Players.belongsTo(models.Teams, {
       foreignKey: {
         allowNull: false
       }
     });
   };
-  return Player;
+  return Players;
 };

@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "hockeydb",
+    "database": "scorekeeper",
     "host": "localhost",
     "dialect": "mysql"
   },

@@ -1,14 +1,16 @@
 // Get references to page elements
+//var $gameText = $("#game-text");
+//var $gameDescription = $("#game-description");
 
 var $gameName = $("#game-name");
-var $submitBtn = $("#submit");
+//var $submitBtn = $("#submit");
 var $gameList = $("#game-list");
-var $homeTeamSelect = $("#homeTeam");
-var $visitingTeamSelect = $("#visitingTeam");
+//var $homeTeamSelect = $("#homeTeam");
+//var $visitingTeamSelect = $("#visitingTeam");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  savegame: function(game) {
+  /*  savegame: function(game) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -18,21 +20,29 @@ var API = {
       data: JSON.stringify(game)
     });
   },
+  */
   getgames: function() {
     return $.ajax({
       url: "api/games",
       type: "GET"
     });
   },
+  pickGame: function(id) {
+    return $.ajax({
+      url: "api/games/" + id,
+      type: "GET"
+    });
+  } /*,
   deletegame: function(id) {
     return $.ajax({
       url: "api/games/" + id,
       type: "DELETE"
     });
   }
+  */
 };
 
-// refreshgames gets new games from the db and repopulates the list
+// refresh games gets new games from the db and repopulates the list
 var refreshgames = function() {
   API.getgames().then(function(data) {
     var $games = data.map(function(game) {
@@ -54,8 +64,8 @@ var refreshgames = function() {
         .append($a);
 
       var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+        .addClass("btn btn-danger float-right gamePick")
+        .text("y");
 
       $li.append($button);
 
@@ -69,7 +79,7 @@ var refreshgames = function() {
 
 // handleFormSubmit is called whenever we submit a new game
 // Save the new game to the db and refresh the list
-var handleFormSubmit = function(event) {
+/*var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var game = {
@@ -91,19 +101,22 @@ var handleFormSubmit = function(event) {
   $homeTeamSelect.val("");
   $visitingTeamSelect.val("");
 };
-
-// handleDeleteBtnClick is called when a game's delete button is clicked
+*/
+// handleGamePickBtnClick is called when a game's gamePick button is clicked
 // Remove the game from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
+var handleGamePickBtnClick = function() {
+  var idPicked = $(this)
     .parent()
     .attr("data-id");
 
-  API.deletegame(idToDelete).then(function() {
-    refreshgames();
+  //CHANGE DELETEGAME TO PICKGAME
+  API.pickGame(idPicked).then(function() {
+    //    refreshgames();
+    console.log("picked a game!!");
+    sessionStorage.setItem("gamePicked", idPicked);
   });
 };
-
+/*
 // A function to get teams and then render our list of teams
 function getTeams() {
   $.get("/api/teams", renderTeamList);
@@ -141,9 +154,9 @@ function createTeamRow(team) {
   listOption.text(team.name);
   return listOption;
 }
-
+*/
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$gameList.on("click", ".delete", handleDeleteBtnClick);
+//$submitBtn.on("click", handleFormSubmit);
+$gameList.on("click", ".gamePick", handleGamePickBtnClick);
 
 refreshgames();
