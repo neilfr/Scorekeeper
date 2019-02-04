@@ -41,6 +41,16 @@ module.exports = function(app) {
     });
   });
 
+  // Load inGameManager page
+  app.get("/inGameManager", function(req, res) {
+    db.Games.findAll({}).then(function(dbGames) {
+      res.render("inGameManager", {
+        msg: "Welcome!",
+        games: dbGames
+      });
+    });
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
