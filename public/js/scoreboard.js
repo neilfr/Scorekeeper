@@ -119,3 +119,11 @@ $("#view-scoreboard").on("click", function(event) {
     }
   });
 });
+
+$("#view-todays-games").on("click", function(event) {
+  event.preventDefault();
+
+  $.get("/api/gamesbydate/today", function(data) {
+    console.log(data);
+  });
+});
