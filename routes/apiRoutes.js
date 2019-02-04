@@ -1,99 +1,108 @@
 var db = require("../models");
 
 module.exports = function(app) {
-
-  // Create a new team
-  app.post("/api/team", function(req, res) {
-    db.Teams.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-  // Create a new player
-  app.post("/api/player", function(req, res) {
-    db.Players.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-  // get all teams in the league
-  app.get("/api/teams", function(req, res) {
-    db.Teams.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
-  
-  // Create a new game
-  app.post("/api/game", function(req, res) {
-    db.Games.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-  // Get all games
-  app.get("/api/games", function(req, res) {
-    db.Games.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
-  
-  // Get teams from a game
-  app.get("/api/teams/:gameid", function(req, res) {
-    db.Teams.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
-  
-  // Get players from teamid
-  app.get("/api/players/:teamid", function(req, res) {
-    db.Players.findAll({}).then(function(dbExamples) {
+  // Get all examples
+  app.get("/api/examples", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
       res.json(dbExamples);
     });
   });
 
-  // Create a new goal entry
-  app.post("/api/goal", function(req, res) {
-    db.Goals.create(req.body).then(function(dbExample) {
+  // Create a new example
+  app.post("/api/examples", function(req, res) {
+    db.Example.create(req.body).then(function(dbExample) {
       res.json(dbExample);
     });
   });
 
-  // Create a new penalty entry
-  app.post("/api/penalty", function(req, res) {
-    db.Penalties.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-  // Delete a team by id
-  app.delete("/api/teams/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-  // Delete a game by id
-  app.delete("/api/games/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-  // Delete a player by id
-  app.delete("/api/players/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-
-
-  /*
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
     db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
       res.json(dbExample);
     });
   });
-  */
+
+  // Get all teams
+  app.get("/api/teams", function(req, res) {
+    db.Team.findAll({}).then(function(dbTeams) {
+      res.json(dbTeams);
+    });
+  });
+
+  // Get team by id
+  app.get("/api/teams/:id", function(req, res) {
+    db.Team.findOne({ where: { id: req.params.id } }).then(function(dbTeam) {
+      res.json(dbTeam);
+    });
+  });
+
+  // Create a new team
+  app.post("/api/teams", function(req, res) {
+    db.Team.create(req.body).then(function(dbTeam) {
+      res.json(dbTeam);
+    });
+  });
+
+  // Delete a team by id
+  app.delete("/api/teams/:id", function(req, res) {
+    db.Team.destroy({ where: { id: req.params.id } }).then(function(dbTeam) {
+      res.json(dbTeam);
+    });
+  });
+
+  // Get all players
+  app.get("/api/players", function(req, res) {
+    db.Player.findAll({}).then(function(dbPlayers) {
+      res.json(dbPlayers);
+    });
+  });
+
+  // Create a new player
+  app.post("/api/players", function(req, res) {
+    db.Player.create(req.body).then(function(dbPlayer) {
+      res.json(dbPlayer);
+    });
+  });
+
+  // Get team by id
+  app.get("/api/players/:id", function(req, res) {
+    db.Team.findOne({ where: { id: req.params.id } }).then(function(dbPlayer) {
+      res.json(dbPlayer);
+    });
+  });
+
+  // Delete a player by id
+  app.delete("/api/players/:id", function(req, res) {
+    db.Player.destroy({ where: { id: req.params.id } }).then(function(dbPlayer) {
+      res.json(dbPlayer);
+    });
+  });
+
+  // Get all games
+  app.get("/api/games", function(req, res) {
+    db.Game.findAll({}).then(function(dbGames) {
+      res.json(dbGames);
+    });
+  });
+
+  // Get a game by id
+  app.get("/api/games/:id", function(req, res) {
+    db.Game.findOne({ where: { id: req.params.id } }).then(function(dbGames) {
+      res.json(dbGames);
+    });
+  });
+
+  // Create a new game
+  app.post("/api/games", function(req, res) {
+    db.Game.create(req.body).then(function(dbGame) {
+      res.json(dbGame);
+    });
+  });
+
+  // Delete a game by id
+  app.delete("/api/games/:id", function(req, res) {
+    db.Game.destroy({ where: { id: req.params.id } }).then(function(dbGame) {
+      res.json(dbGame);
+    });
+  });
 };

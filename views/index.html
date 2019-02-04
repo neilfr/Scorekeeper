@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <title>Scorekeepers</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <!-- <meta name="keywords" content="Unique Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" /> -->
+    <script>
+        addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+    <!--// Meta tag Keywords -->
+
+    <!-- Custom-Files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <!-- Bootstrap-Core-CSS -->
+    <!-- <link rel="stylesheet" href="../public/styles/styles.css" type="text/css" media="all" /> -->
+    <!-- Style-CSS -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- Font-Awesome-Icons-CSS -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+
+    <!-- //Custom-Files -->
+    <!-- Web-Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Acme|PT+Sans+Caption" rel="stylesheet">
+    <!-- //Web-Fonts -->
+
+    <style>
+        body, html {
+  height: 100%;
+  font-family: 'PT Sans Caption', sans-serif;
+}
+.bg {
+  /* The image used */
+  background-image: url("../public/images/ice-hockey.jpg");
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.button {
+  border:black solid 1px;
+  border-radius: 0%;
+  margin: 5px 10px;
+  position: relative;
+  /* padding: 20px; */
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button:after {
+  content: "";
+  background: #003E7E;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: right;
+}
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="bg">
+        <div class="offset-10 col-2">
+            <nav class="navbar navbar-light navbar-1 white">
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
+                    aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
+                        class="navbar-toggler-icon"></span></button>
+
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent15">
+
+                    <!-- Links -->
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="score.html">Scores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="manageGame.handlebars">Manage</a>
+                        </li>
+                    </ul>
+                    <!-- Links -->
+
+                </div>
+                <!-- Collapsible content -->
+            </nav>
+        </div>
+        <div class="container" style="padding-top:160px;padding-left:60px">
+            <div class="row">
+                <h1 class="text-center" style="padding-left:25px">Scorekeepers</h1>
+            </div>
+            <div class="row" style="padding-top:40px;">
+                <button type="button" id="score-btn" class="btn btn-default button" data-toggle="modal" data-target="#exampleModal">Scores</button>
+                <button type="button" id="manage-btn" class="btn btn-default button">Manage</button>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Select Game</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">View</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="page-footer footer">
+            <div class="copy_right text-right ml-auto mr-sm-5 mr-4">
+                <p class="text-li">© 2019 Scorekeepers. All rights reserved
+
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+</body>
+
+</html>

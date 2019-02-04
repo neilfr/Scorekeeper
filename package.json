@@ -1,5 +1,5 @@
 {
-  "name": "handlebars-boilerplate",
+  "name": "node-handlebars-boilerplate",
   "version": "1.0.0",
   "description": "Project 2 Starter",
   "main": "server.js",
@@ -29,13 +29,6 @@
   "directories": {
     "test": "test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/neilfr/scorekeeper.git"
-  },
-  "author": "",
-  "bugs": {
-    "url": "https://github.com/neilfr/scorekeeper/issues"
-  },
-  "homepage": "https://github.com/neilfr/scorekeeper#readme"
+  "keywords": [],
+  "author": ""
 }
