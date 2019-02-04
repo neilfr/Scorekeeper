@@ -22,6 +22,7 @@ module.exports = function(sequelize, DataTypes) {
       as: "visitingTeam",
       foreignKey: "visitingTeamId"
     });
+    models.Teams.hasMany(models.Goals, {});
   };
 
   return Teams;
