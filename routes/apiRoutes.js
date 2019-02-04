@@ -36,23 +36,18 @@ module.exports = function(app) {
     });
   });
 
-  // Get team by id
-  app.get("/api/games/:id", function(req, res) {
-    db.Teams.findOne({ where: { id: req.params.id } }).then(function(dbTeam) {
-      res.json(dbTeam);
+  // Get player by id
+  app.get("/api/players/:id", function(req, res) {
+    db.Players.findOne({ where: { id: req.params.id } }).then(function(
+      dbPlayer
+    ) {
+      res.json(dbPlayer);
     });
   });
 
   // Create a new player
   app.post("/api/players", function(req, res) {
     db.Players.create(req.body).then(function(dbPlayer) {
-      res.json(dbPlayer);
-    });
-  });
-
-  // Get team by id
-  app.get("/api/players/:id", function(req, res) {
-    db.Teams.findOne({ where: { id: req.params.id } }).then(function(dbPlayer) {
       res.json(dbPlayer);
     });
   });
@@ -73,10 +68,10 @@ module.exports = function(app) {
     });
   });
 
-  // Get a game by id
+  // Get game by id
   app.get("/api/games/:id", function(req, res) {
-    db.Games.findOne({ where: { id: req.params.id } }).then(function(dbGames) {
-      res.json(dbGames);
+    db.Games.findOne({ where: { id: req.params.id } }).then(function(dbTeam) {
+      res.json(dbTeam);
     });
   });
 

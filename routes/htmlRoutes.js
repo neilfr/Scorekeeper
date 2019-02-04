@@ -71,6 +71,7 @@ module.exports = function(app) {
   });
 
   // Load gameManager page and pass in a game by id
+  /*
   app.get("/game/:id", function(req, res) {
     db.Games.findOne({ where: { id: req.params.id } }).then(function(dbGame) {
       res.render("gameManager", {
@@ -78,6 +79,7 @@ module.exports = function(app) {
       });
     });
   });
+*/
 
   // Load gamePicker page
   app.get("/gamePicker", function(req, res) {
