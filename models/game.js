@@ -8,19 +8,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  /*
-  Game.associate = function(models) {
-    models.Game.belongsTo(models.Team, {
-      as: "homeTeam"
-    });
-  };
-  */
-
-  Game.associate = function(models) {
-    models.Game.belongsTo(models.Team, {
-      as: "homeTeam"
-    });
-  };
 
   return Game;
 };

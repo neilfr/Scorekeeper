@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
   });
   Team.associate = function(models) {
     models.Team.hasMany(models.Player, {
-      onDelete: "cascade"
+      // onDelete: "cascade"
     });
   };
   Team.associate = function(models) {
