@@ -25,6 +25,10 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
   });
 
+  app.get("/scorekeeper", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/scorekeeper.html"));
+  });
+
   // Load teamManager page
   app.get("/teamManager", function(req, res) {
     db.Teams.findAll({}).then(function(dbTeams) {
