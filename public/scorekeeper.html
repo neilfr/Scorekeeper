@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Scorekeeper</title>
+
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+  </head>
+
+  <body>
+    <div class="jumbotron">
+      <h1 class="text-center">Scorekeeper</h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 text-center">
+          <input
+            id="start-game"
+            class="btn btn-success"
+            type="submit"
+            value="Start Game"
+          />
+        </div>
+
+        <div class="col-lg-4 text-center">
+          <input
+            id="pause-game"
+            class="btn btn-warning"
+            type="submit"
+            value="Pause Game"
+          />
+        </div>
+
+        <div class="col-lg-4 text-center">
+          <input
+            id="stop-game"
+            class="btn btn-danger"
+            type="submit"
+            value="Stop Game"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 text-center">
+          Home Team
+        </div>
+
+        <div class="col-lg-6 text-center">
+          Visitor Team
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card text-center">
+            <input
+              id="home-team-goal"
+              class="btn btn-success"
+              type="submit"
+              value="Home Team Goal"
+            />
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card text-center">
+            <input
+              id="visitor-team-goal"
+              class="btn btn-success"
+              type="submit"
+              value="Visitor Team Goal"
+            /><br />
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card text-center">
+            <!-- Button triggers new movie to be added -->
+            <input
+              id="home-team-penalty"
+              class="btn btn-danger"
+              type="submit"
+              value="Home Team Penalty"
+            /><br />
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card text-center">   
+        <input
+              id="visitor-team-penalty"
+              class="btn btn-danger"
+              type="submit"
+              value="Visitor Team Penalty"
+            /><br />
+          </div>
+        </div>
+
+
+          </div>
+        </div>
+      </div>
+      <!-- end of row -->
+    </div>
+    <!-- end of container-->
+
+    <!-- jQuery -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+    ></script>
+    <!-- Script -->
+    <script type="text/javascript" src="./js/scorekeeper.js"></script>
+  </body>
+</html>
