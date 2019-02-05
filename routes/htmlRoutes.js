@@ -1,6 +1,15 @@
 var db = require("../models");
+var path = require("path");
 
 module.exports = function(app) {
+  app.get("/scoreboard", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
+  });
+
+  // Load index page
+  app.get("/", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.render("index", {
   // Load teamManager page
   app.get("/teamManager", function(req, res) {
     db.Teams.findAll({}).then(function(dbTeams) {
