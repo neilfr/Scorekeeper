@@ -144,7 +144,7 @@ function renderTeamList(data) {
 function createTeamRow(team) {
   var listOption = $("<option>");
   listOption.attr("value", team.id);
-  listOption.text(team.name);
+  listOption.text(team.teamName);
   return listOption;
 }
 
