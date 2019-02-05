@@ -1,0 +1,43 @@
+<div id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 offset-2">
+        <h1>{{msg}}</h1>
+        <h2>This is our In Game Manager Page!</h2>
+        
+        <form class="clearfix mb-4" action="POST">
+          <div class="form-group">
+            <label for="game-name">Game Name</label>
+            <input type="text" id="game-name" class="form-control" aria-describedby="game-name" placeholder="Enter Game Name">
+          </div>
+
+          <div class="form-group">
+            <label for="category">Select Home Team:</label>
+            <select class="custom-select" id="homeTeam">
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Select Visiting Team:</label>
+            <select class="custom-select" id="visitingTeam">
+            </select>
+          </div>
+
+          <button id="submit" class="btn btn-primary float-right">Submit</button>
+        </form>
+        <h3>Games:</h3>
+        <ul id="game-list" class="list-group">
+          {{#each games}}
+          <li data-id="{{this.id}}" class="list-group-item">
+            <a href="api/games/{{this.id}}">{{this.text}}</a>
+            <button class="btn btn-danger float-right delete">ｘ</button>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/inGameManager.js"></script>
