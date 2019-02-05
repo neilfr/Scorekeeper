@@ -7,41 +7,24 @@ module.exports = function (sequelize, DataTypes) {
       validate: {
         len: [1]
       }
-    },
-
+    }
   });
-
-  Teams.associate = function (models) {
-    
+  Teams.associate = function(models) {
     models.Teams.hasMany(models.Players, {
-
+      // onDelete: "cascade"
     });
- 
-
-
-    models.Teams.hasMany(models.Goals, {
-      
+  };
+  Teams.associate = function(models) {
+    models.Teams.hasMany(models.Games, {
+      as: "homeTeam",
+      foreignKey: "homeTeamId"
     });
-
-    // models.Teams.belongsTo(models.Games, {
-      
-    // });
-
-
-  // models.Teams.hasMany(models.Penalties, {
-  //   //onDelete: "cascade"
-  // });
-
-
-};
-
-
-  //       Team.hasOne(Game, {as: 'HomeTeam', foreignKey : 'homeTeamId'});
-  // Team.hasOne(Game, {as: 'AwayTeam', foreignKey : 'awayTeamId'});
-
-  //Game.belongsTo(Team);
-
-
+    models.Teams.hasMany(models.Games, {
+      as: "visitingTeam",
+      foreignKey: "visitingTeamId"
+    });
+    models.Teams.hasMany(models.Goals, {});
+  };
 
   return Teams;
 };

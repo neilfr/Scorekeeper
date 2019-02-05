@@ -7,21 +7,19 @@ module.exports = function (sequelize, DataTypes) {
       validate: {
         len: [1]
       }
-    },
+    }
   });
-
-  // Games.associate = function (models) {
-  //   models.Games.belongsToMany(models.Teams, {
-  //       as: 'homeTeam'
-  //   });
-  //   models.Games.belongsToMany(models.Teams, {
-  //     as: 'visitorTeam'
-  // });
-  // };
-
+  Games.associate = function(models) {
+    /* do we need the relationship from both directions?
   
-
-
-
+    models.Games.belongsTo(models.Teams, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+  */
+    models.Games.hasMany(models.Goals, {});
+  };
   return Games;
 };
