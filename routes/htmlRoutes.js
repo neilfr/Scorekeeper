@@ -1,6 +1,25 @@
 var db = require("../models");
 var path = require("path");
 
+/* app.get("/teamManager", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.render("index", {
+        msg: "Welcome!",
+        examples: dbExamples
+      });
+    });
+  });
+
+  // Load example page and pass in an example by id
+  app.get("/example/:id", function(req, res) {
+    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
+      res.render("example", {
+        example: dbExample
+      });
+    });
+  });
+*/
+
 module.exports = function(app) {
   app.get("/scoreboard", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
@@ -33,6 +52,13 @@ module.exports = function(app) {
         msg: "Welcome!",
         games: dbGames
       });
+    });
+  });
+
+  // Load gameManager page
+  app.get("/gameManager", function(req, res) {
+    db.Game.findAll({}).then(function(dbGames) {
+      res.render("gameManager", {});
     });
   });
 

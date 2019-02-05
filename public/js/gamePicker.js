@@ -1,6 +1,6 @@
 // Get references to page elements
 
-var $gameName = $("#game-name");
+//var $gameName = $("#game-name");
 var $gameList = $("#game-list");
 
 // The API object contains methods for each kind of request we'll make
@@ -31,11 +31,12 @@ var refreshgames = function() {
     var $games = data.map(function(game) {
       var $a = $("<a>")
         .text(
-          game.name +
-            ", Home:" +
+          "Home:" +
             game.homeTeamId +
             ", Visitor:" +
-            game.visitingTeamId
+            game.visitorTeamId +
+            ", Game Date and Time:" +
+            game.gameDate
         )
         .attr("href", "/api/games/" + game.id);
 

@@ -1,22 +1,17 @@
 // Get references to page elements
 
-var $gameName = $("#game-name");
+//var $gameName = $("#game-name");
 var $submitBtn = $("#submit");
 var $gameList = $("#game-list");
 var $homeTeamSelect = $("#homeTeam");
-var $visitingTeamSelect = $("#visitingTeam");
+var $visitorTeamSelect = $("#visitorTeam");
+var $gameDay = $("#gameDay");
+var $gameTime = $("#gameTime");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
   savegame: function(game) {
-    return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      url: "api/games",
-      data: JSON.stringify(game)
-    });
+    return $.post("api/games", game);
   },
   getgames: function() {
     return $.ajax({
@@ -38,12 +33,14 @@ var refreshgames = function() {
     var $games = data.map(function(game) {
       var $a = $("<a>")
         .text(
-          game.name +
-            ", Home:" +
+          "Home:" +
             game.homeTeamId +
             ", Visitor:" +
-            game.visitingTeamId
+            game.visitorTeamId +
+            ", Date and Time:" +
+            game.gameDate
         )
+
         .attr("href", "/api/games/" + game.id);
 
       var $li = $("<li>")
@@ -71,15 +68,24 @@ var refreshgames = function() {
 // Save the new game to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
-
+  console.log("home team");
+  console.log($homeTeamSelect.val());
+  console.log("visitor team");
+  console.log($visitorTeamSelect.val());
+  console.log("game day");
+  console.log($gameDay.val());
+  console.log("game time");
+  console.log($gameTime.val());
   var game = {
-    name: $gameName.val().trim(),
     homeTeamId: $homeTeamSelect.val(),
-    visitingTeamId: $visitingTeamSelect.val()
+    visitorTeamId: $visitorTeamSelect.val(),
+    gameDate: $gameDay.val() + " " + $gameTime.val()
   };
+  console.log("game object");
+  console.log(game);
 
-  if (!(game.name && game.homeTeamId && game.visitingTeamId)) {
-    alert("You must enter game name and the home and visiting teams");
+  if (!(game.homeTeamId && game.visitorTeamId && game.gameDate)) {
+    alert("You must enter game date, time and the home and visitor teams");
     return;
   }
 
@@ -87,9 +93,10 @@ var handleFormSubmit = function(event) {
     refreshgames();
   });
 
-  $gameName.val("");
   $homeTeamSelect.val("");
-  $visitingTeamSelect.val("");
+  $visitorTeamSelect.val("");
+  $gameDay.val("");
+  $gameTime.val("");
 };
 
 // handleDeleteBtnClick is called when a game's delete button is clicked
@@ -132,14 +139,14 @@ function renderTeamList(data) {
   console.log("showed the rows");
 
   $homeTeamSelect.html(rowsToAdd1);
-  $visitingTeamSelect.html(rowsToAdd2);
+  $visitorTeamSelect.html(rowsToAdd2);
 }
 
 // Creates the team options in the dropdown
 function createTeamRow(team) {
   var listOption = $("<option>");
   listOption.attr("value", team.id);
-  listOption.text(team.name);
+  listOption.text(team.teamName);
   return listOption;
 }
 

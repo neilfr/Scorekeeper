@@ -108,6 +108,7 @@ module.exports = function(app) {
     });
   });
 
+
   // Get all teams
 
   app.get("/api/teams", function(req, res) {
@@ -118,9 +119,7 @@ module.exports = function(app) {
         }
       ]
     }).then(function(dbTeams) {
-      res.json(dbTeams);
-    });
-  });
+
 
   // Get team by id
   app.get("/api/teams/:id", function(req, res) {
@@ -166,7 +165,8 @@ module.exports = function(app) {
     });
   });
 
-  // Delete a player by id
+
+  //Delete a player by id
   app.delete("/api/players/:id", function(req, res) {
     db.Players.destroy({ where: { id: req.params.id } }).then(function(
       dbPlayer
@@ -175,7 +175,8 @@ module.exports = function(app) {
     });
   });
 
-  // Get game by id
+
+ // Get game by id
   app.get("/api/games/:id", function(req, res) {
     db.Games.findOne({ where: { id: req.params.id } }).then(function(dbTeam) {
       res.json(dbTeam);
@@ -207,4 +208,5 @@ module.exports = function(app) {
       res.json(dbPenalties);
     });
   });
+
 };

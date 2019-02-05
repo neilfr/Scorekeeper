@@ -1,3 +1,80 @@
-.list-group-item {
-  line-height: 2.5;
+.main-sect {
+    padding-top: 50px;
 }
+
+#timer {
+    font-size: 30px;
+}
+
+#hscore,
+#vscore {
+    font-size: 30px;
+    padding: 2px 15px;
+    border: 2px solid gray;
+}
+
+#home-name,
+#visitor-name {
+    margin: 5 10;
+}
+
+/* timer */
+
+h1 {
+    color: #396;
+    font-weight: 100;
+    font-size: 40px;
+    margin: 40px 0px 20px;
+}
+
+body {
+    text-align: center;
+    /* background: #00ECB9; */
+    font-family: sans-serif;
+    font-weight: 100;
+}
+
+#clockdiv {
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+}
+
+#clockdiv>div {
+    padding: 10px;
+    border-radius: 3px;
+    background: #00BF96;
+    display: inline-block;
+}
+
+#clockdiv div>span {
+    padding: 15px;
+    border-radius: 3px;
+    background: #003E7E;
+    display: inline-block;
+}
+
+.smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+}
+
+.time-holder {
+    width: 130px;
+    margin-bottom: 35px;
+}
+
+.hours,
+.minutes,
+.seconds {
+    width: 50px;
+    height: 42px;
+}
+
+
+/* .team-title {
+
+} */
