@@ -118,7 +118,7 @@ module.exports = function(app) {
         }
       ]
     }).then(function(dbTeams) {
-      res.json(dbTeam);
+      res.json(dbTeams);
     });
   });
 
