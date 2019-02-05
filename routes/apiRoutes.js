@@ -1,4 +1,6 @@
 var db = require("../models");
+var moment = require("moment");
+var Op = require("sequelize").Op;
 
 module.exports = function(app) {
   app.get("/api/games", function(req, res) {
@@ -60,27 +62,23 @@ module.exports = function(app) {
   app.get("/api/gamesbydate/:dateOption", function(req, res) {
     var dateOption = req.params.dateOption;
     var dateCriteriaObject;
+    var startDateRange = moment(new Date()).format("YYYY-MM-DD 00:00:00");
+    var endDateRange = moment(new Date()).format("YYYY-MM-DD 11:59:59");
 
     if (dateOption === "today") {
       dateCriteriaObject = {
-        [db.Sequelize.Op.eq]: new Date()
+        [Op.gte]: startDateRange,
+        [Op.lte]: endDateRange
       };
     } else if (dateOption === "past") {
       dateCriteriaObject = {
-        [db.Sequelize.Op.lt]: new Date()
+        [Op.lte]: startDateRange
       };
     } else if (dateOption === "future") {
       dateCriteriaObject = {
-        [db.Sequelize.Op.gt]: new Date()
+        [Op.gte]: endDateRange
       };
     }
-
-    // {
-    //   createdAt: {
-    //     [Op.lt]: new Date(),
-    //     [Op.gt]: new Date(new Date() - 24 * 60 * 60 * 1000)
-    //   }
-    // }
 
     db.Games.findAll({
       where: {
@@ -110,12 +108,18 @@ module.exports = function(app) {
     });
   });
 
-  //Get all teams
+
+  // Get all teams
+
   app.get("/api/teams", function(req, res) {
-    db.Teams.findAll({}).then(function(dbTeams) {
-      res.json(dbTeams);
-    });
-  });
+    db.Teams.findAll({
+      include: [
+        {
+          model: db.Players
+        }
+      ]
+    }).then(function(dbTeams) {
+
 
   // Get team by id
   app.get("/api/teams/:id", function(req, res) {
@@ -161,6 +165,7 @@ module.exports = function(app) {
     });
   });
 
+
   //Delete a player by id
   app.delete("/api/players/:id", function(req, res) {
     db.Players.destroy({ where: { id: req.params.id } }).then(function(
@@ -170,14 +175,8 @@ module.exports = function(app) {
     });
   });
 
-  // // Get all games
-  // app.get("/api/games", function(req, res) {
-  //   db.Games.findAll({}).then(function(dbGames) {
-  //     res.json(dbGames);
-  //   });
-  // });
 
-  // Get game by id
+ // Get game by id
   app.get("/api/games/:id", function(req, res) {
     db.Games.findOne({ where: { id: req.params.id } }).then(function(dbTeam) {
       res.json(dbTeam);
@@ -197,4 +196,17 @@ module.exports = function(app) {
       res.json(dbGame);
     });
   });
+
+  app.post("/api/goals", function(req, res) {
+    db.Goals.create(req.body).then(function(dbGoals) {
+      res.json(dbGoals);
+    });
+  });
+
+  app.post("/api/penalties", function(req, res) {
+    db.Penalties.create(req.body).then(function(dbPenalties) {
+      res.json(dbPenalties);
+    });
+  });
+
 };

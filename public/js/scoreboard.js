@@ -127,3 +127,19 @@ $("#view-todays-games").on("click", function(event) {
     console.log(data);
   });
 });
+
+$("#view-past-games").on("click", function(event) {
+  event.preventDefault();
+
+  $.get("/api/gamesbydate/past", function(data) {
+    console.log(data);
+  });
+});
+
+$("#view-future-games").on("click", function(event) {
+  event.preventDefault();
+
+  $.get("/api/gamesbydate/future", function(data) {
+    console.log(data);
+  });
+});
