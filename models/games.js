@@ -1,24 +1,31 @@
 module.exports = function(sequelize, DataTypes) {
   var Games = sequelize.define("Games", {
-    name: {
-      type: DataTypes.STRING,
+    gameDate: {
+      type: DataTypes.DATE,
       allowNull: false,
       validate: {
         len: [1]
       }
     }
   });
+
   Games.associate = function(models) {
-    /* do we need the relationship from both directions?
-  
     models.Games.belongsTo(models.Teams, {
-      foreignKey: {
-        allowNull: false
-      }
+      as: "HomeTeam",
+      foreignKey: "homeTeamId"
     });
-  };
-  */
+
+    models.Games.belongsTo(models.Teams, {
+      as: "VisitorTeam",
+      foreignKey: "visitorTeamId"
+    });
+
     models.Games.hasMany(models.Goals, {});
+
+    models.Games.hasMany(models.Penalties, {});
+
+    models.Games.belongsTo(models.Players, {});
   };
+
   return Games;
 };
