@@ -1,8 +1,18 @@
+var timeRemaining = sessionStorage.getItem("timeRemaining");
 var gamePicked = parseInt(sessionStorage.getItem("gamePicked"));
-var timeRemaining = 3000; // 5 minutes for now
+
 var $gameClock = $("#gameClock");
 var gameMinutes, gameSeconds, game10ths;
 var running = false;
+
+
+//if there is timeRemaining in the session storage - IE. there is an unfinished game - use that timeRemaining
+if (timeRemaining > 0) {
+  timeRemaining = sessionStorage.getItem("timeRemaining");
+} else {
+  timeRemaining = 3000; //otherwise we have a new game, so set the time to 5 minutes
+}
+
 
 /* Chris F: 02/06/2019 Work in progress.  I will get all the players in 2 arrays; home team and visitors
 this can be reused for goals and penalties accordingly */
@@ -31,6 +41,7 @@ this can be reused for goals and penalties accordingly */
 For now, I just copied and paste the code into the on click for "#visitor-team-goal". 
 There are some minor differences, but there is a lot of code repetition.  If we have time, 
 it would be good to make a function for this to make the code more efficient, etc. */
+
 
 $("#home-team-goal").on("click", function(event) {
   event.preventDefault();
@@ -153,9 +164,12 @@ var countDown = setInterval(function() {
   if (game10ths < 10) {
     game10ths = "0" + game10ths;
   }
+
   $gameClock.text(gameMinutes + ":" + gameSeconds + ":" + game10ths);
+  sessionStorage.setItem("timeRemaining", timeRemaining);
   if (running) {
     if (--timeRemaining <= 0) {
+      localStorage.removeItem("timeRemaining");
       clearInterval(countDown);
       $gameClock.text("Game Over");
     }
