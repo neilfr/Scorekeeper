@@ -14,6 +14,13 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     }
+    // penaltyType: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   validate: {
+    //     len: [1]
+    //   }
+    // }
   });
 
   Penalties.associate = function(models) {

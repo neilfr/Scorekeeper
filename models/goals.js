@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Goals.associate = function(models) {
-    //models.Goals.belongsTo(models.Teams, {});
+    models.Goals.belongsTo(models.Teams, {});
     models.Goals.belongsTo(models.Players, {});
     models.Goals.belongsTo(models.Games, {});
 
