@@ -1,8 +1,17 @@
 var gamePicked = sessionStorage.getItem("gamePicked");
-var timeRemaining = 3000; // 5 minutes for now
+var timeRemaining = sessionStorage.getItem("timeRemaining");
 var $gameClock = $("#gameClock");
 var gameMinutes, gameSeconds, game10ths;
 var running = false;
+
+//if there is timeRemaining in the session storage - IE. there is an unfinished game - use that timeRemaining
+if (timeRemaining > 0) {
+  timeRemaining = sessionStorage.getItem("timeRemaining");
+} else {
+  timeRemaining = 3000; //otherwise we have a new game, so set the time to 5 minutes
+}
+console.log("timeRemaining is:");
+console.log(timeRemaining);
 
 $("#home-team-goal").on("click", function(event) {
   event.preventDefault();
@@ -67,9 +76,12 @@ var countDown = setInterval(function() {
   if (game10ths < 10) {
     game10ths = "0" + game10ths;
   }
+
   $gameClock.text(gameMinutes + ":" + gameSeconds + ":" + game10ths);
+  sessionStorage.setItem("timeRemaining", timeRemaining);
   if (running) {
     if (--timeRemaining <= 0) {
+      localStorage.removeItem("timeRemaining");
       clearInterval(countDown);
       $gameClock.text("Game Over");
     }
