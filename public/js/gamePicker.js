@@ -1,6 +1,6 @@
 // Get references to page elements
 
-var $gameName = $("#game-name");
+//var $gameName = $("#game-name");
 var $gameList = $("#game-list");
 
 // The API object contains methods for each kind of request we'll make
@@ -8,20 +8,13 @@ var API = {
   getgames: function() {
     return $.ajax({
       url: "api/games",
+      //url: "api/gamesbydate/today",
       type: "GET"
     });
   },
-  pickGame: function(id) {
-    return $.ajax({
-      url: "api/games/" + id,
-      type: "GET"
-    });
-  },
-  inGameManager: function() {
-    return $.ajax({
-      url: "inGameManager/",
-      type: "GET"
-    });
+
+  pickGame: function() {
+    return $.get("/scorekeeper");
   }
 };
 
@@ -31,11 +24,12 @@ var refreshgames = function() {
     var $games = data.map(function(game) {
       var $a = $("<a>")
         .text(
-          game.name +
-            ", Home:" +
-            game.homeTeamId +
-            ", Visitor:" +
-            game.visitingTeamId
+          "Home: " +
+            game.HomeTeam.teamName +
+            ", Visitor: " +
+            game.VisitorTeam.teamName +
+            " Game Date and Time: " +
+            moment(game.gameDate).format("ddd MMM Do YYYY h:mm a")
         )
         .attr("href", "/api/games/" + game.id);
 
@@ -46,11 +40,12 @@ var refreshgames = function() {
         })
         .append($a);
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right gamePick")
-        .text("y");
+      var $picker = $("<a>")
+        .addClass("btn btn-primary float-right gamePick")
+        .attr("href", "/scorekeeper")
+        .text("Start this game!");
 
-      $li.append($button);
+      $li.append($picker);
 
       return $li;
     });
@@ -66,18 +61,11 @@ var handleGamePickBtnClick = function() {
   var idPicked = $(this)
     .parent()
     .attr("data-id");
-
-  //CHANGE DELETEGAME TO PICKGAME
-  API.pickGame(idPicked).then(function() {
-    //    refreshgames();
-    console.log("picked a game!!");
+  API.pickGame().then(function() {
     sessionStorage.setItem("gamePicked", idPicked);
-    //go to ingame manager
-    API.inGameManager();
   });
 };
-// Add event listeners to the submit and delete buttons
-//$submitBtn.on("click", handleFormSubmit);
+// Add event listeners to the game selection buttons
 $gameList.on("click", ".gamePick", handleGamePickBtnClick);
 
 refreshgames();

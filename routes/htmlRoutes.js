@@ -22,14 +22,39 @@ var path = require("path");
 
 module.exports = function (app) {
 
-  app.get("/scoreboard", function(req, res) {
+  app.get("/landinghtml", function (req, res) {
+    res.sendFile(path.join(__dirname, "../views/landing.html"));
+  });
+  app.get("/gameselect", function (req, res) {
+    res.sendFile(path.join(__dirname, "../views/gameselect.html"));
+  });
+
+  app.get("/landing", function (req, res) {
+    db.Games.findAll({}).then(function (dbGames) {
+      res.render("landing");
+    });
+  });
+
+  app.get("/scorepage", function (req, res) {
+    db.Games.findAll({}).then(function (dbGames) {
+      res.render("scorepage", {
+        games: dbGames
+      });
+    });
+  });
+
+
+
+  app.get("/scoreboard", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
   });
 
-  // Load index page
-  app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("index", {
+
+  app.get("/scorekeeper", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/scorekeeper.html"));
+  });
+
+
   // Load teamManager page
   app.get("/teamManager", function (req, res) {
     db.Teams.findAll({}).then(function (dbTeams) {
@@ -76,8 +101,6 @@ module.exports = function (app) {
     });
   });
 
-
-
   // Load inGameManager page
   app.get("/inGameManager", function (req, res) {
     db.Games.findAll({}).then(function (dbGames) {
@@ -92,4 +115,5 @@ module.exports = function (app) {
   app.get("*", function (req, res) {
     res.render("404");
   });
+
 };
