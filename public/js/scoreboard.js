@@ -1,8 +1,8 @@
-$("#view-scoreboard").on("click", function(event) {
+$("#view-scoreboard").on("click", function (event) {
   event.preventDefault();
 
-  $.get("/api/games", function(data) {
-    console.log(data);
+  $.get("/api/games", function (data) {
+    console.log("data is", data);
     var i; //counter variable
     var j; //counter variable
 
@@ -52,16 +52,16 @@ $("#view-scoreboard").on("click", function(event) {
           if (homeTeamID === data[i].Goals[j].Player.TeamId) {
             $gameHomeTeamPlayerGoalsDiv.append(
               "Goal: #" +
-                data[i].Goals[j].Player.jerseyNumber +
-                " " +
-                data[i].Goals[j].Player.firstName +
-                " " +
-                data[i].Goals[j].Player.lastName +
-                " " +
-                moment(new Date(data[i].Goals[j].goalTime)).format(
-                  "h:mm:ss a"
-                ) +
-                "<br>"
+              data[i].Goals[j].Player.jerseyNumber +
+              " " +
+              data[i].Goals[j].Player.firstName +
+              " " +
+              data[i].Goals[j].Player.lastName +
+              " " +
+              moment(new Date(data[i].Goals[j].goalTime)).format(
+                "h:mm:ss a"
+              ) +
+              "<br>"
             );
           }
         } else if (visitorTeamID === data[i].Goals[j].TeamId) {
@@ -70,16 +70,16 @@ $("#view-scoreboard").on("click", function(event) {
           if (visitorTeamID === data[i].Goals[j].Player.TeamId) {
             $gameVisitorTeamPlayerGoalsDiv.append(
               "Goal: #" +
-                data[i].Goals[j].Player.jerseyNumber +
-                " " +
-                data[i].Goals[j].Player.firstName +
-                " " +
-                data[i].Goals[j].Player.lastName +
-                " " +
-                moment(new Date(data[i].Goals[j].goalTime)).format(
-                  "h:mm:ss a"
-                ) +
-                "<br>"
+              data[i].Goals[j].Player.jerseyNumber +
+              " " +
+              data[i].Goals[j].Player.firstName +
+              " " +
+              data[i].Goals[j].Player.lastName +
+              " " +
+              moment(new Date(data[i].Goals[j].goalTime)).format(
+                "h:mm:ss a"
+              ) +
+              "<br>"
             );
           }
         }
@@ -87,8 +87,13 @@ $("#view-scoreboard").on("click", function(event) {
 
       $gameInfoDiv.append(
         "<b>Game Date: </b> " +
-          moment(new Date(data[i].gameDate)).format("MMMM Do YYYY h:mm a") +
+<<<<<<< HEAD
+        moment(new Date(data[i].gameDate)).format("MMMM Do YYYY h:mm a") +
+        "<br><br>"
+=======
+          moment(new Date(data[i].gameDate)).format("ddd MMM Do YYYY h:mm a") +
           "<br><br>"
+>>>>>>> fb7673d52a42edecbb710ef111f6ffec05753db4
       );
 
       $gameHomeTeamNameDiv.html(
@@ -120,12 +125,15 @@ $("#view-scoreboard").on("click", function(event) {
   });
 });
 
-$("#view-todays-games").on("click", function(event) {
+$("#view-todays-games").on("click", function (event) {
   event.preventDefault();
 
-  $.get("/api/gamesbydate/today", function(data) {
+  $.get("/api/gamesbydate/today", function (data) {
     console.log(data);
   });
+<<<<<<< HEAD
+});
+=======
 });
 
 $("#view-past-games").on("click", function(event) {
@@ -143,3 +151,4 @@ $("#view-future-games").on("click", function(event) {
     console.log(data);
   });
 });
+>>>>>>> fb7673d52a42edecbb710ef111f6ffec05753db4

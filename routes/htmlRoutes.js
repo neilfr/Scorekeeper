@@ -20,74 +20,98 @@ var path = require("path");
   });
 */
 
-module.exports = function(app) {
-  app.get("/scoreboard", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
-  });
+module.exports = function (app) {
 
-  app.get("/scorekeeper", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/scorekeeper.html"));
-  });
+    app.get("/landinghtml", function (req, res) {
+      res.sendFile(path.join(__dirname, "../views/landing.html"));
+    });
+    app.get("/gameselect", function (req, res) {
+      res.sendFile(path.join(__dirname, "../views/gameselect.html"));
+    });
 
-  // Load teamManager page
-  app.get("/teamManager", function(req, res) {
-    db.Teams.findAll({}).then(function(dbTeams) {
-      res.render("teamManager", {
-        msg: "Welcome!",
-        teams: dbTeams
+    app.get("/landing", function (req, res) {
+      db.Games.findAll({}).then(function (dbGames) {
+        res.render("landing");
       });
     });
-  });
 
-  // Load playerManager page
-  app.get("/playerManager", function(req, res) {
-    db.Players.findAll({}).then(function(dbPlayers) {
-      res.render("playerManager", {
-        msg: "Welcome!",
-        players: dbPlayers
+    app.get("/scorepage", function (req, res) {
+      db.Games.findAll({}).then(function (dbGames) {
+        res.render("scorepage", {
+          games: dbGames
+        });
       });
     });
-  });
 
-  // Load gameManager page
-  app.get("/gameManager", function(req, res) {
-    db.Games.findAll({}).then(function(dbGames) {
-      res.render("gameManager", {
-        msg: "Welcome!",
-        games: dbGames
-      });
-    });
-  });
+    app.get("/scoreboard", function (req, res) {
+          module.exports = function (app) {
+            app.get("/scoreboard", function (req, res) {
+              res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
+            });
 
-  // Load gameManager page
-  app.get("/gameManager", function(req, res) {
-    db.Game.findAll({}).then(function(dbGames) {
-      res.render("gameManager", {});
-    });
-  });
+            app.get("/scorekeeper", function (req, res) {
+              res.sendFile(path.join(__dirname, "../public/scorekeeper.html"));
+            });
 
-  // Load gamePicker page
-  app.get("/gamePicker", function(req, res) {
-    db.Games.findAll({}).then(function(dbGames) {
-      res.render("gamePicker", {
-        msg: "Welcome!",
-        games: dbGames
-      });
-    });
-  });
+            // Load teamManager page
+            app.get("/teamManager", function (req, res) {
+              db.Teams.findAll({}).then(function (dbTeams) {
+                res.render("teamManager", {
+                  msg: "Welcome!",
+                  teams: dbTeams
+                });
+              });
+            });
 
-  // Load inGameManager page
-  app.get("/inGameManager", function(req, res) {
-    db.Games.findAll({}).then(function(dbGames) {
-      res.render("inGameManager", {
-        msg: "Welcome!",
-        games: dbGames
-      });
-    });
-  });
+            // Load playerManager page
+            app.get("/playerManager", function (req, res) {
+              db.Players.findAll({}).then(function (dbPlayers) {
+                res.render("playerManager", {
+                  msg: "Welcome!",
+                  players: dbPlayers
+                });
+              });
+            });
 
-  // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
-    res.render("404");
-  });
-};
+            // Load gameManager page
+            app.get("/gameManager", function (req, res) {
+              db.Games.findAll({}).then(function (dbGames) {
+                res.render("gameManager", {
+                  msg: "Welcome!",
+                  games: dbGames
+                });
+              });
+            });
+
+            // Load gameManager page
+            app.get("/gameManager", function (req, res) {
+              db.Game.findAll({}).then(function (dbGames) {
+                res.render("gameManager")
+              });
+            });
+            // Load gamePicker page
+            app.get("/gamePicker", function (req, res) {
+              db.Games.findAll({}).then(function (dbGames) {
+                res.render("gamePicker", {
+                  msg: "Welcome!",
+                  games: dbGames
+                });
+              });
+            });
+
+            // Load inGameManager page
+            app.get("/inGameManager", function (req, res) {
+              db.Games.findAll({}).then(function (dbGames) {
+                res.render("inGameManager", {
+                  msg: "Welcome!",
+                  games: dbGames
+                });
+              });
+            });
+
+            // Render 404 page for any unmatched routes
+            app.get("*", function (req, res) {
+              res.render("404");
+            });
+
+          };

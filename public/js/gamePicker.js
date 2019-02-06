@@ -8,6 +8,7 @@ var API = {
   getgames: function() {
     return $.ajax({
       url: "api/games",
+      //url: "api/gamesbydate/today",
       type: "GET"
     });
   },
@@ -23,12 +24,12 @@ var refreshgames = function() {
     var $games = data.map(function(game) {
       var $a = $("<a>")
         .text(
-          "Home:" +
-            game.homeTeamId +
-            ", Visitor:" +
-            game.visitorTeamId +
-            ", Game Date and Time:" +
-            game.gameDate
+          "Home: " +
+            game.HomeTeam.teamName +
+            ", Visitor: " +
+            game.VisitorTeam.teamName +
+            " Game Date and Time: " +
+            moment(game.gameDate).format("ddd MMM Do YYYY h:mm a")
         )
         .attr("href", "/api/games/" + game.id);
 

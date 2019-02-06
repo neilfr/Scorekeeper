@@ -1,0 +1,118 @@
+<style>
+    body, html {
+  height: 100%;
+  font-family: 'PT Sans Caption', sans-serif;
+}
+.bg {
+  /* The image used */
+  background-image: url("../public/images/ice-hockey.jpg");
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.button {
+  border:black solid 1px;
+  border-radius: 0%;
+  margin: 5px 10px;
+  position: relative;
+  /* padding: 20px; */
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button:after {
+  content: "";
+  background: #003E7E;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: right;
+}
+
+
+    </style>
+
+
+
+<div class="bg">
+    <div class="offset-10 col-2">
+        <nav class="navbar navbar-light navbar-1 white">
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
+                aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
+                    class="navbar-toggler-icon"></span></button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent15">
+
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="score.html">Scores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="manageGame.handlebars">Manage</a>
+                    </li>
+                </ul>
+                <!-- Links -->
+
+            </div>
+            <!-- Collapsible content -->
+        </nav>
+    </div>
+    <div class="container" style="padding-top:160px;padding-left:60px">
+        <div class="row">
+            <h1 class="text-center" style="padding-left:25px">Scorekeepers</h1>
+        </div>
+        <div class="row" style="padding-top:40px;">
+            <a href="#"><button type="button" id="score-btn" class="btn btn-default button">Scores</button></a>
+            <button type="button" id="manage-btn" class="btn btn-default button">Manage</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+
+
+    <footer class="page-footer footer">
+        <div class="copy_right text-right ml-auto mr-sm-5 mr-4">
+            <p class="text-li">© 2019 Scorekeepers. All rights reserved
+
+            </p>
+        </div>
+    </footer>
+
+</div>
+
+<!-- Menu Toggle Script -->
+<script type="text/javascript" src="/js/scoreboard.js"></script>
