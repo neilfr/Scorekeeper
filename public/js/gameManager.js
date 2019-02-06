@@ -31,14 +31,15 @@ var API = {
 var refreshgames = function() {
   API.getgames().then(function(data) {
     var $games = data.map(function(game) {
+      console.log(game);
       var $a = $("<a>")
         .text(
           "Home:" +
-            game.homeTeamId +
+            game.HomeTeam.teamName +
             ", Visitor:" +
-            game.visitorTeamId +
+            game.VisitorTeam.teamName +
             ", Date and Time:" +
-            game.gameDate
+            moment( game.gameDate).format("ddd MMM Do YYYY h:mm a")
         )
 
         .attr("href", "/api/games/" + game.id);

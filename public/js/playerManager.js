@@ -36,6 +36,7 @@ var API = {
 var refreshplayers = function() {
   API.getplayers().then(function(data) {
     var $players = data.map(function(player) {
+      console.log(player);
       var $a = $("<a>")
         .text(
           player.firstName +
@@ -44,7 +45,7 @@ var refreshplayers = function() {
             ", Jersey:" +
             player.jerseyNumber +
             ", Team:" +
-            player.TeamId
+            player.Team.teamName
         )
         .attr("href", "/api/players/" + player.id);
 

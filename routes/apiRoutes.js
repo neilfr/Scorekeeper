@@ -29,9 +29,6 @@ module.exports = function(app) {
   });
 
   app.get("/api/games/:id", function(req, res) {
-    // Here we add an "include" property to our options in our findOne query
-    // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.Post
     db.Games.findOne({
       where: {
         id: req.params.id
@@ -47,11 +44,13 @@ module.exports = function(app) {
         },
         {
           model: db.Teams,
-          as: "HomeTeam" // specifies how we want to be able to access our joined rows on the returned data
+          as: "HomeTeam",
+          include: [db.Players] // specifies how we want to be able to access our joined rows on the returned data
         },
         {
           model: db.Teams,
-          as: "VisitorTeam" // specifies how we want to be able to access our joined rows on the returned data
+          as: "VisitorTeam",
+          include: [db.Players] // specifies how we want to be able to access our joined rows on the returned data
         }
       ]
     }).then(function(dbGames) {
@@ -145,16 +144,27 @@ module.exports = function(app) {
 
   // Get all players
   app.get("/api/players", function(req, res) {
-    db.Players.findAll({}).then(function(dbPlayers) {
+    db.Players.findAll({
+      include: [
+        {
+          model: db.Teams
+        }
+      ]
+    }).then(function(dbPlayers) {
       res.json(dbPlayers);
     });
   });
 
   // Get player by id
   app.get("/api/players/:id", function(req, res) {
-    db.Players.findOne({ where: { id: req.params.id } }).then(function(
-      dbPlayer
-    ) {
+    db.Players.findOne({
+      where: { id: req.params.id },
+      include: [
+        {
+          model: db.Teams
+        }
+      ]
+    }).then(function(dbPlayer) {
       res.json(dbPlayer);
     });
   });
@@ -175,13 +185,6 @@ module.exports = function(app) {
     });
   });
 
-  // Get game by id
-  app.get("/api/games/:id", function(req, res) {
-    db.Games.findOne({ where: { id: req.params.id } }).then(function(dbTeam) {
-      res.json(dbTeam);
-    });
-  });
-
   // Create a new game
   app.post("/api/games", function(req, res) {
     db.Games.create(req.body).then(function(dbGame) {
@@ -197,8 +200,11 @@ module.exports = function(app) {
   });
 
   app.post("/api/goals", function(req, res) {
-    db.Goals.create(req.body).then(function(dbGoals) {
-      res.json(dbGoals);
+    db.Goals.create({
+      goalTime: req.body.goalDateTime,
+      GameId: req.body.gameID,
+      TeamId: req.body.teamID,
+      PlayerId: req.body.playerID
     });
   });
 
