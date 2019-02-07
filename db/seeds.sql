@@ -1,3 +1,4 @@
+
 drop database scorekeeper;
 create database scorekeeper;
 
