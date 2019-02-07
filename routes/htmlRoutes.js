@@ -22,7 +22,7 @@ var path = require("path");
 
 module.exports = function (app) {
 
-  app.get("/landinghtml", function (req, res) {
+  app.get("/home", function (req, res) {
     res.sendFile(path.join(__dirname, "../views/landing.html"));
   });
   app.get("/gameselect", function (req, res) {
@@ -47,6 +47,10 @@ module.exports = function (app) {
 
   app.get("/scoreboard", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
+  });
+
+  app.get("/index", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
 

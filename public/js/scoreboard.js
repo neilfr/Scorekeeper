@@ -87,13 +87,8 @@ $("#view-scoreboard").on("click", function (event) {
 
       $gameInfoDiv.append(
         "<b>Game Date: </b> " +
-<<<<<<< HEAD
-        moment(new Date(data[i].gameDate)).format("MMMM Do YYYY h:mm a") +
+        moment(new Date(data[i].gameDate)).format("ddd MMM Do YYYY h:mm a") +
         "<br><br>"
-=======
-          moment(new Date(data[i].gameDate)).format("ddd MMM Do YYYY h:mm a") +
-          "<br><br>"
->>>>>>> fb7673d52a42edecbb710ef111f6ffec05753db4
       );
 
       $gameHomeTeamNameDiv.html(
@@ -131,24 +126,20 @@ $("#view-todays-games").on("click", function (event) {
   $.get("/api/gamesbydate/today", function (data) {
     console.log(data);
   });
-<<<<<<< HEAD
-});
-=======
 });
 
-$("#view-past-games").on("click", function(event) {
+$("#view-past-games").on("click", function (event) {
   event.preventDefault();
 
-  $.get("/api/gamesbydate/past", function(data) {
+  $.get("/api/gamesbydate/past", function (data) {
     console.log(data);
   });
 });
 
-$("#view-future-games").on("click", function(event) {
+$("#view-future-games").on("click", function (event) {
   event.preventDefault();
 
-  $.get("/api/gamesbydate/future", function(data) {
+  $.get("/api/gamesbydate/future", function (data) {
     console.log(data);
   });
 });
->>>>>>> fb7673d52a42edecbb710ef111f6ffec05753db4
