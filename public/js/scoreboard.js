@@ -58,9 +58,7 @@ $("#view-scoreboard").on("click", function(event) {
                 " " +
                 data[i].Goals[j].Player.lastName +
                 " " +
-                moment(new Date(data[i].Goals[j].goalTime)).format(
-                  "h:mm:ss a"
-                ) +
+                data[i].Goals[j].timeRemaining +
                 "<br>"
             );
           }
@@ -76,9 +74,7 @@ $("#view-scoreboard").on("click", function(event) {
                 " " +
                 data[i].Goals[j].Player.lastName +
                 " " +
-                moment(new Date(data[i].Goals[j].goalTime)).format(
-                  "h:mm:ss a"
-                ) +
+                data[i].Goals[j].timeRemaining +
                 "<br>"
             );
           }
