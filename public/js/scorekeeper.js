@@ -1,5 +1,6 @@
+var timeRemaining = sessionStorage.getItem("timeRemaining");
 var gamePicked = parseInt(sessionStorage.getItem("gamePicked"));
-var timeRemaining = 3000; // 5 minutes for now
+
 var $gameClock = $("#gameClock");
 var gameMinutes, gameSeconds, game10ths;
 var running = false;
@@ -10,6 +11,15 @@ var visitorTeamID;
 var homeTeamPlayersArray;
 var visitorTeamPlayersArray;
 var timeRemainingUponEvent;
+
+
+//if there is timeRemaining in the session storage - IE. there is an unfinished game - use that timeRemaining
+if (timeRemaining > 0) {
+  timeRemaining = sessionStorage.getItem("timeRemaining");
+} else {
+  timeRemaining = 3000; //otherwise we have a new game, so set the time to 5 minutes
+}
+
 
 /* Chris F: 02/06/2019 Work in progress.  I will get all the players in 2 arrays; home team and visitors
 this can be reused for goals and penalties accordingly */
@@ -114,6 +124,7 @@ There are some minor differences, but there is a lot of code repetition.  If we 
 it would be good to make a function for this to make the code more efficient, etc. */
   //$("#home-team-goal").on("click", function(event) {
 
+
   $("body").on("click", "#home-team-goal", function(event) {
     event.preventDefault();
     running = false;
@@ -142,7 +153,7 @@ it would be good to make a function for this to make the code more efficient, et
   $("body").on("click", "#hometeam-player", function(event) {
     event.preventDefault();
 
-    console.log("hello");
+   
 
     //The newGoal object that will be passed to the post api call.
     //This object will contain the necessary data to create the goal record in the db.
@@ -217,14 +228,31 @@ it would be good to make a function for this to make the code more efficient, et
     running = false;
   });
 
-  var countDown = setInterval(function() {
-    gameMinutes = Math.floor(timeRemaining / 600);
-    gameSeconds = Math.floor((timeRemaining - gameMinutes * 600) / 10);
-    game10ths = Math.floor(
-      timeRemaining - (gameMinutes * 600 + gameSeconds * 10)
-    );
-    if (gameMinutes < 10) {
-      gameMinutes = "0" + gameMinutes;
+
+var countDown = setInterval(function() {
+  gameMinutes = Math.floor(timeRemaining / 600);
+  gameSeconds = Math.floor((timeRemaining - gameMinutes * 600) / 10);
+  game10ths = Math.floor(
+    timeRemaining - (gameMinutes * 600 + gameSeconds * 10)
+  );
+  if (gameMinutes < 10) {
+    gameMinutes = "0" + gameMinutes;
+  }
+  if (gameSeconds < 10) {
+    gameSeconds = "0" + gameSeconds;
+  }
+  if (game10ths < 10) {
+    game10ths = "0" + game10ths;
+  }
+
+  $gameClock.text(gameMinutes + ":" + gameSeconds + ":" + game10ths);
+  sessionStorage.setItem("timeRemaining", timeRemaining);
+  if (running) {
+    if (--timeRemaining <= 0) {
+      localStorage.removeItem("timeRemaining");
+      clearInterval(countDown);
+      $gameClock.text("Game Over");
+
     }
     if (gameSeconds < 10) {
       gameSeconds = "0" + gameSeconds;

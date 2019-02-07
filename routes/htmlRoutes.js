@@ -21,6 +21,28 @@ var path = require("path");
 */
 
 module.exports = function(app) {
+  app.get("/landinghtml", function(req, res) {
+    res.sendFile(path.join(__dirname, "../views/landing.html"));
+  });
+
+  app.get("/gameselect", function(req, res) {
+    res.sendFile(path.join(__dirname, "../views/gameselect.html"));
+  });
+
+  app.get("/landing", function(req, res) {
+    db.Games.findAll({}).then(function(dbGames) {
+      res.render("landing");
+    });
+  });
+
+  app.get("/scorepage", function(req, res) {
+    db.Games.findAll({}).then(function(dbGames) {
+      res.render("scorepage", {
+        games: dbGames
+      });
+    });
+  });
+
   app.get("/scoreboard", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
   });
@@ -62,7 +84,7 @@ module.exports = function(app) {
   // Load gameManager page
   app.get("/gameManager", function(req, res) {
     db.Game.findAll({}).then(function(dbGames) {
-      res.render("gameManager", {});
+      res.render("gameManager");
     });
   });
 
