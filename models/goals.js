@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Goals = sequelize.define("Goals", {
-    goalTime: {
-      type: DataTypes.DATE,
+    timeRemaining: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         len: [1]
