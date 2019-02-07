@@ -12,6 +12,8 @@ var homeTeamPlayersArray;
 var visitorTeamPlayersArray;
 var timeRemainingUponEvent;
 
+var socket = io();
+
 //if there is timeRemaining in the session storage - IE. there is an unfinished game - use that timeRemaining
 if (timeRemaining > 0) {
   timeRemaining = sessionStorage.getItem("timeRemaining");
