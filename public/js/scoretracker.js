@@ -3,11 +3,14 @@ var socket = io();
 socket.on("goalEvent", function(msg) {
   var $goalTable = $("#goalTable");
   var $tr = $("<tr>");
-  $tr.append("<td>" + msg.gameID + "</td>");
-  $tr.append("<td>" + msg.teamID + "</td>");
-  $tr.append("<td>" + msg.playerID + "</td>");
-  $tr.append("<td>" + gameTime(msg.timeRemaining) + "</td>");
+  $tr.append("<td>" + msg.goalData.gameID + "</td>");
+  $tr.append("<td>" + msg.goalData.teamID + "</td>");
+  $tr.append("<td>" + msg.goalData.playerID + "</td>");
+  $tr.append("<td>" + gameTime(msg.goalData.timeRemaining) + "</td>");
   $goalTable.append($tr);
+
+  $("#homeScore").html("Home: " + msg.score.home);
+  $("#visitorScore").html("Visitor: " + msg.score.visitor);
 });
 
 socket.on("timerEvent", function(timeRemaining) {
