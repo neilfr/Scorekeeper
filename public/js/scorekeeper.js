@@ -245,9 +245,6 @@ it would be good to make a function for this to make the code more efficient, et
     if (gameSeconds < 10) {
       gameSeconds = "0" + gameSeconds;
     }
-    if (game10ths < 10) {
-      game10ths = "0" + game10ths;
-    }
 
     $gameClock.text(gameMinutes + ":" + gameSeconds + ":" + game10ths);
     sessionStorage.setItem("timeRemaining", timeRemaining);
