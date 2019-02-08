@@ -3,12 +3,14 @@ var socket = io();
 socket.on("goalEvent", function(data) {
   console.log("data received is:");
   console.log(data);
-  //loop through the goal data for the game and increment counters for each goal their team scored
   var homeScore = 0;
   var visitorScore = 0;
   var homeTeamID = data.HomeTeam.id;
   var $goalTable = $("#goalTable");
 
+  //loop through the goal data for the game and
+  // 1. build a table row for each goal and append to the goal table
+  // 2. increment counters for each goal their team scored
   for (i = 0; i < data.Goals.length; i++) {
     var $tr = $("<tr>");
     $tr.append("<td>" + data.Goals[i].GameId + "</td>");
@@ -22,24 +24,8 @@ socket.on("goalEvent", function(data) {
       visitorScore++;
     }
   }
-  console.log("homeScore is:" + homeScore);
-  console.log("visitorScore is:" + visitorScore);
   $("#homeScore").html("Home: " + homeScore);
   $("#visitorScore").html("Visitor: " + visitorScore);
-
-  /*
-socket.on("goalEvent", function(msg) {
-  var $goalTable = $("#goalTable");
-  var $tr = $("<tr>");
-  $tr.append("<td>" + msg.goalData.gameID + "</td>");
-  $tr.append("<td>" + msg.goalData.teamID + "</td>");
-  $tr.append("<td>" + msg.goalData.playerID + "</td>");
-  $tr.append("<td>" + gameTime(msg.goalData.timeRemaining) + "</td>");
-  $goalTable.append($tr);
-
-  $("#homeScore").html("Home: " + msg.score.home);
-  $("#visitorScore").html("Visitor: " + msg.score.visitor);
-  */
 });
 
 socket.on("timerEvent", function(timeRemaining) {

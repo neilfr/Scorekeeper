@@ -272,27 +272,6 @@ it would be good to make a function for this to make the code more efficient, et
 function goalAnnounce(goalData) {
   //get game data for the current game so we can calculate the current game score
   $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
-    //loop through the goal data for the game and increment counters for each goal their team scored
-    var homeScore = 0;
-    var visitorScore = 0;
-    for (i = 0; i < data.Goals.length; i++) {
-      if (data.Goals[i].TeamId === homeTeamID) {
-        homeScore++;
-      } else {
-        visitorScore++;
-      }
-    }
-    console.log("homeScore is:" + homeScore);
-    console.log("visitorScore is:" + visitorScore);
-    //put the game score data and the goal data into one object,
-    // so we can deliver it together in one socket emit to all listeners
-    var announceData = {
-      goalData: goalData,
-      score: {
-        home: homeScore,
-        visitor: visitorScore
-      }
-    };
     //push a goal announcement using socket.io
     socket.emit("goalEvent", data);
   });
