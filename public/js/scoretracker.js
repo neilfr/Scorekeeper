@@ -1,6 +1,6 @@
 //scoretracker.js
 var socket = io();
-socket.on("myEvent", function(msg) {
+socket.on("goalEvent", function(msg) {
   var $goalTable = $("#goalTable");
   var $tr = $("<tr>");
   $tr.append("<td>" + msg.gameID + "</td>");
@@ -8,6 +8,10 @@ socket.on("myEvent", function(msg) {
   $tr.append("<td>" + msg.playerID + "</td>");
   $tr.append("<td>" + gameTime(msg.timeRemaining) + "</td>");
   $goalTable.append($tr);
+});
+
+socket.on("timerEvent", function(timeRemaining) {
+  $("#gameTime").html("Time Remaining: " + timeRemaining);
 });
 
 function gameTime(timeRemaining) {
