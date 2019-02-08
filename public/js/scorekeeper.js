@@ -3,6 +3,7 @@ var gamePicked = parseInt(sessionStorage.getItem("gamePicked"));
 
 var $gameClock = $("#gameClock");
 var gameMinutes, gameSeconds, game10ths;
+var gameClock;
 var running = false;
 var currentDate;
 var goalDateTime;
@@ -11,6 +12,7 @@ var visitorTeamID;
 var homeTeamPlayersArray;
 var visitorTeamPlayersArray;
 var timeRemainingUponEvent;
+var mySocketMessage;
 
 var socket = io();
 
@@ -168,8 +170,7 @@ it would be good to make a function for this to make the code more efficient, et
     };
 
     //push a goal announcement using socket.io
-    console.log("emit the goal event");
-    socket.emit("myEvent", newGoal);
+    socket.emit("goalEvent", newGoal);
 
     //Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
@@ -197,8 +198,7 @@ it would be good to make a function for this to make the code more efficient, et
     };
 
     //push a goal announcement using socket.io
-    console.log("emit the goal event");
-    socket.emit("myEvent", newGoal);
+    socket.emit("goalEvent", newGoal);
 
     //Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
@@ -245,14 +245,17 @@ it would be good to make a function for this to make the code more efficient, et
     if (gameSeconds < 10) {
       gameSeconds = "0" + gameSeconds;
     }
-
-    $gameClock.text(gameMinutes + ":" + gameSeconds + ":" + game10ths);
+    gameClock = gameMinutes + ":" + gameSeconds + ":" + game10ths;
+    $gameClock.text(gameClock);
     sessionStorage.setItem("timeRemaining", timeRemaining);
+
+    socket.emit("timerEvent", gameClock);
     if (running) {
       if (--timeRemaining <= 0) {
         localStorage.removeItem("timeRemaining");
         clearInterval(countDown);
         $gameClock.text("Game Over");
+        socket.emit("timerEvent", "Game Over");
       }
     }
   }, 100);

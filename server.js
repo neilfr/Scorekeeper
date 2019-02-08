@@ -38,9 +38,13 @@ if (process.env.NODE_ENV === "test") {
 
 //socketio
 io.on("connection", function(socket) {
-  socket.on("myEvent", function(myMessage) {
-    console.log("myEvent: " + myMessage);
-    io.emit("myEvent", myMessage);
+  socket.on("goalEvent", function(goalMessage) {
+    // console.log("goalEvent: " + goalMessage);
+    io.emit("goalEvent", goalMessage);
+  });
+  socket.on("timerEvent", function(timerMessage) {
+    //console.log("timerEvent: " + timerMessage);
+    io.emit("timerEvent", timerMessage);
   });
 });
 
