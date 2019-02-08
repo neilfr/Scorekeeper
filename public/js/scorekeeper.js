@@ -169,12 +169,16 @@ it would be good to make a function for this to make the code more efficient, et
       playerID: playerID
     };
 
-    //Announce the goal to every browser listening
-    goalAnnounce(newGoal);
-
-    //Calling the post goal API route and passing the newGoal object
+    //CF: Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
-    $.post("/api/goals", newGoal, function() {});
+    //NF: added goalAnnounce
+    $.post("/api/goals", newGoal)
+      .then(function(response) {
+        goalAnnounce(newGoal);
+      })
+      .catch(function(err) {
+        console.log("error", err);
+      });
   });
 
   // $("#visitorteam-player").on("click", function(event) {
@@ -197,12 +201,16 @@ it would be good to make a function for this to make the code more efficient, et
       playerID: playerID
     };
 
-    //Announce the goal to every browser listening
-    goalAnnounce(newGoal);
-
-    //Calling the post goal API route and passing the newGoal object
+    //CF: Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
-    $.post("/api/goals", newGoal, function() {});
+    //NF: added goalAnnounce
+    $.post("/api/goals", newGoal)
+      .then(function(response) {
+        goalAnnounce(newGoal);
+      })
+      .catch(function(err) {
+        console.log("error", err);
+      });
   });
 
   $("#home-team-penalty").on("click", function(event) {
@@ -263,6 +271,7 @@ it would be good to make a function for this to make the code more efficient, et
 
 function goalAnnounce(goalData) {
   //get game data for the current game so we can calculate the current game score
+  console.log("i got into goalannounce");
   $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
     //loop through the goal data for the game and increment counters for each goal their team scored
     var homeScore = 0;
@@ -274,7 +283,8 @@ function goalAnnounce(goalData) {
         visitorScore++;
       }
     }
-
+    console.log("homeScore is:" + homeScore);
+    console.log("visitorScore is:" + visitorScore);
     //put the game score data and the goal data into one object,
     // so we can deliver it together in one socket emit to all listeners
     var announceData = {
