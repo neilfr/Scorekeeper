@@ -12,12 +12,21 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-    welcome to the scoretracker page
-    <h1>message:</h1>
-    <h2>Team:</h2>
-    <h2>Player:</h2>
-    <h2>Time:</h2>
-    <h2>Game:</h2>
+    <h1>Goal!!</h1>
+    <table>
+      <tr>
+        <th>Game:</th>
+        <th>Player:</th>
+        <th>Team:</th>
+        <th>Time Remaining:</th>
+      </tr>
+      <tr>
+        <td id="game"></td>
+        <td id="player"></td>
+        <td id="team"></td>
+        <td id="timeRemaining"></td>
+      </tr>
+    </table>
   </body>
   <script src="js/scoretracker.js" type="text/javascript"></script>
 </HTML>
