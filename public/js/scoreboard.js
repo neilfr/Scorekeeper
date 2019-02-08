@@ -87,16 +87,10 @@ $("#view-scoreboard").on("click", function (event) {
 
       $gameInfoDiv.append(
         "<b>Game Date: </b> " +
-        <<
-        << << < HEAD moment(new Date(data[i].gameDate)).format("ddd MMM Do YYYY h:mm a") +
-        "<br><br>" ===
-        === =
 
         moment(new Date(data[i].gameDate)).format("MMMM Do YYYY h:mm a") +
         "<br><br>"
 
-        >>>
-        >>> > test
       );
 
       $gameHomeTeamNameDiv.html(
