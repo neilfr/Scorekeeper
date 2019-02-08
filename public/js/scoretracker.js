@@ -1,9 +1,6 @@
 //scoretracker.js
 var socket = io();
 socket.on("myEvent", function(msg) {
-  console.log("and the object is:");
-  console.log(msg);
-
   var game = document.getElementById("game");
   var player = document.getElementById("player");
   var team = document.getElementById("team");

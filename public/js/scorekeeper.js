@@ -196,6 +196,10 @@ it would be good to make a function for this to make the code more efficient, et
       playerID: playerID
     };
 
+    //push a goal announcement using socket.io
+    console.log("emit the goal event");
+    socket.emit("myEvent", newGoal);
+
     //Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
     $.post("/api/goals", newGoal, function() {});
