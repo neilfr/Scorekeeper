@@ -69,11 +69,11 @@ module.exports = function (app) {
       };
     } else if (dateOption === "past") {
       dateCriteriaObject = {
-        [Op.lte]: startDateRange
+        [Op.lt]: startDateRange
       };
     } else if (dateOption === "future") {
       dateCriteriaObject = {
-        [Op.gte]: endDateRange
+        [Op.gt]: endDateRange
       };
     }
 
@@ -210,7 +210,7 @@ module.exports = function (app) {
 
   app.post("/api/goals", function (req, res) {
     db.Goals.create({
-      goalTime: req.body.goalDateTime,
+      timeRemaining: req.body.timeRemaining,
       GameId: req.body.gameID,
       TeamId: req.body.teamID,
       PlayerId: req.body.playerID

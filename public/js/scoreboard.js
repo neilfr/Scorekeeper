@@ -52,16 +52,16 @@ $("#view-scoreboard").on("click", function (event) {
           if (homeTeamID === data[i].Goals[j].Player.TeamId) {
             $gameHomeTeamPlayerGoalsDiv.append(
               "Goal: #" +
+
               data[i].Goals[j].Player.jerseyNumber +
               " " +
               data[i].Goals[j].Player.firstName +
               " " +
               data[i].Goals[j].Player.lastName +
               " " +
-              moment(new Date(data[i].Goals[j].goalTime)).format(
-                "h:mm:ss a"
-              ) +
+              data[i].Goals[j].timeRemaining +
               "<br>"
+
             );
           }
         } else if (visitorTeamID === data[i].Goals[j].TeamId) {
@@ -70,16 +70,16 @@ $("#view-scoreboard").on("click", function (event) {
           if (visitorTeamID === data[i].Goals[j].Player.TeamId) {
             $gameVisitorTeamPlayerGoalsDiv.append(
               "Goal: #" +
+
               data[i].Goals[j].Player.jerseyNumber +
               " " +
               data[i].Goals[j].Player.firstName +
               " " +
               data[i].Goals[j].Player.lastName +
               " " +
-              moment(new Date(data[i].Goals[j].goalTime)).format(
-                "h:mm:ss a"
-              ) +
+              data[i].Goals[j].timeRemaining +
               "<br>"
+
             );
           }
         }
@@ -87,8 +87,16 @@ $("#view-scoreboard").on("click", function (event) {
 
       $gameInfoDiv.append(
         "<b>Game Date: </b> " +
-        moment(new Date(data[i].gameDate)).format("ddd MMM Do YYYY h:mm a") +
+        <<
+        << << < HEAD moment(new Date(data[i].gameDate)).format("ddd MMM Do YYYY h:mm a") +
+        "<br><br>" ===
+        === =
+
+        moment(new Date(data[i].gameDate)).format("MMMM Do YYYY h:mm a") +
         "<br><br>"
+
+        >>>
+        >>> > test
       );
 
       $gameHomeTeamNameDiv.html(
