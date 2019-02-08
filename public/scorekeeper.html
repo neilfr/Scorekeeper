@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  
+    <script src="/socket.io/socket.io.js"></script>
   </head>
 
   <body>
@@ -65,14 +65,14 @@
           <div class="card text-center">
             <input
               id="home-team-goal"
-              class="btn btn-success"
+              class="btn btn-primary"
               type="submit"
               value="Home Team Goal"
-             
-            />
+              data-toggle="modal" 
+              data-target="#selectHomeTeamPlayerModal" 
+            /><br />
 
-            <!-- data-toggle="modal" 
-            data-target="#selectPlayerModal" -->
+           
           </div>
         </div>
 
@@ -80,9 +80,11 @@
           <div class="card text-center">
             <input
               id="visitor-team-goal"
-              class="btn btn-success"
+              class="btn btn-secondary"
               type="submit"
               value="Visitor Team Goal"
+              data-toggle="modal" 
+              data-target="#selectVisitorTeamPlayerModal" 
            
             /><br />
           </div>
@@ -92,7 +94,7 @@
           <div class="card text-center">
                <input
               id="home-team-penalty"
-              class="btn btn-danger"
+              class="btn btn-warning"
               type="submit"
               value="Home Team Penalty"
             /><br />
@@ -103,7 +105,7 @@
           <div class="card text-center">   
         <input
               id="visitor-team-penalty"
-              class="btn btn-danger"
+              class="btn btn-dark"
               type="submit"
               value="Visitor Team Penalty"
             /><br />
@@ -142,17 +144,17 @@
 
 
      <!-- Modal -->
-    <div class="modal fade" id="selectPlayerModal" role="dialog">
+    <div class="modal fade" id="selectHomeTeamPlayerModal" role="dialog">
       <div class="modal-dialog">
       
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Select Player</h4>
+            <h4 class="modal-title" id="modal-title-hometeam"></h4>
           </div>
-          <div class="modal-body">
-            <p>Some text in the modal.</p>
+          <div class="modal-body" id="modal-body-hometeam">
+         
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -163,6 +165,30 @@
     </div>
     
   </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="selectVisitorTeamPlayerModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" id="modal-title-visitorteam"></h4>
+        </div>
+        <div class="modal-body" id="modal-body-visitorteam">
+       
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
 
 
 
