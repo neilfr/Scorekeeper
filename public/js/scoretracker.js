@@ -1,6 +1,12 @@
 //scoretracker.js
-var socket = io();
-socket.on("goalEvent", function(data) {
+var gamePicked = sessionStorage.getItem("gamePicked");
+console.log("game picked is:");
+console.log(gamePicked);
+//for now only
+//gamePicked = 6;
+console.log("game picked is: " + gamePicked);
+var socket = io("http://localhost:3000?gameId=" + gamePicked);
+socket.on("goalEvent" + gamePicked, function(data) {
   console.log("data received is:");
   console.log(data);
   var homeScore = 0;
@@ -15,7 +21,6 @@ socket.on("goalEvent", function(data) {
   // 2. increment counters for each goal their team scored
   for (i = 0; i < data.Goals.length; i++) {
     var $tr = $("<tr>");
-    var teamName;
     if (data.Goals[i].TeamId === homeTeamID) {
       $tr.append("<td>" + homeTeamName + "</td>");
     } else {
@@ -35,7 +40,7 @@ socket.on("goalEvent", function(data) {
   $("#visitorScore").html(visitorTeamName + ": " + visitorScore);
 });
 
-socket.on("timerEvent", function(timeRemaining) {
+socket.on("timerEvent" + gamePicked, function(timeRemaining) {
   $("#gameTime").html("Time Remaining: " + timeRemaining);
 });
 

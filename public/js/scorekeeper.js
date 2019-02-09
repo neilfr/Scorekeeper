@@ -14,7 +14,7 @@ var visitorTeamPlayersArray;
 var timeRemainingUponEvent;
 var mySocketMessage;
 
-var socket = io();
+var socket = io("http://localhost:3000?gameId=" + gamePicked);
 
 //if there is timeRemaining in the session storage - IE. there is an unfinished game - use that timeRemaining
 if (timeRemaining > 0) {
@@ -257,13 +257,13 @@ it would be good to make a function for this to make the code more efficient, et
     $gameClock.text(gameClock);
     sessionStorage.setItem("timeRemaining", timeRemaining);
 
-    socket.emit("timerEvent", gameClock);
+    socket.emit("timerEvent" + gamePicked, gameClock);
     if (running) {
       if (--timeRemaining <= 0) {
         localStorage.removeItem("timeRemaining");
         clearInterval(countDown);
         $gameClock.text("Game Over");
-        socket.emit("timerEvent", "Game Over");
+        socket.emit("timerEvent" + gamePicked, "Game Over");
       }
     }
   }, 100);
@@ -273,6 +273,6 @@ function goalAnnounce(goalData) {
   //get game data for the current game so we can calculate the current game score
   $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
     //push a goal announcement using socket.io
-    socket.emit("goalEvent", data);
+    socket.emit("goalEvent" + gamePicked, data);
   });
 }
