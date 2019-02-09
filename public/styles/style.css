@@ -58,3 +58,85 @@ body {
     width: 100%;
     text-align: right;
 }
+
+/* scorekeeper page */
+
+.scoreheading {
+    text-align: center;
+    color: rgb(4, 66, 117);
+    text-shadow: rgb(27, 6, 65) 0 0 10px;
+    font-family: 'Diplomata', cursive;
+    padding: 3% 1%;
+    margin: 2% 0;
+    border-bottom: 1px solid rgb(0, 95, 238);
+}
+
+.controller {
+    padding: 10px;
+    margin: auto;
+}
+
+#start-game,
+#stop-game {
+    margin: auto;
+}
+
+/* clock */
+#clockdiv {
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+}
+
+#clockdiv>div {
+    padding: 10px;
+    border-radius: 3px;
+    background: rgb(180, 185, 184);
+    display: inline-block;
+}
+
+#clockdiv div>span {
+    /* padding: 15px; */
+    border-radius: 3px;
+    background: #003E7E;
+    display: inline-block;
+}
+
+.smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+}
+
+.time-holder {
+    width: 100px;
+    margin-bottom: 35px;
+}
+
+
+.minutes,
+.seconds,
+.milliseconds {
+    width: 50px;
+    height: 42px;
+}
+
+/* ..... */
+
+#hscore,
+#vscore {
+    font-size: 30px;
+    padding: 2px 15px;
+    border: 2px solid gray;
+}
+
+.winner {
+    background-color: rgb(119, 168, 241);
+}
+
+.game-button {
+    width: 165px;
+    margin: 10px;
+}

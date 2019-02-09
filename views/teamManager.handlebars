@@ -1,13 +1,33 @@
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="/teamManager">Team Manager</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/playerManager">Player Manager</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/gameManager">Game Manager</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/gamePicker">Game Picker</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
 <div id="home">
   <div class="container">
     <div class="row">
       <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
+        {{!-- <h1>{{msg}}</h1> --}}
         <h2>This is our Team Manager Page!</h2>
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
             <label for="team-name">Team Name</label>
-            <input type="text" id="team-name" class="form-control" aria-describedby="team-name" placeholder="Enter Team Name">
+            <input type="text" id="team-name" class="form-control" aria-describedby="team-name"
+              placeholder="Enter Team Name">
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
