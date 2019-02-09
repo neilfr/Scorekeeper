@@ -3,6 +3,7 @@ var gamePicked = parseInt(sessionStorage.getItem("gamePicked"));
 
 var $gameClock = $("#gameClock");
 var gameMinutes, gameSeconds, game10ths;
+var gameClock;
 var running = false;
 var currentDate;
 var goalDateTime;
@@ -16,7 +17,17 @@ var timeRemainingUponEvent;
 var totalHomeGoals = 0;
 var totalVisitorGoals = 0;
 
-var socket = io();
+var mySocketMessage;
+
+
+//var socket = io("http://localhost:3000?gameId=" + gamePicked);
+var socket = io(
+  window.location.protocol +
+    "//" +
+    window.location.host +
+    "?gameId=" +
+    gamePicked
+);
 
 //if there is timeRemaining in the session storage - IE. there is an unfinished game - use that timeRemaining
 if (timeRemaining > 0) {
@@ -185,13 +196,16 @@ it would be good to make a function for this to make the code more efficient, et
       $('#vscore').removeClass('winner')
     }
 
-    //push a goal announcement using socket.io
-    console.log("emit the goal event");
-    socket.emit("myEvent", newGoal);
-
-    //Calling the post goal API route and passing the newGoal object
+    //CF: Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
-    $.post("/api/goals", newGoal, function () {});
+    //NF: added goalAnnounce
+    $.post("/api/goals", newGoal)
+      .then(function(response) {
+        goalAnnounce(newGoal);
+      })
+      .catch(function(err) {
+        console.log("error", err);
+      });
   });
 
   // $("#visitorteam-player").on("click", function(event) {
@@ -215,6 +229,7 @@ it would be good to make a function for this to make the code more efficient, et
       playerID: playerID
     };
 
+
     totalVisitorGoals += 1;
     $("#vscore").text(totalVisitorGoals);
     if (totalVisitorGoals > totalHomeGoals) {
@@ -228,7 +243,18 @@ it would be good to make a function for this to make the code more efficient, et
 
     //Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
-    $.post("/api/goals", newGoal, function () {});
+   
+    //CF: Calling the post goal API route and passing the newGoal object
+    //to create the goal record in the db with the contained data.
+    //NF: added goalAnnounce
+    $.post("/api/goals", newGoal)
+      .then(function(response) {
+        goalAnnounce(newGoal);
+      })
+      .catch(function(err) {
+        console.log("error", err);
+      });
+
   });
 
   $("#home-team-penalty").on("click", function (event) {
@@ -272,17 +298,32 @@ it would be good to make a function for this to make the code more efficient, et
       gameSeconds = "0" + gameSeconds;
     }
 
+
     // $gameClock.text(gameMinutes + ":" + gameSeconds + ":" + game10ths);
     $('.minutes').text(gameMinutes);
     $('.seconds').text(gameSeconds);
     $('.milliseconds').text(game10ths);
+
     sessionStorage.setItem("timeRemaining", timeRemaining);
+
+    socket.emit("timerEvent" + gamePicked, gameClock);
     if (running) {
       if (--timeRemaining <= 0) {
         localStorage.removeItem("timeRemaining");
         clearInterval(countDown);
         $gameClock.text("Game Over");
+        socket.emit("timerEvent" + gamePicked, "Game Over");
       }
     }
   }, 100);
+
 });
+
+function goalAnnounce(goalData) {
+  //get game data for the current game so we can calculate the current game score
+  $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
+    //push a goal announcement using socket.io
+    socket.emit("goalEvent" + gamePicked, data);
+  });
+}
+

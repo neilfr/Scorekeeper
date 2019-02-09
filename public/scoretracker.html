@@ -20,18 +20,21 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-    <h1>Game Tracker</h1>
+    <h1>Score Tracker</h1>
+    <h2 id="gameTime"></h2>
+    <h2 id="homeScore">Home: 0</h2>
+    <h2 id="visitorScore">Visitor: 0</h2>
     <table id="goalTable" class="table table-striped">
       <tr>
-        <th>Game</th>
         <th>Team</th>
         <th>Player</th>
+        <th>Jersey</th>
         <th>Time Remaining</th>
       </tr>
       <tr>
-        <td id="game"></td>
         <td id="team"></td>
         <td id="player"></td>
+        <td id="jersey"></td>
         <td id="timeRemaining"></td>
       </tr>
     </table>
