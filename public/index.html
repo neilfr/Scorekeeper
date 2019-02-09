@@ -1,26 +1,61 @@
 <!DOCTYPE html>
 <HTML lang="en-us">
-  <head>
-    <meta charset="utf-8" />
-    <title>index page</title>
-  </head>
-  <body>
-    welcome to the main page
-    <ul>
-      <li>
-        <a id="startTeamManager" href="/teamManager">Team Manager</a>
-      </li>
-      <li>
-        <a id="startPlayerManager" href="/playerManager">Player Manager</a>
-      </li>
-      <li>
-        <a id="startGameManager" href="/gameManager">Game Manager</a>
-      </li>
-      <li>
-        <a id="startGamePicker" href="/gamePicker">Game Picker</a>
-      </li>
-    </ul>
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <title>index page</title>
+
+  <link rel="stylesheet" href="./styles/style.css">
+  <!-- Custom-Files -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
+  <!-- Bootstrap-Core-CSS -->
+  <!-- <link rel="stylesheet" href="../public/styles/styles.css" type="text/css" media="all" /> -->
+  <!-- Style-CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Font-Awesome-Icons-CSS -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <h1 class="text-center">Manager's Page</h1>
+  <div class="jumbotron container">
+    <div class="row text-center">
+      <div class="col-6"><a href="/teamManager"><button class="funkyButton" id="startTeamManager">Team Manager</button></a></div>
+      <div class="col-6"><a href="/playerManager"><button class="funkyButton" id="startPlayerManager">Player Manager</button></div>
+    </div>
+    <div class="row text-center">
+      <div class="col-6"><a href="/gameManager"><button class="funkyButton" id="startGameManager" href="">Game Manager</button></a></div>
+      <div class="col-6"><a href="/gamePicker"><button class="funkyButton" id="startGamePicker" href="">Game Picker</button></a></div>
+    </div>
+
+    <div class="row text-center">
+          <div class="col-6"><a href="/gameselect"><button class="funkyButton" id="startGameSelect" href="">Game Select for Parent / Client / End User</button></a></div>
+    </div>
+
+    <i class="fa fa-group"></i>
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <!--
         <script src="js/index.js" type="text/javascript"></script>
 -->
   </body>

@@ -63,6 +63,7 @@ var handleGamePickBtnClick = function() {
     .attr("data-id");
   API.pickGame().then(function() {
     sessionStorage.setItem("gamePicked", idPicked);
+    sessionStorage.setItem("timeRemaining", 3000);
   });
 };
 // Add event listeners to the game selection buttons

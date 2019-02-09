@@ -62,15 +62,9 @@ module.exports = function(app) {
     var dateOption = req.params.dateOption;
     var dateCriteriaObject;
 
-    var dateFormat = "YYYY-DD-MM HH:mm:ss";
-    var testDateUtc = moment.utc("2015-01-30 10:00:00");
-    var localDate = testDateUtc.local();
+    var startDateRange = moment().format("YYYY-MM-DD 00:00:00");
 
-    var startDateRange = localDate.format(dateFormat);
-
-    var endDateRange = moment(
-      moment.utc().format("YYYY-MM-DD 11:59:59")
-    ).format("YYYY-MM-DD 11:59:59");
+    var endDateRange = moment().format("YYYY-MM-DD 11:59:59");
 
     if (dateOption === "today") {
       dateCriteriaObject = {
@@ -131,7 +125,11 @@ module.exports = function(app) {
 
   // Get team by id
   app.get("/api/teams/:id", function(req, res) {
-    db.Teams.findOne({ where: { id: req.params.id } }).then(function(dbTeam) {
+    db.Teams.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbTeam) {
       res.json(dbTeam);
     });
   });
@@ -145,7 +143,11 @@ module.exports = function(app) {
 
   // Delete a team by id
   app.delete("/api/teams/:id", function(req, res) {
-    db.Teams.destroy({ where: { id: req.params.id } }).then(function(dbTeam) {
+    db.Teams.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbTeam) {
       res.json(dbTeam);
     });
   });
@@ -166,7 +168,9 @@ module.exports = function(app) {
   // Get player by id
   app.get("/api/players/:id", function(req, res) {
     db.Players.findOne({
-      where: { id: req.params.id },
+      where: {
+        id: req.params.id
+      },
       include: [
         {
           model: db.Teams
@@ -186,9 +190,11 @@ module.exports = function(app) {
 
   //Delete a player by id
   app.delete("/api/players/:id", function(req, res) {
-    db.Players.destroy({ where: { id: req.params.id } }).then(function(
-      dbPlayer
-    ) {
+    db.Players.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbPlayer) {
       res.json(dbPlayer);
     });
   });
@@ -202,7 +208,11 @@ module.exports = function(app) {
 
   // Delete a game by id
   app.delete("/api/games/:id", function(req, res) {
-    db.Games.destroy({ where: { id: req.params.id } }).then(function(dbGame) {
+    db.Games.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbGame) {
       res.json(dbGame);
     });
   });
@@ -213,6 +223,8 @@ module.exports = function(app) {
       GameId: req.body.gameID,
       TeamId: req.body.teamID,
       PlayerId: req.body.playerID
+    }).then(function(dbGoals) {
+      res.json(dbGoals);
     });
   });
 

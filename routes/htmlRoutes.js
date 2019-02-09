@@ -21,10 +21,9 @@ var path = require("path");
 */
 
 module.exports = function(app) {
-  app.get("/landinghtml", function(req, res) {
+  app.get("/home", function(req, res) {
     res.sendFile(path.join(__dirname, "../views/landing.html"));
   });
-
   app.get("/gameselect", function(req, res) {
     res.sendFile(path.join(__dirname, "../views/gameselect.html"));
   });
@@ -45,6 +44,14 @@ module.exports = function(app) {
 
   app.get("/scoreboard", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
+  });
+
+  app.get("/scoretracker", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/scoretracker.html"));
+  });
+
+  app.get("/index", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
   app.get("/scorekeeper", function(req, res) {
@@ -87,11 +94,19 @@ module.exports = function(app) {
       res.render("gameManager");
     });
   });
-
   // Load gamePicker page
   app.get("/gamePicker", function(req, res) {
     db.Games.findAll({}).then(function(dbGames) {
       res.render("gamePicker", {
+        msg: "Welcome!",
+        games: dbGames
+      });
+    });
+  });
+
+  app.get("/gamePickerScoreboard", function(req, res) {
+    db.Games.findAll({}).then(function(dbGames) {
+      res.render("gamePickerScoreboard", {
         msg: "Welcome!",
         games: dbGames
       });
@@ -106,6 +121,10 @@ module.exports = function(app) {
         games: dbGames
       });
     });
+  });
+
+  app.get("/gametracker", function(req, res) {
+    res.sendFile(path.join(__dirname, "../gametracker.html"));
   });
 
   // Render 404 page for any unmatched routes

@@ -5,6 +5,9 @@ var exphbs = require("express-handlebars");
 var db = require("./models");
 
 var app = express();
+var http = require("http").Server(app);
+var io = require("socket.io")(http); //socketio
+
 var PORT = process.env.PORT || 3000;
 
 // Middleware
@@ -33,9 +36,23 @@ if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
 
+//socketio
+io.on("connection", function(socket) {
+  socket.on("goalEvent", function(goalMessage) {
+    // console.log("goalEvent: " + goalMessage);
+    io.emit("goalEvent", goalMessage);
+  });
+  socket.on("timerEvent", function(timerMessage) {
+    //console.log("timerEvent: " + timerMessage);
+    io.emit("timerEvent", timerMessage);
+  });
+});
+
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function() {
-  app.listen(PORT, function() {
+  //  app.listen(PORT, function() {
+  http.listen(PORT, function() {
+    // added this for socket
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,

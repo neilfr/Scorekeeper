@@ -3,6 +3,7 @@ var gamePicked = parseInt(sessionStorage.getItem("gamePicked"));
 
 var $gameClock = $("#gameClock");
 var gameMinutes, gameSeconds, game10ths;
+var gameClock;
 var running = false;
 var currentDate;
 var goalDateTime;
@@ -11,6 +12,9 @@ var visitorTeamID;
 var homeTeamPlayersArray;
 var visitorTeamPlayersArray;
 var timeRemainingUponEvent;
+var mySocketMessage;
+
+var socket = io();
 
 //if there is timeRemaining in the session storage - IE. there is an unfinished game - use that timeRemaining
 if (timeRemaining > 0) {
@@ -165,9 +169,16 @@ it would be good to make a function for this to make the code more efficient, et
       playerID: playerID
     };
 
-    //Calling the post goal API route and passing the newGoal object
+    //CF: Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
-    $.post("/api/goals", newGoal, function() {});
+    //NF: added goalAnnounce
+    $.post("/api/goals", newGoal)
+      .then(function(response) {
+        goalAnnounce(newGoal);
+      })
+      .catch(function(err) {
+        console.log("error", err);
+      });
   });
 
   // $("#visitorteam-player").on("click", function(event) {
@@ -190,9 +201,16 @@ it would be good to make a function for this to make the code more efficient, et
       playerID: playerID
     };
 
-    //Calling the post goal API route and passing the newGoal object
+    //CF: Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
-    $.post("/api/goals", newGoal, function() {});
+    //NF: added goalAnnounce
+    $.post("/api/goals", newGoal)
+      .then(function(response) {
+        goalAnnounce(newGoal);
+      })
+      .catch(function(err) {
+        console.log("error", err);
+      });
   });
 
   $("#home-team-penalty").on("click", function(event) {
@@ -235,18 +253,26 @@ it would be good to make a function for this to make the code more efficient, et
     if (gameSeconds < 10) {
       gameSeconds = "0" + gameSeconds;
     }
-    if (game10ths < 10) {
-      game10ths = "0" + game10ths;
-    }
-
-    $gameClock.text(gameMinutes + ":" + gameSeconds + ":" + game10ths);
+    gameClock = gameMinutes + ":" + gameSeconds + ":" + game10ths;
+    $gameClock.text(gameClock);
     sessionStorage.setItem("timeRemaining", timeRemaining);
+
+    socket.emit("timerEvent", gameClock);
     if (running) {
       if (--timeRemaining <= 0) {
         localStorage.removeItem("timeRemaining");
         clearInterval(countDown);
         $gameClock.text("Game Over");
+        socket.emit("timerEvent", "Game Over");
       }
     }
   }, 100);
 });
+
+function goalAnnounce(goalData) {
+  //get game data for the current game so we can calculate the current game score
+  $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
+    //push a goal announcement using socket.io
+    socket.emit("goalEvent", data);
+  });
+}
