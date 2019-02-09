@@ -5,7 +5,15 @@ console.log(gamePicked);
 //for now only
 //gamePicked = 6;
 console.log("game picked is: " + gamePicked);
-var socket = io("http://localhost:3000?gameId=" + gamePicked);
+//var socket = io("http://localhost:3000?gameId=" + gamePicked);
+var socket = io(
+  window.location.protocol +
+    "//" +
+    window.location.host +
+    "?gameId=" +
+    gamePicked
+);
+
 socket.on("goalEvent" + gamePicked, function(data) {
   console.log("data received is:");
   console.log(data);
