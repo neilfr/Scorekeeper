@@ -14,7 +14,7 @@ var visitorTeamPlayersArray;
 var timeRemainingUponEvent;
 var mySocketMessage;
 
-var socket = io();
+var socket = io("http://localhost:3000?gameId=" + gamePicked);
 
 //if there is timeRemaining in the session storage - IE. there is an unfinished game - use that timeRemaining
 if (timeRemaining > 0) {

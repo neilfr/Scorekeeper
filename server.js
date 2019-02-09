@@ -38,6 +38,11 @@ if (process.env.NODE_ENV === "test") {
 
 //socketio
 io.on("connection", function(socket) {
+  console.log("a user connected!");
+  console.log("socket.handshake is:");
+  console.log(socket.handshake);
+  console.log("gameId is:");
+  console.log(socket.handshake.headers);
   socket.on("goalEvent", function(goalMessage) {
     // console.log("goalEvent: " + goalMessage);
     io.emit("goalEvent", goalMessage);
