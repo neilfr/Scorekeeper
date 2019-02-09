@@ -34,7 +34,7 @@ var refreshTeams = function() {
   API.getTeams().then(function(data) {
     var $teams = data.map(function(team) {
       var $a = $("<a>")
-        .text(team.name)
+        .text(team.teamName)
         .attr("href", "/api/teams/" + team.id);
 
       var $li = $("<li>")
@@ -58,18 +58,16 @@ var refreshTeams = function() {
   });
 };
 
-
-
 // handleFormSubmit is called whenever we submit a new team
 // Save the new team to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var team = {
-    name: $teamName.val().trim()
+    teamName: $teamName.val().trim()
   };
 
-  if (!team.name) {
+  if (!team.teamName) {
     alert("You must enter a team name");
     return;
   }

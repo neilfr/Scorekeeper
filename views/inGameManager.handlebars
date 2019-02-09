@@ -3,8 +3,13 @@
     <div class="row">
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
-        <h2>This is our Game Manager Page!</h2>
+        <h2>This is our In Game Manager Page!</h2>
+        
         <form class="clearfix mb-4" action="POST">
+          <div class="form-group">
+            <label for="game-name">Game Name</label>
+            <input type="text" id="game-name" class="form-control" aria-describedby="game-name" placeholder="Enter Game Name">
+          </div>
 
           <div class="form-group">
             <label for="category">Select Home Team:</label>
@@ -13,17 +18,9 @@
           </div>
 
           <div class="form-group">
-            <label for="category">Select Visitor Team:</label>
-            <select class="custom-select" id="visitorTeam">
+            <label for="category">Select Visiting Team:</label>
+            <select class="custom-select" id="visitingTeam">
             </select>
-          </div>
-          <div class="form-group">
-            <label for="category">Select Game Date:</label>
-            <input type="date" id="gameDay">
-          </div>
-          <div class="form-group">
-            <label for="category">Select Game Time:</label>
-            <input type="time" id="gameTime">
           </div>
 
           <button id="submit" class="btn btn-primary float-right">Submit</button>
@@ -43,5 +40,4 @@
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/gameManager.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/js/inGameManager.js"></script>

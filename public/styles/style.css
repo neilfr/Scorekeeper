@@ -1,0 +1,60 @@
+body {
+    height: 100%;
+    font-family: 'PT Sans Caption',
+        sans-serif;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("../public/images/ice-hockey.jpg");
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.funkyButton {
+    border: black solid 1px;
+    border-radius: 0%;
+    margin: 5px 10px;
+    position: relative;
+    /* padding: 20px; */
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.funkyButton:after {
+    content: "";
+    background: #003E7E;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: right;
+}

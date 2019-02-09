@@ -3,12 +3,13 @@
     "username": "root",
     "password": "root",
     "database": "hockeydb",
+    "database": "scorekeeper",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "root",
     "database": "testdb",
     "host": "localhost",
     "dialect": "mysql",

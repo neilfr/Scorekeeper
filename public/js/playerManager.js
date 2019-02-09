@@ -36,8 +36,17 @@ var API = {
 var refreshplayers = function() {
   API.getplayers().then(function(data) {
     var $players = data.map(function(player) {
+      console.log(player);
       var $a = $("<a>")
-        .text(player.firstName + " " + player.lastName+", Jersey:"+player.jerseyNumber+", Team:"+player.TeamId)
+        .text(
+          player.firstName +
+            " " +
+            player.lastName +
+            ", Jersey:" +
+            player.jerseyNumber +
+            ", Team:" +
+            player.Team.teamName
+        )
         .attr("href", "/api/players/" + player.id);
 
       var $li = $("<li>")
@@ -70,11 +79,20 @@ var handleFormSubmit = function(event) {
     firstName: $playerFirstName.val().trim(),
     lastName: $playerLastName.val().trim(),
     jerseyNumber: $playerJerseyNumber.val().trim(),
-    TeamId: $teamSelect.val()   //WHY IS THE FIELD CAPITALIZED IN THE DATABASE!!!!!
+    TeamId: $teamSelect.val() //WHY IS THE FIELD CAPITALIZED IN THE DATABASE!!!!!
   };
 
-  if (!(player.firstName && player.lastName && player.jerseyNumber && player.TeamId)) {
-    alert("You must enter a player's first name, last name, description and pick a team");
+  if (
+    !(
+      player.firstName &&
+      player.lastName &&
+      player.jerseyNumber &&
+      player.TeamId
+    )
+  ) {
+    alert(
+      "You must enter a player's first name, last name, description and pick a team"
+    );
     return;
   }
 
@@ -116,7 +134,7 @@ function renderTeamList(data) {
   var rowsToAdd = [];
   for (var i = 0; i < data.length; i++) {
     rowsToAdd.push(createTeamRow(data[i]));
-    console.log("data[i] where i is:"+i);
+    console.log("data[i] where i is:" + i);
     console.log(data[i]);
   }
   $teamSelect.empty();
@@ -127,7 +145,7 @@ function renderTeamList(data) {
 function createTeamRow(team) {
   var listOption = $("<option>");
   listOption.attr("value", team.id);
-  listOption.text(team.name);
+  listOption.text(team.teamName);
   return listOption;
 }
 

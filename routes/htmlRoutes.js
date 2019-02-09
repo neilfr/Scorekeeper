@@ -1,8 +1,7 @@
 var db = require("../models");
+var path = require("path");
 
-module.exports = function(app) {
-  // Load index page
- /* app.get("/teamManager", function(req, res) {
+/* app.get("/teamManager", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
       res.render("index", {
         msg: "Welcome!",
@@ -20,9 +19,48 @@ module.exports = function(app) {
     });
   });
 */
+
+module.exports = function(app) {
+  app.get("/home", function(req, res) {
+    res.sendFile(path.join(__dirname, "../views/landing.html"));
+  });
+  app.get("/gameselect", function(req, res) {
+    res.sendFile(path.join(__dirname, "../views/gameselect.html"));
+  });
+
+  app.get("/landing", function(req, res) {
+    db.Games.findAll({}).then(function(dbGames) {
+      res.render("landing");
+    });
+  });
+
+  app.get("/scorepage", function(req, res) {
+    db.Games.findAll({}).then(function(dbGames) {
+      res.render("scorepage", {
+        games: dbGames
+      });
+    });
+  });
+
+  app.get("/scoreboard", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
+  });
+
+  app.get("/scoretracker", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/scoretracker.html"));
+  });
+
+  app.get("/index", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  });
+
+  app.get("/scorekeeper", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/scorekeeper.html"));
+  });
+
   // Load teamManager page
   app.get("/teamManager", function(req, res) {
-    db.Team.findAll({}).then(function(dbTeams) {
+    db.Teams.findAll({}).then(function(dbTeams) {
       res.render("teamManager", {
         msg: "Welcome!",
         teams: dbTeams
@@ -30,18 +68,9 @@ module.exports = function(app) {
     });
   });
 
-  // Load teamManager page and pass in a team by id
-  app.get("/team/:id", function(req, res) {
-    db.Team.findOne({ where: { id: req.params.id } }).then(function(dbTeam) {
-      res.render("teamManager", {
-        team: dbTeam
-      });
-    });
-  });
-
   // Load playerManager page
   app.get("/playerManager", function(req, res) {
-    db.Player.findAll({}).then(function(dbPlayers) {
+    db.Players.findAll({}).then(function(dbPlayers) {
       res.render("playerManager", {
         msg: "Welcome!",
         players: dbPlayers
@@ -49,18 +78,9 @@ module.exports = function(app) {
     });
   });
 
-  // Load playerManager page and pass in a player by id
-  app.get("/player/:id", function(req, res) {
-    db.Player.findOne({ where: { id: req.params.id } }).then(function(dbPlayer) {
-      res.render("playerManager", {
-        player: dbPlayer
-      });
-    });
-  });
-
   // Load gameManager page
   app.get("/gameManager", function(req, res) {
-    db.Game.findAll({}).then(function(dbGames) {
+    db.Games.findAll({}).then(function(dbGames) {
       res.render("gameManager", {
         msg: "Welcome!",
         games: dbGames
@@ -68,14 +88,45 @@ module.exports = function(app) {
     });
   });
 
-  // Load gameManager page and pass in a game by id
-  app.get("/game/:id", function(req, res) {
-    db.Game.findOne({ where: { id: req.params.id } }).then(function(dbGame) {
-      res.render("gameManager", {
-        game: dbGame
+  // Load gameManager page
+  app.get("/gameManager", function(req, res) {
+    db.Game.findAll({}).then(function(dbGames) {
+      res.render("gameManager");
+    });
+  });
+  // Load gamePicker page
+  app.get("/gamePicker", function(req, res) {
+    db.Games.findAll({}).then(function(dbGames) {
+      res.render("gamePicker", {
+        msg: "Welcome!",
+        games: dbGames
       });
     });
   });
+
+  app.get("/gamePickerScoreboard", function(req, res) {
+    db.Games.findAll({}).then(function(dbGames) {
+      res.render("gamePickerScoreboard", {
+        msg: "Welcome!",
+        games: dbGames
+      });
+    });
+  });
+
+  // Load inGameManager page
+  app.get("/inGameManager", function(req, res) {
+    db.Games.findAll({}).then(function(dbGames) {
+      res.render("inGameManager", {
+        msg: "Welcome!",
+        games: dbGames
+      });
+    });
+  });
+
+  app.get("/gametracker", function(req, res) {
+    res.sendFile(path.join(__dirname, "../gametracker.html"));
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
