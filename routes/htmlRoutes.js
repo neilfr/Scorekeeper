@@ -46,12 +46,6 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
   });
 
-<<<<<<< HEAD
-  app.get("/index", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-  });
-
-=======
   app.get("/scoretracker", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/scoretracker.html"));
   });
@@ -60,7 +54,6 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
->>>>>>> fc7df420739dcf321cfa16bdc037c8ea81dfd59e
   app.get("/scorekeeper", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/scorekeeper.html"));
   });
