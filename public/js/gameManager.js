@@ -39,7 +39,7 @@ var refreshgames = function() {
             ", Visitor:" +
             game.VisitorTeam.teamName +
             ", Date and Time:" +
-            moment( game.gameDate).format("ddd MMM Do YYYY h:mm a")
+            moment(game.gameDate).format("ddd MMM Do YYYY h:mm a")
         )
 
         .attr("href", "/api/games/" + game.id);
@@ -77,6 +77,7 @@ var handleFormSubmit = function(event) {
   console.log($gameDay.val());
   console.log("game time");
   console.log($gameTime.val());
+  console.log(moment.utc($gameDay.val() + " " + $gameTime.val()).format());
   var game = {
     homeTeamId: $homeTeamSelect.val(),
     visitorTeamId: $visitorTeamSelect.val(),

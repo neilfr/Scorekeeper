@@ -61,8 +61,16 @@ module.exports = function(app) {
   app.get("/api/gamesbydate/:dateOption", function(req, res) {
     var dateOption = req.params.dateOption;
     var dateCriteriaObject;
-    var startDateRange = moment(new Date()).format("YYYY-MM-DD 00:00:00");
-    var endDateRange = moment(new Date()).format("YYYY-MM-DD 11:59:59");
+
+    var dateFormat = "YYYY-DD-MM HH:mm:ss";
+    var testDateUtc = moment.utc("2015-01-30 10:00:00");
+    var localDate = testDateUtc.local();
+
+    var startDateRange = localDate.format(dateFormat);
+
+    var endDateRange = moment(
+      moment.utc().format("YYYY-MM-DD 11:59:59")
+    ).format("YYYY-MM-DD 11:59:59");
 
     if (dateOption === "today") {
       dateCriteriaObject = {
