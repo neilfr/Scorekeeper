@@ -1,11 +1,12 @@
-//scoretracker.js
 var gamePicked = sessionStorage.getItem("gamePicked");
 console.log("game picked is:");
 console.log(gamePicked);
-//for now only
-//gamePicked = 6;
+
 console.log("game picked is: " + gamePicked);
+
 var socket = io("http://localhost:3000?gameId=" + gamePicked);
+goalAnnounce();
+
 socket.on("goalEvent" + gamePicked, function(data) {
   console.log("data received is:");
   console.log(data);
@@ -57,4 +58,12 @@ function gameTime(timeRemaining) {
     gameSeconds = "0" + gameSeconds;
   }
   return gameMinutes + ":" + gameSeconds + ":" + game10ths;
+}
+
+function goalAnnounce() {
+  //get game data for the current game so we can calculate the current game score
+  $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
+    //push a goal announcement using socket.io
+    socket.emit("goalEvent" + gamePicked, data);
+  });
 }
