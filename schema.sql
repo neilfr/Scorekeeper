@@ -1,1 +1,1 @@
-create database exampledb;
+create database scorekeeper;

@@ -88,6 +88,7 @@ $("#view-scoreboard").on("click", function (event) {
       $gameInfoDiv.append(
         "<b>Game Date: </b> " +
 
+
         moment(new Date(data[i].gameDate)).format("MMMM Do YYYY h:mm a") +
         "<br><br>"
 
@@ -130,19 +131,20 @@ $("#view-todays-games").on("click", function (event) {
   });
 });
 
-$("#view-past-games").on("click", function(event) {
+$("#view-past-games").on("click", function (event) {
   event.preventDefault();
 
-  $.get("/api/gamesbydate/past", function(data) {
+  $.get("/api/gamesbydate/past", function (data) {
     console.log(data);
   });
 });
 
-$("#view-future-games").on("click", function(event) {
+$("#view-future-games").on("click", function (event) {
   event.preventDefault();
 
-  $.get("/api/gamesbydate/future", function(data) {
+  $.get("/api/gamesbydate/future", function (data) {
     console.log(data);
   });
 });
+
 
