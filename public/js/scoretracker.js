@@ -15,7 +15,7 @@ socket.on("goalEvent" + gamePicked, function(data) {
   var homeTeamName = data.HomeTeam.teamName;
   var visitorTeamName = data.VisitorTeam.teamName;
   var $goalTable = $("#goalTable");
-
+  $goalTable.html("");
   //loop through the goal data for the game and
   // 1. build a table row for each goal and append to the goal table
   // 2. increment counters for each goal their team scored

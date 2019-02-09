@@ -53,7 +53,7 @@ io.on("connection", function(socket) {
     //console.log("timerEvent: " + timerMessage);
     io.emit("timerEvent" + gameId, timerMessage);
   });
-  socket.on("goalEvent", function(goalMessage) {
+  /*socket.on("goalEvent", function(goalMessage) {
     // console.log("goalEvent: " + goalMessage);
     io.emit("goalEvent", goalMessage);
   });
@@ -61,6 +61,7 @@ io.on("connection", function(socket) {
     //console.log("timerEvent: " + timerMessage);
     io.emit("timerEvent", timerMessage);
   });
+  */
 });
 
 // Starting the server, syncing our models ------------------------------------/
