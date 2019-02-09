@@ -61,8 +61,10 @@ module.exports = function(app) {
   app.get("/api/gamesbydate/:dateOption", function(req, res) {
     var dateOption = req.params.dateOption;
     var dateCriteriaObject;
-    var startDateRange = moment(new Date()).format("YYYY-MM-DD 00:00:00");
-    var endDateRange = moment(new Date()).format("YYYY-MM-DD 11:59:59");
+
+    var startDateRange = moment().format("YYYY-MM-DD 00:00:00");
+
+    var endDateRange = moment().format("YYYY-MM-DD 11:59:59");
 
     if (dateOption === "today") {
       dateCriteriaObject = {
