@@ -77,11 +77,13 @@ var handleFormSubmit = function(event) {
   console.log($gameDay.val());
   console.log("game time");
   console.log($gameTime.val());
-  console.log(moment.utc($gameDay.val() + " " + $gameTime.val()).format());
+  console.log($gameDay.val() + " " + $gameTime.val());
   var game = {
     homeTeamId: $homeTeamSelect.val(),
     visitorTeamId: $visitorTeamSelect.val(),
-    gameDate: $gameDay.val() + " " + $gameTime.val()
+    gameDate: moment($gameDay.val() + " " + $gameTime.val()).format(
+      "YYYY MM DD HH:mm:ss"
+    )
   };
   console.log("game object");
   console.log(game);
