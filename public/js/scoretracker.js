@@ -1,10 +1,12 @@
 //scoretracker.js
 var gamePicked = sessionStorage.getItem("gamePicked");
+console.log("game picked is:");
+console.log(gamePicked);
 //for now only
-gamePicked = 6;
+//gamePicked = 6;
 console.log("game picked is: " + gamePicked);
 var socket = io("http://localhost:3000?gameId=" + gamePicked);
-socket.on("goalEvent", function(data) {
+socket.on("goalEvent" + gamePicked, function(data) {
   console.log("data received is:");
   console.log(data);
   var homeScore = 0;
@@ -38,7 +40,7 @@ socket.on("goalEvent", function(data) {
   $("#visitorScore").html(visitorTeamName + ": " + visitorScore);
 });
 
-socket.on("timerEvent", function(timeRemaining) {
+socket.on("timerEvent" + gamePicked, function(timeRemaining) {
   $("#gameTime").html("Time Remaining: " + timeRemaining);
 });
 
