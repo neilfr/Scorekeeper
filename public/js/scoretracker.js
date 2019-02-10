@@ -49,6 +49,9 @@ socket.on("goalEvent" + gamePicked, function(data) {
 });
 
 socket.on("timerEvent" + gamePicked, function(timeRemaining) {
+  console.log("inside timer event!");
+  console.log("the time remaining is:");
+  console.log(timeRemaining);
   $("#gameTime").html("Time Remaining: " + timeRemaining);
 });
 

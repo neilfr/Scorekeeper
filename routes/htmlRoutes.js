@@ -32,6 +32,10 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/gameselect.html"));
   });
 
+  //app.get("/gameselect", function(req, res) {
+  //  res.sendFile(path.join(__dirname, "../views/gameselect.html"));
+  //});
+
   app.get("/scorepage", function(req, res) {
     db.Games.findAll({}).then(function(dbGames) {
       res.render("scorepage", {
