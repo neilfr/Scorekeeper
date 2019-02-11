@@ -23,10 +23,10 @@ var mySocketMessage;
 //var socket = io("http://localhost:3000?gameId=" + gamePicked);
 var socket = io(
   window.location.protocol +
-    "//" +
-    window.location.host +
-    "?gameId=" +
-    gamePicked
+  "//" +
+  window.location.host +
+  "?gameId=" +
+  gamePicked
 );
 
 //if there is timeRemaining in the session storage - IE. there is an unfinished game - use that timeRemaining
@@ -192,6 +192,9 @@ it would be good to make a function for this to make the code more efficient, et
     $("#hscore").text(totalHomeGoals);
     if (totalVisitorGoals < totalHomeGoals) {
       $('#hscore').addClass('winner')
+      if (totalVisitorGoals === 0) {
+        $('#vscore').text("0")
+      }
     } else if (totalVisitorGoals === totalHomeGoals) {
       $('#vscore').removeClass('winner')
     }
@@ -200,10 +203,10 @@ it would be good to make a function for this to make the code more efficient, et
     //to create the goal record in the db with the contained data.
     //NF: added goalAnnounce
     $.post("/api/goals", newGoal)
-      .then(function(response) {
+      .then(function (response) {
         goalAnnounce(newGoal);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log("error", err);
       });
   });
@@ -234,6 +237,9 @@ it would be good to make a function for this to make the code more efficient, et
     $("#vscore").text(totalVisitorGoals);
     if (totalVisitorGoals > totalHomeGoals) {
       $('#vscore').addClass('winner')
+      if (totalHomeGoals === 0) {
+        $('#hscore').text("0");
+      }
     } else if (totalVisitorGoals === totalHomeGoals) {
       $('#hscore').removeClass('winner')
     }
@@ -243,15 +249,15 @@ it would be good to make a function for this to make the code more efficient, et
 
     //Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
-   
+
     //CF: Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
     //NF: added goalAnnounce
     $.post("/api/goals", newGoal)
-      .then(function(response) {
+      .then(function (response) {
         goalAnnounce(newGoal);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log("error", err);
       });
 
@@ -321,9 +327,8 @@ it would be good to make a function for this to make the code more efficient, et
 
 function goalAnnounce(goalData) {
   //get game data for the current game so we can calculate the current game score
-  $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
+  $.get("/api/games/" + gamePicked, function () {}).then(function (data) {
     //push a goal announcement using socket.io
     socket.emit("goalEvent" + gamePicked, data);
   });
 }
-

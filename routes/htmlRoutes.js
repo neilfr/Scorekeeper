@@ -34,37 +34,37 @@ module.exports = function (app) {
 
 
 
-  app.get("/scorepage", function(req, res) {
-    db.Games.findAll({}).then(function(dbGames) {
+  app.get("/scorepage", function (req, res) {
+    db.Games.findAll({}).then(function (dbGames) {
       res.render("scorepage", {
         games: dbGames
       });
     });
   });
 
-  app.get("/scoreboard", function(req, res) {
+  app.get("/scoreboard", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
   });
 
-  app.get("/manage", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/managerpage.html"));
+  // app.get("/manage", function (req, res) {
+  //   res.sendFile(path.join(__dirname, "../public/managerpage.html"));
 
-  app.get("/scoretracker", function(req, res) {
+  app.get("/scoretracker", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/scoretracker.html"));
 
   });
 
-  app.get("/index", function(req, res) {
+  app.get("/index", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
-  app.get("/scorekeeper", function(req, res) {
+  app.get("/scorekeeper", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/scorekeeper.html"));
   });
 
   // Load teamManager page
-  app.get("/teamManager", function(req, res) {
-    db.Teams.findAll({}).then(function(dbTeams) {
+  app.get("/teamManager", function (req, res) {
+    db.Teams.findAll({}).then(function (dbTeams) {
       res.render("teamManager", {
         msg: "Welcome!",
         teams: dbTeams
@@ -73,8 +73,8 @@ module.exports = function (app) {
   });
 
   // Load playerManager page
-  app.get("/playerManager", function(req, res) {
-    db.Players.findAll({}).then(function(dbPlayers) {
+  app.get("/playerManager", function (req, res) {
+    db.Players.findAll({}).then(function (dbPlayers) {
       res.render("playerManager", {
         msg: "Welcome!",
         players: dbPlayers
@@ -83,8 +83,8 @@ module.exports = function (app) {
   });
 
   // Load gameManager page
-  app.get("/gameManager", function(req, res) {
-    db.Games.findAll({}).then(function(dbGames) {
+  app.get("/gameManager", function (req, res) {
+    db.Games.findAll({}).then(function (dbGames) {
       res.render("gameManager", {
         msg: "Welcome!",
         games: dbGames
@@ -94,15 +94,15 @@ module.exports = function (app) {
 
 
   // Load gameManager page
-  app.get("/gameManager", function(req, res) {
-    db.Game.findAll({}).then(function(dbGames) {
+  app.get("/gameManager", function (req, res) {
+    db.Game.findAll({}).then(function (dbGames) {
       res.render("gameManager");
     });
   });
 
   // Load gamePicker page
-  app.get("/gamePicker", function(req, res) {
-    db.Games.findAll({}).then(function(dbGames) {
+  app.get("/gamePicker", function (req, res) {
+    db.Games.findAll({}).then(function (dbGames) {
       res.render("gamePicker", {
         msg: "Welcome!",
         games: dbGames
@@ -110,8 +110,8 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/gamePickerScoreboard", function(req, res) {
-    db.Games.findAll({}).then(function(dbGames) {
+  app.get("/gamePickerScoreboard", function (req, res) {
+    db.Games.findAll({}).then(function (dbGames) {
       res.render("gamePickerScoreboard", {
         msg: "Welcome!",
         games: dbGames
@@ -120,8 +120,8 @@ module.exports = function (app) {
   });
 
   // Load inGameManager page
-  app.get("/inGameManager", function(req, res) {
-    db.Games.findAll({}).then(function(dbGames) {
+  app.get("/inGameManager", function (req, res) {
+    db.Games.findAll({}).then(function (dbGames) {
       res.render("inGameManager", {
         msg: "Welcome!",
         games: dbGames
@@ -134,7 +134,7 @@ module.exports = function (app) {
   });
 
   // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.render("404");
   });
 };

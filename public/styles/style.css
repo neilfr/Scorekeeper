@@ -130,6 +130,9 @@ body {
     font-size: 30px;
     padding: 2px 15px;
     border: 2px solid gray;
+    width: 50px;
+    min-width: 50px;
+
 }
 
 .winner {
@@ -139,4 +142,10 @@ body {
 .game-button {
     width: 165px;
     margin: 10px;
+}
+
+.display-row {
+    border: 1px solid rgb(50, 72, 94);
+    background-color: rgba(152, 202, 252, 0.5);
+    /* background-opacity: 0.0; */
 }
