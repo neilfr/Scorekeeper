@@ -138,4 +138,6 @@ $("#view-future-games").on("click", function(event) {
   $.get("/api/gamesbydate/future", function(data) {
     console.log(data);
   });
+
 });
+
