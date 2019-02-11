@@ -5,20 +5,14 @@ var $gameClock = $("#gameClock");
 var gameMinutes, gameSeconds, game10ths;
 var gameClock;
 var running = false;
-var currentDate;
-var goalDateTime;
 var homeTeamID;
 var visitorTeamID;
 var homeTeamName;
-var visitoTeamName;
 var homeTeamPlayersArray;
 var visitorTeamPlayersArray;
 var timeRemainingUponEvent;
 var totalHomeGoals = 0;
 var totalVisitorGoals = 0;
-
-var mySocketMessage;
-
 
 //var socket = io("http://localhost:3000?gameId=" + gamePicked);
 var socket = io(
@@ -44,13 +38,13 @@ this can be reused for goals and penalties accordingly */
 $(document).ready(function () {
   $.get("/api/games/" + gamePicked, function () {}).then(function (data) {
     /*
-    Creates the home team players array and visitor team players 
-    array based on the players attached to the game object returned 
-    as the data variable.
+        Creates the home team players array and visitor team players 
+        array based on the players attached to the game object returned 
+        as the data variable.
     
-    These arrays will hold the player data for the home team and visitor team.
-    These array will be used for home team goals and penalties and visitor team goals and penalties.
-    */
+        These arrays will hold the player data for the home team and visitor team.
+        These array will be used for home team goals and penalties and visitor team goals and penalties.
+        */
     homeTeamPlayersArray = data.HomeTeam.Players;
     visitorTeamPlayersArray = data.VisitorTeam.Players;
     //The current home team ID and name from the game data.
@@ -62,8 +56,8 @@ $(document).ready(function () {
     visitorTeamName = data.VisitorTeam.teamName;
 
     // feeding the names in respective divs
-    $('#home-name').text(homeTeamName);
-    $('#visitor-name').text(visitorTeamName);
+    $("#home-name").text(homeTeamName);
+    $("#visitor-name").text(visitorTeamName);
 
     //Loop through the home team players array and create the player buttons
     //and then attach the buttons to the modal that already exists on the html.
@@ -173,7 +167,7 @@ it would be good to make a function for this to make the code more efficient, et
     */
   $("body").on("click", "#hometeam-player", function (event) {
     event.preventDefault();
-    $('.scorelog').css("display", "block")
+    $(".scorelog").css("display", "block");
     //The newGoal object that will be passed to the post api call.
     //This object will contain the necessary data to create the goal record in the db.
     var newGoal;
@@ -195,16 +189,17 @@ it would be good to make a function for this to make the code more efficient, et
       if (totalVisitorGoals === 0) {
         $('#vscore').text("0")
       }
+      $("#hscore").addClass("winner");
     } else if (totalVisitorGoals === totalHomeGoals) {
-      $('#vscore').removeClass('winner')
+      $("#vscore").removeClass("winner");
     }
 
     //CF: Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
-    //NF: added goalAnnounce
+
     $.post("/api/goals", newGoal)
-      .then(function (response) {
-        goalAnnounce(newGoal);
+      .then(function () {
+        socket.emit("goalEvent" + gamePicked);
       })
       .catch(function (err) {
         console.log("error", err);
@@ -215,7 +210,7 @@ it would be good to make a function for this to make the code more efficient, et
   $("body").on("click", "#visitorteam-player", function (event) {
     event.preventDefault();
     running = false;
-    $('.scorelog').css("display", "block");
+    $(".scorelog").css("display", "block");
 
     //The newGoal object that will be passed to the post api call.
     //This object will contain the necessary data to create the goal record in the db.
@@ -232,7 +227,6 @@ it would be good to make a function for this to make the code more efficient, et
       playerID: playerID
     };
 
-
     totalVisitorGoals += 1;
     $("#vscore").text(totalVisitorGoals);
     if (totalVisitorGoals > totalHomeGoals) {
@@ -241,26 +235,25 @@ it would be good to make a function for this to make the code more efficient, et
         $('#hscore').text("0");
       }
     } else if (totalVisitorGoals === totalHomeGoals) {
-      $('#hscore').removeClass('winner')
+      $("#hscore").removeClass("winner");
     }
-    //push a goal announcement using socket.io
-    console.log("emit the goal event");
-    socket.emit("myEvent", newGoal);
 
     //Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
 
     //CF: Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
-    //NF: added goalAnnounce
+
     $.post("/api/goals", newGoal)
-      .then(function (response) {
-        goalAnnounce(newGoal);
+
+      // .then(function (response) {
+      //   goalAnnounce(newGoal); 
+      .then(function () {
+        socket.emit("goalEvent" + gamePicked);
       })
       .catch(function (err) {
         console.log("error", err);
       });
-
   });
 
   $("#home-team-penalty").on("click", function (event) {
@@ -304,14 +297,14 @@ it would be good to make a function for this to make the code more efficient, et
       gameSeconds = "0" + gameSeconds;
     }
 
-
     // $gameClock.text(gameMinutes + ":" + gameSeconds + ":" + game10ths);
-    $('.minutes').text(gameMinutes);
-    $('.seconds').text(gameSeconds);
-    $('.milliseconds').text(game10ths);
+    $(".minutes").text(gameMinutes);
+    $(".seconds").text(gameSeconds);
+    $(".milliseconds").text(game10ths);
 
     sessionStorage.setItem("timeRemaining", timeRemaining);
 
+    gameClock = gameMinutes + ":" + gameSeconds + ":" + game10ths;
     socket.emit("timerEvent" + gamePicked, gameClock);
     if (running) {
       if (--timeRemaining <= 0) {
@@ -322,7 +315,6 @@ it would be good to make a function for this to make the code more efficient, et
       }
     }
   }, 100);
-
 });
 
 function goalAnnounce(goalData) {
