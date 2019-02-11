@@ -200,7 +200,7 @@ it would be good to make a function for this to make the code more efficient, et
     //NF: added goalAnnounce
     $.post("/api/goals", newGoal)
       .then(function(response) {
-        goalAnnounce(newGoal);
+        goalAnnounce();
       })
       .catch(function(err) {
         console.log("error", err);
@@ -235,9 +235,6 @@ it would be good to make a function for this to make the code more efficient, et
     } else if (totalVisitorGoals === totalHomeGoals) {
       $("#hscore").removeClass("winner");
     }
-    //push a goal announcement using socket.io
-    console.log("emit the goal event");
-    socket.emit("myEvent", newGoal);
 
     //Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
@@ -247,7 +244,7 @@ it would be good to make a function for this to make the code more efficient, et
     //NF: added goalAnnounce
     $.post("/api/goals", newGoal)
       .then(function(response) {
-        goalAnnounce(newGoal);
+        goalAnnounce();
       })
       .catch(function(err) {
         console.log("error", err);
@@ -315,7 +312,7 @@ it would be good to make a function for this to make the code more efficient, et
   }, 100);
 });
 
-function goalAnnounce(goalData) {
+function goalAnnounce() {
   //get game data for the current game so we can calculate the current game score
   $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
     //push a goal announcement using socket.io

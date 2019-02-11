@@ -2,10 +2,9 @@
 var gamePicked = sessionStorage.getItem("gamePicked");
 console.log("game picked is:");
 console.log(gamePicked);
-//for now only
-//gamePicked = 6;
+
 console.log("game picked is: " + gamePicked);
-//var socket = io("http://localhost:3000?gameId=" + gamePicked);
+
 var socket = io(
   window.location.protocol +
     "//" +
@@ -17,6 +16,29 @@ var socket = io(
 socket.on("goalEvent" + gamePicked, function(data) {
   console.log("data received is:");
   console.log(data);
+  refreshGoalInfo(data);
+});
+
+socket.on("timerEvent" + gamePicked, function(timeRemaining) {
+  $("#gameTime").html("Time Remaining: " + timeRemaining);
+});
+
+function gameTime(timeRemaining) {
+  var gameMinutes = Math.floor(timeRemaining / 600);
+  var gameSeconds = Math.floor((timeRemaining - gameMinutes * 600) / 10);
+  var game10ths = Math.floor(
+    timeRemaining - (gameMinutes * 600 + gameSeconds * 10)
+  );
+  if (gameMinutes < 10) {
+    gameMinutes = "0" + gameMinutes;
+  }
+  if (gameSeconds < 10) {
+    gameSeconds = "0" + gameSeconds;
+  }
+  return gameMinutes + ":" + gameSeconds + ":" + game10ths;
+}
+
+function refreshGoalInfo(data) {
   var homeScore = 0;
   var visitorScore = 0;
   var homeTeamID = data.HomeTeam.id;
@@ -48,26 +70,4 @@ socket.on("goalEvent" + gamePicked, function(data) {
   }
   $("#homeScore").html(homeTeamName + ": " + homeScore);
   $("#visitorScore").html(visitorTeamName + ": " + visitorScore);
-});
-
-socket.on("timerEvent" + gamePicked, function(timeRemaining) {
-  console.log("inside timer event!");
-  console.log("the time remaining is:");
-  console.log(timeRemaining);
-  $("#gameTime").html("Time Remaining: " + timeRemaining);
-});
-
-function gameTime(timeRemaining) {
-  var gameMinutes = Math.floor(timeRemaining / 600);
-  var gameSeconds = Math.floor((timeRemaining - gameMinutes * 600) / 10);
-  var game10ths = Math.floor(
-    timeRemaining - (gameMinutes * 600 + gameSeconds * 10)
-  );
-  if (gameMinutes < 10) {
-    gameMinutes = "0" + gameMinutes;
-  }
-  if (gameSeconds < 10) {
-    gameSeconds = "0" + gameSeconds;
-  }
-  return gameMinutes + ":" + gameSeconds + ":" + game10ths;
 }
