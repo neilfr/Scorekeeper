@@ -3,8 +3,6 @@ var gamePicked = sessionStorage.getItem("gamePicked");
 console.log("game picked is:");
 console.log(gamePicked);
 
-console.log("game picked is: " + gamePicked);
-
 var socket = io(
   window.location.protocol +
     "//" +
@@ -13,10 +11,18 @@ var socket = io(
     gamePicked
 );
 
-socket.on("goalEvent" + gamePicked, function(data) {
+socket.on("goalEvent" + gamePicked, function() {
+  /*
   console.log("data received is:");
   console.log(data);
   refreshGoalInfo(data);
+  */
+  $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
+    //push a goal announcement using socket.io
+    console.log("data received is:");
+    console.log(data);
+    refreshGoalInfo(data);
+  });
 });
 
 socket.on("timerEvent" + gamePicked, function(timeRemaining) {

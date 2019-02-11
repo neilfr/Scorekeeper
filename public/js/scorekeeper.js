@@ -5,19 +5,14 @@ var $gameClock = $("#gameClock");
 var gameMinutes, gameSeconds, game10ths;
 var gameClock;
 var running = false;
-var currentDate;
-var goalDateTime;
 var homeTeamID;
 var visitorTeamID;
 var homeTeamName;
-var visitoTeamName;
 var homeTeamPlayersArray;
 var visitorTeamPlayersArray;
 var timeRemainingUponEvent;
 var totalHomeGoals = 0;
 var totalVisitorGoals = 0;
-
-var mySocketMessage;
 
 //var socket = io("http://localhost:3000?gameId=" + gamePicked);
 var socket = io(
@@ -199,8 +194,8 @@ it would be good to make a function for this to make the code more efficient, et
     //to create the goal record in the db with the contained data.
     //NF: added goalAnnounce
     $.post("/api/goals", newGoal)
-      .then(function(response) {
-        goalAnnounce();
+      .then(function() {
+        socket.emit("goalEvent" + gamePicked);
       })
       .catch(function(err) {
         console.log("error", err);
@@ -243,8 +238,8 @@ it would be good to make a function for this to make the code more efficient, et
     //to create the goal record in the db with the contained data.
     //NF: added goalAnnounce
     $.post("/api/goals", newGoal)
-      .then(function(response) {
-        goalAnnounce();
+      .then(function() {
+        socket.emit("goalEvent" + gamePicked);
       })
       .catch(function(err) {
         console.log("error", err);
@@ -311,11 +306,8 @@ it would be good to make a function for this to make the code more efficient, et
     }
   }, 100);
 });
-
+/*
 function goalAnnounce() {
-  //get game data for the current game so we can calculate the current game score
-  $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
-    //push a goal announcement using socket.io
-    socket.emit("goalEvent" + gamePicked, data);
-  });
+  socket.emit("goalEvent" + gamePicked);
 }
+*/
