@@ -1,7 +1,5 @@
 //scoretracker.js
 var gamePicked = sessionStorage.getItem("gamePicked");
-console.log("game picked is:");
-console.log(gamePicked);
 
 var socket = io(
   window.location.protocol +
@@ -11,14 +9,10 @@ var socket = io(
     gamePicked
 );
 
+initialize();
+
 socket.on("goalEvent" + gamePicked, function() {
-  /*
-  console.log("data received is:");
-  console.log(data);
-  refreshGoalInfo(data);
-  */
-  $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
-    //push a goal announcement using socket.io
+  $.get("/api/games/" + gamePicked).then(function(data) {
     console.log("data received is:");
     console.log(data);
     refreshGoalInfo(data);
@@ -76,4 +70,12 @@ function refreshGoalInfo(data) {
   }
   $("#homeScore").html(homeTeamName + ": " + homeScore);
   $("#visitorScore").html(visitorTeamName + ": " + visitorScore);
+}
+
+function initialize() {
+  $.get("/api/games/" + gamePicked).then(function(data) {
+    console.log("data received is:");
+    console.log(data);
+    refreshGoalInfo(data);
+  });
 }

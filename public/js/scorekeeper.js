@@ -192,7 +192,7 @@ it would be good to make a function for this to make the code more efficient, et
 
     //CF: Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
-    //NF: added goalAnnounce
+
     $.post("/api/goals", newGoal)
       .then(function() {
         socket.emit("goalEvent" + gamePicked);
@@ -236,7 +236,7 @@ it would be good to make a function for this to make the code more efficient, et
 
     //CF: Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
-    //NF: added goalAnnounce
+
     $.post("/api/goals", newGoal)
       .then(function() {
         socket.emit("goalEvent" + gamePicked);
@@ -306,8 +306,3 @@ it would be good to make a function for this to make the code more efficient, et
     }
   }, 100);
 });
-/*
-function goalAnnounce() {
-  socket.emit("goalEvent" + gamePicked);
-}
-*/
