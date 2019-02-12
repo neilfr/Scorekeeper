@@ -38,9 +38,28 @@ if (process.env.NODE_ENV === "test") {
 
 //socketio
 io.on("connection", function(socket) {
-  socket.on("myEvent", function(myMessage) {
-    console.log("myEvent: " + myMessage);
-    io.emit("myEvent", myMessage);
+  console.log("a user connected!");
+  console.log("socket.handshake is:");
+  console.log(socket.handshake);
+  console.log("gameId is:");
+  var gameId = socket.handshake.query.gameId;
+  console.log(gameId);
+
+  socket.on("goalEvent" + gameId, function(goalMessage) {
+    // console.log("goalEvent: " + goalMessage);
+    io.emit("goalEvent" + gameId, goalMessage);
+  });
+  socket.on("timerEvent" + gameId, function(timerMessage) {
+    //console.log("timerEvent: " + timerMessage);
+    io.emit("timerEvent" + gameId, timerMessage);
+  });
+  socket.on("goalEvent", function(goalMessage) {
+    // console.log("goalEvent: " + goalMessage);
+    io.emit("goalEvent", goalMessage);
+  });
+  socket.on("timerEvent", function(timerMessage) {
+    //console.log("timerEvent: " + timerMessage);
+    io.emit("timerEvent", timerMessage);
   });
 });
 
