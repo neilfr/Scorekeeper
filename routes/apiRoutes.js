@@ -65,7 +65,7 @@ module.exports = function(app) {
 
     var startDateRange = moment().format("YYYY-MM-DD 00:00:00");
 
-    var endDateRange = moment().format("YYYY-MM-DD 11:59:59");
+    var endDateRange = moment().format("YYYY-MM-DD 23:59:59");
 
     if (dateOption === "today") {
       dateCriteriaObject = {
