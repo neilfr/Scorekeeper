@@ -5,6 +5,7 @@ var Op = require("sequelize").Op;
 module.exports = function(app) {
   app.get("/api/games", function(req, res) {
     db.Games.findAll({
+      order: [["gameDate", "ASC"]],
       include: [
         {
           model: db.Goals,
@@ -64,7 +65,7 @@ module.exports = function(app) {
 
     var startDateRange = moment().format("YYYY-MM-DD 00:00:00");
 
-    var endDateRange = moment().format("YYYY-MM-DD 11:59:59");
+    var endDateRange = moment().format("YYYY-MM-DD 23:59:59");
 
     if (dateOption === "today") {
       dateCriteriaObject = {
@@ -82,6 +83,7 @@ module.exports = function(app) {
     }
 
     db.Games.findAll({
+      order: [["gameDate", "ASC"]],
       where: {
         //id: req.params.id
         gameDate: dateCriteriaObject
@@ -155,6 +157,7 @@ module.exports = function(app) {
   // Get all players
   app.get("/api/players", function(req, res) {
     db.Players.findAll({
+      order: [["firstName", "ASC"], ["lastName", "ASC"]],
       include: [
         {
           model: db.Teams
