@@ -278,9 +278,10 @@
                         " " +
                         data[i].Goals[j].Player.lastName +
                         " " +
-                        moment(new Date(data[i].Goals[j].goalTime)).format(
-                          "h:mm:ss a"
-                        ) +
+                        // moment(new Date(data[i].Goals[j].goalTime)).format(
+                        //"h:mm:ss a")
+
+                        formatGoalTime(data[i].Goals[j].timeRemaining) +
                         "<br>"
                     );
                   }
@@ -296,9 +297,10 @@
                         " " +
                         data[i].Goals[j].Player.lastName +
                         " " +
-                        moment(new Date(data[i].Goals[j].goalTime)).format(
-                          "h:mm:ss a"
-                        ) +
+                        // moment(new Date(data[i].Goals[j].timeRemaining)).format(
+                        //   "h:mm:ss a"
+                        // )
+                        formatGoalTime(data[i].Goals[j].timeRemaining) +
                         "<br>"
                     );
                   }
@@ -321,9 +323,7 @@
 
               $gameInfoDiv.append(
                 "<b>Game Date: </b> " +
-                  moment(new Date(data[i].gameDate)).format(
-                    "ddd MMM Do YYYY h:mm a"
-                  ) +
+                  moment(data[i].gameDate).format("ddd MMM Do YYYY h:mm a") +
                   "<br><br>"
               );
 
@@ -362,8 +362,8 @@
               //Make the button blue for home team.
               $btn.addClass("btn btn-primary");
               /* Assign the data attribute with the gameID to the button.
-This data attribute will be used to identify the game ID
-*/
+        This data attribute will be used to identify the game ID
+        */
               $btn.attr("data-game-id", data[i].id);
               $btn.attr("id", "game-id");
 
@@ -395,6 +395,30 @@ This data attribute will be used to identify the game ID
         window.location.href = "/scoretracker";
         // href="/gameselect"
       });
+
+      /*The function formatGoalTime takes the timeRemaining as a parameter 
+      and uses Neil's logic from scorekeeper.js to derive the minutes, seconds, 
+      an 10th seconds.  The function formatGoalTime returns a string that looks 
+      like 04:57:2.
+      */
+      function formatGoalTime(timeRemaining) {
+        gameMinutes = Math.floor(timeRemaining / 600);
+        gameSeconds = Math.floor((timeRemaining - gameMinutes * 600) / 10);
+        game10ths = Math.floor(
+          timeRemaining - (gameMinutes * 600 + gameSeconds * 10)
+        );
+        if (gameMinutes < 10) {
+          gameMinutes = "0" + gameMinutes;
+        }
+        if (gameSeconds < 10) {
+          gameSeconds = "0" + gameSeconds;
+        }
+        if (game10ths < 10) {
+          game10ths = "0" + game10ths;
+        }
+
+        return gameMinutes + ":" + gameSeconds + ":" + game10ths;
+      }
     </script>
   </body>
 </html>
