@@ -5,6 +5,7 @@ var Op = require("sequelize").Op;
 module.exports = function(app) {
   app.get("/api/games", function(req, res) {
     db.Games.findAll({
+      order: [["gameDate", "ASC"]],
       include: [
         {
           model: db.Goals,
@@ -82,6 +83,7 @@ module.exports = function(app) {
     }
 
     db.Games.findAll({
+      order: [["gameDate", "ASC"]],
       where: {
         //id: req.params.id
         gameDate: dateCriteriaObject
@@ -155,6 +157,7 @@ module.exports = function(app) {
   // Get all players
   app.get("/api/players", function(req, res) {
     db.Players.findAll({
+      order: [["firstName", "ASC"], ["lastName", "ASC"]],
       include: [
         {
           model: db.Teams
