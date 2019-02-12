@@ -20,15 +20,15 @@ var path = require("path");
   });
 */
 
-module.exports = function(app) {
-  app.get("/", function(req, res) {
+module.exports = function (app) {
+  app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
-  app.get("/home", function(req, res) {
+  app.get("/home", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
-  app.get("/gameselect", function(req, res) {
+  app.get("/gameselect", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/gameselect.html"));
   });
 
@@ -48,14 +48,9 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/scoreboard.html"));
   });
 
-<<<<<<< HEAD
-  // app.get("/manage", function (req, res) {
-  //   res.sendFile(path.join(__dirname, "../public/managerpage.html"));
-=======
-  app.get("/manage", function(req, res) {
+  app.get("/manage", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/managerpage.html"));
   });
->>>>>>> 4712e402c7c4fd474fb41f5b8b9903f87570f402
 
   app.get("/scoretracker", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/scoretracker.html"));
@@ -135,7 +130,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/gametracker", function(req, res) {
+  app.get("/gametracker", function (req, res) {
     res.sendFile(path.join(__dirname, "../gametracker.html"));
   });
 
