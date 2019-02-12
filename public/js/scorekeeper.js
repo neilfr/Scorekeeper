@@ -17,10 +17,10 @@ var totalVisitorGoals = 0;
 //var socket = io("http://localhost:3000?gameId=" + gamePicked);
 var socket = io(
   window.location.protocol +
-  "//" +
-  window.location.host +
-  "?gameId=" +
-  gamePicked
+    "//" +
+    window.location.host +
+    "?gameId=" +
+    gamePicked
 );
 
 //if there is timeRemaining in the session storage - IE. there is an unfinished game - use that timeRemaining
@@ -35,8 +35,8 @@ this can be reused for goals and penalties accordingly */
 
 //Calls the get API route to retrieve game data with the game picked (the game picked ID)
 // from local storage as the parameter.
-$(document).ready(function () {
-  $.get("/api/games/" + gamePicked, function () {}).then(function (data) {
+$(document).ready(function() {
+  $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
     /*
         Creates the home team players array and visitor team players 
         array based on the players attached to the game object returned 
@@ -81,9 +81,9 @@ $(document).ready(function () {
       //Set the button text for the player i.e. jersey number and last name.
       $btn.text(
         "#" +
-        homeTeamPlayersArray[i].jerseyNumber +
-        " " +
-        homeTeamPlayersArray[i].lastName
+          homeTeamPlayersArray[i].jerseyNumber +
+          " " +
+          homeTeamPlayersArray[i].lastName
       );
       //Append the button to the paragraph.
       $p.append($btn);
@@ -112,9 +112,9 @@ $(document).ready(function () {
       //Set the button text for the player i.e. jersey number and last name.
       $btn.text(
         "#" +
-        visitorTeamPlayersArray[i].jerseyNumber +
-        " " +
-        visitorTeamPlayersArray[i].lastName
+          visitorTeamPlayersArray[i].jerseyNumber +
+          " " +
+          visitorTeamPlayersArray[i].lastName
       );
       //Append the button to the paragraph.
       $p.append($btn);
@@ -140,7 +140,7 @@ There are some minor differences, but there is a lot of code repetition.  If we 
 it would be good to make a function for this to make the code more efficient, etc. */
   //$("#home-team-goal").on("click", function(event) {
 
-  $("body").on("click", "#home-team-goal", function (event) {
+  $("body").on("click", "#home-team-goal", function(event) {
     event.preventDefault();
     running = false;
     var $p = $("<p>");
@@ -150,7 +150,7 @@ it would be good to make a function for this to make the code more efficient, et
     timeRemainingUponEvent = timeRemaining;
   });
 
-  $("body").on("click", "#visitor-team-goal", function (event) {
+  $("body").on("click", "#visitor-team-goal", function(event) {
     event.preventDefault();
     running = false;
     var $p = $("<p>");
@@ -165,7 +165,7 @@ it would be good to make a function for this to make the code more efficient, et
   element to the event.  This is  better than having multiple events for each button.
   This was the old code: $("#hometeam-player").on("click", function(event) {
     */
-  $("body").on("click", "#hometeam-player", function (event) {
+  $("body").on("click", "#hometeam-player", function(event) {
     event.preventDefault();
     $(".scorelog").css("display", "block");
     //The newGoal object that will be passed to the post api call.
@@ -185,9 +185,9 @@ it would be good to make a function for this to make the code more efficient, et
     totalHomeGoals += 1;
     $("#hscore").text(totalHomeGoals);
     if (totalVisitorGoals < totalHomeGoals) {
-      $('#hscore').addClass('winner')
+      $("#hscore").addClass("winner");
       if (totalVisitorGoals === 0) {
-        $('#vscore').text("0")
+        $("#vscore").text("0");
       }
       $("#hscore").addClass("winner");
     } else if (totalVisitorGoals === totalHomeGoals) {
@@ -198,16 +198,16 @@ it would be good to make a function for this to make the code more efficient, et
     //to create the goal record in the db with the contained data.
 
     $.post("/api/goals", newGoal)
-      .then(function () {
+      .then(function() {
         socket.emit("goalEvent" + gamePicked);
       })
-      .catch(function (err) {
+      .catch(function(err) {
         console.log("error", err);
       });
   });
 
   // $("#visitorteam-player").on("click", function(event) {
-  $("body").on("click", "#visitorteam-player", function (event) {
+  $("body").on("click", "#visitorteam-player", function(event) {
     event.preventDefault();
     running = false;
     $(".scorelog").css("display", "block");
@@ -230,9 +230,9 @@ it would be good to make a function for this to make the code more efficient, et
     totalVisitorGoals += 1;
     $("#vscore").text(totalVisitorGoals);
     if (totalVisitorGoals > totalHomeGoals) {
-      $('#vscore').addClass('winner')
+      $("#vscore").addClass("winner");
       if (totalHomeGoals === 0) {
-        $('#hscore').text("0");
+        $("#hscore").text("0");
       }
     } else if (totalVisitorGoals === totalHomeGoals) {
       $("#hscore").removeClass("winner");
@@ -247,44 +247,44 @@ it would be good to make a function for this to make the code more efficient, et
     $.post("/api/goals", newGoal)
 
       // .then(function (response) {
-      //   goalAnnounce(newGoal); 
-      .then(function () {
+      //   goalAnnounce(newGoal);
+      .then(function() {
         socket.emit("goalEvent" + gamePicked);
       })
-      .catch(function (err) {
+      .catch(function(err) {
         console.log("error", err);
       });
   });
 
-  $("#home-team-penalty").on("click", function (event) {
+  $("#home-team-penalty").on("click", function(event) {
     event.preventDefault();
     currentDateTime = new Date();
 
-    $.get("/api/games/1", function (data) {
+    $.get("/api/games/1", function(data) {
       console.log(data);
     });
   });
 
-  $("#visitor-team-penalty").on("click", function (event) {
+  $("#visitor-team-penalty").on("click", function(event) {
     event.preventDefault();
     currentDateTime = new Date();
 
-    $.get("/api/games/1", function (data) {
+    $.get("/api/games/1", function(data) {
       console.log(data);
     });
   });
 
   //$("#start-game").on("click", function(event) {
-  $("body").on("click", "#start-game", function (event) {
+  $("body").on("click", "#start-game", function(event) {
     running = true;
   });
 
-  $("body").on("click", "#stop-game", function (event) {
+  $("body").on("click", "#stop-game", function(event) {
     //$("#stop-game").on("click", function(event) {
     running = false;
   });
 
-  var countDown = setInterval(function () {
+  var countDown = setInterval(function() {
     gameMinutes = Math.floor(timeRemaining / 600);
     gameSeconds = Math.floor((timeRemaining - gameMinutes * 600) / 10);
     game10ths = Math.floor(
@@ -295,6 +295,9 @@ it would be good to make a function for this to make the code more efficient, et
     }
     if (gameSeconds < 10) {
       gameSeconds = "0" + gameSeconds;
+    }
+    if (game10ths < 10) {
+      game10ths = "0" + game10ths;
     }
 
     // $gameClock.text(gameMinutes + ":" + gameSeconds + ":" + game10ths);
@@ -319,7 +322,7 @@ it would be good to make a function for this to make the code more efficient, et
 
 function goalAnnounce(goalData) {
   //get game data for the current game so we can calculate the current game score
-  $.get("/api/games/" + gamePicked, function () {}).then(function (data) {
+  $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
     //push a goal announcement using socket.io
     socket.emit("goalEvent" + gamePicked, data);
   });
