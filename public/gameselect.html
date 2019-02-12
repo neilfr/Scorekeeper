@@ -355,7 +355,9 @@
 
               $gameDiv.append($gameInfoDiv);
               $gameDiv.append($gameDataDiv);
-
+              
+              //As per issue #79 only showed the "Real Time Score" button
+              //for today's games.
               if (val === "View Today's Games") {
                 //Create a paragraph to hold the buttons.
                 var $p = $("<p>");
