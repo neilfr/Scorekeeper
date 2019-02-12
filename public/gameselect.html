@@ -197,7 +197,7 @@
               break;
             case "View Future Games":
               url = "/api/gamesbydate/future ";
-              classNameForScore  = ".scores-appear-here-view-future-games";
+              classNameForScore = ".scores-appear-here-view-future-games";
               break;
             default:
             // code block
@@ -210,7 +210,7 @@
             if (data.length === 0) {
               var $head = $("<h3>");
               $head.text("No games");
-              $(".scores-appear-here").prepend($head);
+              $(classNameForScore).prepend($head);
             }
 
             for (i = 0; i < data.length; i++) {
@@ -355,31 +355,33 @@
 
               $gameDiv.append($gameInfoDiv);
               $gameDiv.append($gameDataDiv);
+              
+              //As per issue #79 only showed the "Real Time Score" button
+              //for today's games.
+              if (val === "View Today's Games") {
+                //Create a paragraph to hold the buttons.
+                var $p = $("<p>");
 
-              //Create a paragraph to hold the buttons.
-              var $p = $("<p>");
-
-              // Create a button for each player
-              var $btn = $("<button>");
-              //Make the button blue for home team.
-              $btn.addClass("btn btn-primary");
-              /* Assign the data attribute with the gameID to the button.
+                // Create a button for each player
+                var $btn = $("<button>");
+                //Make the button blue for home team.
+                $btn.addClass("btn btn-primary");
+                /* Assign the data attribute with the gameID to the button.
         This data attribute will be used to identify the game ID
         */
-              $btn.attr("data-game-id", data[i].id);
-              $btn.attr("id", "game-id");
+                $btn.attr("data-game-id", data[i].id);
+                $btn.attr("id", "game-id");
 
-              $btn.text("View Real Time Score Updates");
-              //Append the button to the paragraph.
-              $p.append($btn);
-              // Append the button to the applicable home team modal.
-              $($gameDiv).append($p);
-
+                $btn.text("View Real Time Score Updates");
+                //Append the button to the paragraph.
+                $p.append($btn);
+                // Append the button to the applicable home team modal.
+                $($gameDiv).append($p);
+              }
               $gameDivRow.append($gameDiv);
 
               //Appends the row to the section that diplays the scoreboard.
               $(classNameForScore).prepend($gameDivRow);
-            
             }
           });
         });
