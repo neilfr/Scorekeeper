@@ -47,7 +47,7 @@
               <div class="col-lg-12">
                 <div class="card text-center">
                   <b>Scoreboard below </b>
-                  <div class="scores-appear-here"></div>
+                  <div class="scores-appear-here-view-all-games"></div>
                 </div>
               </div>
             </div>
@@ -82,7 +82,7 @@
               <div class="col-lg-12">
                 <div class="card text-center">
                   <b>Scoreboard below </b>
-                  <div class="scores-appear-here"></div>
+                  <div class="scores-appear-here-view-todays-games"></div>
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@
               <div class="col-lg-12">
                 <div class="card text-center">
                   <b>Scoreboard below </b>
-                  <div class="scores-appear-here"></div>
+                  <div class="scores-appear-here-view-past-games"></div>
                 </div>
               </div>
             </div>
@@ -152,7 +152,7 @@
               <div class="col-lg-12">
                 <div class="card text-center">
                   <b>Scoreboard below </b>
-                  <div class="scores-appear-here"></div>
+                  <div class="scores-appear-here-view-future-games"></div>
                 </div>
               </div>
             </div>
@@ -169,26 +169,35 @@
 
       function generateBtn() {
         $(".btn").on("click", function() {
-          $(".scores-appear-here").empty();
+          $(".scores-appear-here-view-all-games").empty();
+          $(".scores-appear-here-view-past-games").empty();
+          $(".scores-appear-here-view-todays-games").empty();
+          $(".scores-appear-here-view-future-games").empty();
           $gameDivRow.empty();
           val = $(this).attr("value");
           console.log("You have chosen " + val);
+          var classNameForScore = "";
+
           switch (val) {
             case "View All Games":
               url = "/api/games";
               console.log("from btn", url);
               $gameDivRow.html("");
+              classNameForScore = ".scores-appear-here-view-all-games";
               break;
             case "View Today's Games":
               url = "/api/gamesbydate/today";
               console.log("from btn", url);
               $gameDivRow.html("");
+              classNameForScore = ".scores-appear-here-view-todays-games";
               break;
             case "View Past Games":
               url = "/api/gamesbydate/past";
+              classNameForScore = ".scores-appear-here-view-past-games";
               break;
             case "View Future Games":
               url = "/api/gamesbydate/future ";
+              classNameForScore  = ".scores-appear-here-view-future-games";
               break;
             default:
             // code block
@@ -198,8 +207,7 @@
             method: "GET"
           }).then(function(data) {
             console.log(data);
-            if (data.length === 0);
-            {
+            if (data.length === 0) {
               var $head = $("<h3>");
               $head.text("No games");
               $(".scores-appear-here").prepend($head);
@@ -278,9 +286,6 @@
                         " " +
                         data[i].Goals[j].Player.lastName +
                         " " +
-                        // moment(new Date(data[i].Goals[j].goalTime)).format(
-                        //"h:mm:ss a")
-
                         formatGoalTime(data[i].Goals[j].timeRemaining) +
                         "<br>"
                     );
@@ -297,9 +302,6 @@
                         " " +
                         data[i].Goals[j].Player.lastName +
                         " " +
-                        // moment(new Date(data[i].Goals[j].timeRemaining)).format(
-                        //   "h:mm:ss a"
-                        // )
                         formatGoalTime(data[i].Goals[j].timeRemaining) +
                         "<br>"
                     );
@@ -376,8 +378,8 @@
               $gameDivRow.append($gameDiv);
 
               //Appends the row to the section that diplays the scoreboard.
-              $(".scores-appear-here").prepend($gameDivRow);
-              $(".scores-appear-here").append("<br>");
+              $(classNameForScore).prepend($gameDivRow);
+            
             }
           });
         });
