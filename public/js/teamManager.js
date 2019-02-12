@@ -5,7 +5,7 @@ var $teamList = $("#team-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveTeam: function(team) {
+  saveTeam: function (team) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -15,13 +15,13 @@ var API = {
       data: JSON.stringify(team)
     });
   },
-  getTeams: function() {
+  getTeams: function () {
     return $.ajax({
       url: "api/teams",
       type: "GET"
     });
   },
-  deleteTeam: function(id) {
+  deleteTeam: function (id) {
     return $.ajax({
       url: "api/teams/" + id,
       type: "DELETE"
@@ -30,9 +30,9 @@ var API = {
 };
 
 // refreshTeams gets new teams from the db and repopulates the list
-var refreshTeams = function() {
-  API.getTeams().then(function(data) {
-    var $teams = data.map(function(team) {
+var refreshTeams = function () {
+  API.getTeams().then(function (data) {
+    var $teams = data.map(function (team) {
       var $a = $("<a>")
         .text(team.teamName)
         .attr("href", "/api/teams/" + team.id);
@@ -60,7 +60,7 @@ var refreshTeams = function() {
 
 // handleFormSubmit is called whenever we submit a new team
 // Save the new team to the db and refresh the list
-var handleFormSubmit = function(event) {
+var handleFormSubmit = function (event) {
   event.preventDefault();
 
   var team = {
@@ -72,7 +72,7 @@ var handleFormSubmit = function(event) {
     return;
   }
 
-  API.saveTeam(team).then(function() {
+  API.saveTeam(team).then(function () {
     refreshTeams();
   });
 
@@ -81,12 +81,12 @@ var handleFormSubmit = function(event) {
 
 // handleDeleteBtnClick is called when a team's delete button is clicked
 // Remove the team from the db and refresh the list
-var handleDeleteBtnClick = function() {
+var handleDeleteBtnClick = function () {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  API.deleteTeam(idToDelete).then(function() {
+  API.deleteTeam(idToDelete).then(function () {
     refreshTeams();
   });
 };

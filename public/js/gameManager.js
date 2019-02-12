@@ -10,16 +10,16 @@ var $gameTime = $("#gameTime");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  savegame: function(game) {
+  savegame: function (game) {
     return $.post("api/games", game);
   },
-  getgames: function() {
+  getgames: function () {
     return $.ajax({
       url: "api/games",
       type: "GET"
     });
   },
-  deletegame: function(id) {
+  deletegame: function (id) {
     return $.ajax({
       url: "api/games/" + id,
       type: "DELETE"
@@ -28,18 +28,18 @@ var API = {
 };
 
 // refreshgames gets new games from the db and repopulates the list
-var refreshgames = function() {
-  API.getgames().then(function(data) {
-    var $games = data.map(function(game) {
+var refreshgames = function () {
+  API.getgames().then(function (data) {
+    var $games = data.map(function (game) {
       console.log(game);
       var $a = $("<a>")
         .text(
           "Home:" +
-            game.HomeTeam.teamName +
-            ", Visitor:" +
-            game.VisitorTeam.teamName +
-            ", Date and Time:" +
-            moment(game.gameDate).format("ddd MMM Do YYYY h:mm a")
+          game.HomeTeam.teamName +
+          ", Visitor:" +
+          game.VisitorTeam.teamName +
+          ", Date and Time:" +
+          moment(game.gameDate).format("ddd MMM Do YYYY h:mm a")
         )
 
         .attr("href", "/api/games/" + game.id);
@@ -67,7 +67,7 @@ var refreshgames = function() {
 
 // handleFormSubmit is called whenever we submit a new game
 // Save the new game to the db and refresh the list
-var handleFormSubmit = function(event) {
+var handleFormSubmit = function (event) {
   event.preventDefault();
   console.log("home team");
   console.log($homeTeamSelect.val());
@@ -88,12 +88,16 @@ var handleFormSubmit = function(event) {
   console.log("game object");
   console.log(game);
 
-  if (!(game.homeTeamId && game.visitorTeamId && game.gameDate)) {
+  // if (!(game.homeTeamId && game.visitorTeamId && game.gameDate)) {
+  //   alert("You must enter game date, time and the home and visitor teams");
+  //   return;
+  // }
+  if ((game.homeTeamId == '0') || (game.visitorTeamId == '0')) {
     alert("You must enter game date, time and the home and visitor teams");
     return;
   }
 
-  API.savegame(game).then(function() {
+  API.savegame(game).then(function () {
     refreshgames();
   });
 
@@ -105,12 +109,12 @@ var handleFormSubmit = function(event) {
 
 // handleDeleteBtnClick is called when a game's delete button is clicked
 // Remove the game from the db and refresh the list
-var handleDeleteBtnClick = function() {
+var handleDeleteBtnClick = function () {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  API.deletegame(idToDelete).then(function() {
+  API.deletegame(idToDelete).then(function () {
     refreshgames();
   });
 };
