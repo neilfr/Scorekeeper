@@ -85,16 +85,18 @@ var handleFormSubmit = function (event) {
       "YYYY MM DD HH:mm:ss"
     )
   };
-  console.log("game object");
-  console.log(game);
+
+  console.log("game object", game);
+
 
   // if (!(game.homeTeamId && game.visitorTeamId && game.gameDate)) {
   //   alert("You must enter game date, time and the home and visitor teams");
   //   return;
   // }
-  if ((game.homeTeamId == '0') || (game.visitorTeamId == '0')) {
-    alert("You must enter game date, time and the home and visitor teams");
-    return;
+
+  // validation for date
+  if (game.gameDate === "Invalid date") {
+    alert("Input a valid Date and Time")
   }
 
   API.savegame(game).then(function () {
