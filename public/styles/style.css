@@ -29,6 +29,7 @@ body {
     text-decoration: none;
     overflow: hidden;
     cursor: pointer;
+    box-shadow: 5px 5px 3px rgb(43, 42, 42);
 }
 
 .funkyButton:after {
@@ -113,6 +114,8 @@ body {
 .time-holder {
     width: 100px;
     margin-bottom: 35px;
+    min-width: 70px;
+
 }
 
 
@@ -147,10 +150,18 @@ body {
 .display-row {
     border: 1px solid rgb(50, 72, 94);
     background-color: rgba(152, 202, 252, 0.5);
+    margin: 15px 0;
     /* background-opacity: 0.0; */
 }
 
 /* view scoresplace */
 .scores-appear-here {
     background-color: rgba(0, 0, 0, 0.2)
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

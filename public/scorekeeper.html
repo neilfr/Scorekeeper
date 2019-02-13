@@ -22,98 +22,95 @@
     <div>
       <h1 class="text-center heading scoreheading">Scorekeeper</h1>
     </div>
-
-
-    <div class="clockContainer">
-      <!-- <h1 class="text-center" id="gameClock">&nbsp;</h1> -->
-      <div id="timer" class="col-12 text-center">
-
-        <div id="clockdiv" class="row ">
-          <div class="col-4  time-holder ">
-            <span class="minutes text-center"></span>
-            <div class="smalltext">Minutes</div>
-          </div>
-          <div class="col-4 time-holder">
-            <span class="seconds"></span>
-            <div class="smalltext">Seconds</div>
-          </div>
-          <div class="col-4 time-holder">
-            <span class="milliseconds"></span>
-            <div class="smalltext">10th</div>
+    <div class="container">
+      <div class="row text-center">
+        <div class="offset-3 col-6 clockContainer">
+          <!-- <h1 class="text-center" id="gameClock">&nbsp;</h1> -->
+          <div id="timer" class="col-12 ">
+            <div id="clockdiv" class="row ">
+              <div class="col-4  time-holder ">
+                <span class="minutes text-center"></span>
+                <div class="smalltext">Minutes</div>
+              </div>
+              <div class="col-4 time-holder">
+                <span class="seconds"></span>
+                <div class="smalltext">Seconds</div>
+              </div>
+              <div class="col-4 time-holder">
+                <span class="milliseconds"></span>
+                <div class="smalltext">10th</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row controller text-center">
-      <div class="offset-3 col-9">
-        <div class=" col-lg-4 text-center">
+      <div class="row controller text-center">
+        <!-- <div class="offset-4 col-12"> -->
+        <div class=" col-4 text-center">
           <input id="start-game" class="btn btn-success" type="submit" value="Start Game" />
         </div>
 
-        <div class=" col-lg-4 text-center">
+        <div class=" offset-4 col-4 text-center">
           <input id="stop-game" class="btn btn-danger" type="submit" value="Stop Game" />
         </div>
+        <!-- </div> -->
       </div>
-    </div>
-    <div class="container" style="margin-bottom:30px">
 
-      <div class="row display-row">
-        <div class="col-4 offset-1 text-center home-div">
-          <div class="col-12 ">
-            <h4>Home Team</h4>
+      <div class="container" style="margin-bottom:30px">
+        <div class="row display-row">
+          <div class="col-4 offset-1 text-center home-div">
+            <div class="col-12 ">
+              <h4>Home Team</h4>
+            </div>
+            <div class="col-12">
+              <h3 id="home-name"></h3>
+            </div>
+
           </div>
-          <div class="col-12">
-            <h3 id="home-name"></h3>
-          </div>
 
-        </div>
-
-        <!-- <div class="col-6 text-center"></div>
+          <!-- <div class="col-6 text-center"></div>
     <div class="col-lg-6 text-center">
       Home Team
     </div> -->
 
-        <!-- goal-div -->
-        <div class="col-2 text-center" style="margin-top:20px">
-          <div class="scorelog" style="display:none"><span id="hscore"></span><span id="vscore"></span></div>
-        </div>
-
-        <!-- visitor div -->
-
-        <div class="col-4 text-center visitor-div">
-          <div class="col-12">
-            <h4>Visitor Team</h4>
-          </div>
-          <div class="col-12">
-            <h3 id="visitor-name"></h3>
+          <!-- goal-div -->
+          <div class="col-2 text-center" style="margin-top:20px">
+            <div class="scorelog" style="display:none"><span id="hscore"></span><span id="vscore"></span></div>
           </div>
 
+          <!-- visitor div -->
 
+          <div class="col-4 text-center visitor-div">
+            <div class="col-12">
+              <h4>Visitor Team</h4>
+            </div>
+            <div class="col-12">
+              <h3 id="visitor-name"></h3>
+            </div>
+
+
+          </div>
+        </div>
+        <!-- ... -->
+        <div class="row">
+          <div class=" col-6 text-center">
+            <input id="home-team-goal" class="btn funkyButton game-button" type="submit" value="Home Team Goal"
+              data-toggle="modal" data-target="#selectHomeTeamPlayerModal" /><br />
+          </div>
+          <div class="col-6 text-center">
+            <input id="visitor-team-goal" class="btn funkyButton game-button" type="submit" value="Visitor Team Goal"
+              data-toggle="modal" data-target="#selectVisitorTeamPlayerModal" /><br />
+          </div>
+        </div>
+        <div class="row">
+          <div class=" col-6 text-center">
+            <input id="home-team-penalty" class="btn funkyButton game-button" type="submit" value="Home Team Penalty" /><br />
+          </div>
+          <div class="col-6 text-center">
+            <input id="visitor-team-penalty" class="btn funkyButton game-button" type="submit" value="Visitor Team Penalty" /><br />
+          </div>
         </div>
       </div>
-      <!-- ... -->
-      <div class="row">
-        <div class=" col-6 text-center">
-          <input id="home-team-goal" class="btn btn-primary game-button" type="submit" value="Home Team Goal"
-            data-toggle="modal" data-target="#selectHomeTeamPlayerModal" /><br />
-        </div>
-        <div class="col-6 text-center">
-          <input id="visitor-team-goal" class="btn btn-secondary game-button" type="submit" value="Visitor Team Goal"
-            data-toggle="modal" data-target="#selectVisitorTeamPlayerModal" /><br />
-        </div>
-      </div>
-      <div class="row">
-        <div class=" col-6 text-center">
-          <input id="home-team-penalty" class="btn btn-warning game-button" type="submit" value="Home Team Penalty" /><br />
-        </div>
-        <div class="col-6 text-center">
-          <input id="visitor-team-penalty" class="btn btn-dark game-button" type="submit" value="Visitor Team Penalty" /><br />
-        </div>
-      </div>
-
-
-
-
     </div>
     <!-- end of container-->
 
