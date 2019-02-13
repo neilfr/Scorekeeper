@@ -57,8 +57,8 @@ var refreshplayers = function () {
         .append($a);
 
       var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+        .addClass("btn float-right delete")
+      $(' <div id="delete-icon" class="display-icon"> <i class="fa fa-trash "></i> </div> ').appendTo($button);
 
       $li.append($button);
 
