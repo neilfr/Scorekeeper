@@ -95,13 +95,26 @@ var handleFormSubmit = function (event) {
   // }
 
   // validation for date
-  if (game.gameDate === "Invalid date") {
+  if (
+    !(
+      game.homeTeamId &&
+      game.visitorTeamId
+    )
+  ) {
+    alert(
+      "You must enter a home team and visitor team name"
+    );
+    return;
+  } else if (game.gameDate === "Invalid date") {
     alert("Input a valid Date and Time")
+  } else if (game.homeTeamId === game.visitorTeamId) {
+    alert("Same teams can not play against each other")
+  } else {
+    API.savegame(game).then(function () {
+      refreshgames();
+    });
   }
 
-  API.savegame(game).then(function () {
-    refreshgames();
-  });
 
   $homeTeamSelect.val("");
   $visitorTeamSelect.val("");
