@@ -45,9 +45,12 @@ var refreshTeams = function () {
         .append($a);
 
       var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
+        .addClass("btn  float-right delete")
+      $(' <div id="delete-icon" class="display-icon"> <i class="fa fa-trash "></i> </div> ').appendTo($button)
+      // $button.mouseleave(function () {
+      //   $(this).css({
+      //     border: "0"
+      //   })
       $li.append($button);
 
       return $li;
