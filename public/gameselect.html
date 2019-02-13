@@ -1,420 +1,388 @@
 <!DOCTYPE html>
 <html>
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="/js/moment.js"></script>
-<!-- font awesome -->
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-  crossorigin="anonymous">
-<!-- linking stylesheet -->
-<link rel="stylesheet" href="./styles/style.css">
 <style>
   .info {
       margin: 2px;
       border: 1px solid black;
       padding: 0 2px;
     }
-  .centered{
-      position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-    }
-    .acc-card{
-      background-color:rgba(0,0,0,0.3);
-      box-shadow: 10px 10px 5px rgb(43, 42, 42);
-    }
-    .accordion {
-position:absolute;
-bottom: 0px;
-}
   </style>
 
 <body>
-  <nav class="navbar navbar-light bg-light" style="margin-bottom:2%">
-    <div class="col-2"><a href="/"> <button type="button" class="btn btn-dark"><i class="fa fa-arrow-left"></i> BACK</button></a>
-  </nav>
-  <div class="contanier bg">
-    <img src="/images/wall4.jpg" alt="backdrop" style="width:100%">
-    <!-- <div class="jumbotron" style="color:cornsilk;opacity:0.5">  -->
-    <div class="accordion centered" id="accordionExample" style="width:70%;margin-top: 30px">
-
-      <!-- 1st button for all games -->
-      <div class="card acc-card">
-        <div class="card-header text-center" id="headingOne">
-          <h2 class="mb-0">
-            <input id="view-scoreboard" class="btn funkyButton collapsed" type="button" value="View All Games"
-              data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" /><br />
-          </h2>
-        </div>
-        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card text-center">
-                  <b>Scoreboard below </b>
-                  <div class="scores-appear-here"></div>
-                </div>
+  <div class="accordion" id="accordionExample">
+    <!-- 1st button for all games -->
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <input id="view-scoreboard" class="btn btn-success collapsed" type="button" value="View All Games"
+            data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" /><br />
+        </h2>
+      </div>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card text-center">
+                <b>Scoreboard below </b>
+                <div class="scores-appear-here-view-all-games"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- ----/view all games end -->
-
-      <!-- view today's games -->
-      <div class="card text-center acc-card">
-        <div class="card-header" id="headingTwo">
-          <h2 class="mb-0">
-            <input id="view-todays-games" class="btn  collapsed funkyButton" type="button" value="View Today's Games"
-              data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" /><br />
-          </h2>
-        </div>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card text-center">
-                  <b>Scoreboard below </b>
-                  <div class="scores-appear-here"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /today's end -->
-
-      <!-- view past games -->
-      <div class="card acc-card">
-        <div class="card-header text-center" id="headingThree">
-          <h2 class="mb-0">
-            <input id="view-past-games" class="btn funkyButton collapsed" type="button" value="View Past Games"
-              data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" /><br />
-          </h2>
-        </div>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card text-center">
-                  <b>Scoreboard below </b>
-                  <div class="scores-appear-here"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /past games -->
-
-      <!-- view future games -->
-      <div class="card acc-card">
-        <div class="card-header text-center" id="headingFour">
-          <h2 class="mb-0">
-            <input id="view-future-games" class="btn funkyButton collapsed" type="button" value="View Future Games"
-              data-toggle="collapse" data-target="#collapseFour" aria-expanded="false"><br />
-          </h2>
-        </div>
-        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card text-center">
-                  <b>Scoreboard below </b>
-                  <div class="scores-appear-here"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- --/future games -->
     </div>
+    <!-- ----/view all games end -->
 
-    <!-- </div> -->
+    <!-- view today's games -->
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <input id="view-todays-games" class="btn btn-danger collapsed" type="button" value="View Today's Games"
+            data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" /><br />
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card text-center">
+                <b>Scoreboard below </b>
+                <div class="scores-appear-here-view-todays-games"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /today's end -->
+
+    <!-- view past games -->
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h2 class="mb-0">
+          <input id="view-past-games" class="btn btn-info collapsed" type="button" value="View Past Games" data-toggle="collapse"
+            data-target="#collapseThree" aria-expanded="false" /><br />
+        </h2>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card text-center">
+                <b>Scoreboard below </b>
+                <div class="scores-appear-here-view-past-games"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /past games -->
+
+    <!-- view future games -->
+    <div class="card">
+      <div class="card-header" id="headingFour">
+        <h2 class="mb-0">
+          <input id="view-future-games" class="btn btn-warning collapsed" type="button" value="View Future Games"
+            data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" /><br />
+        </h2>
+      </div>
+      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card text-center">
+                <b>Scoreboard below </b>
+                <div class="scores-appear-here-view-future-games"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-    <script>
-      var url = "";
-      var val = "";
-      var $gameDivRow = $("<div>");
 
-      function generateBtn() {
-        $(".btn").on("click", function() {
-          //
-          $(".scores-appear-here-view-all-games").empty();
-          $(".scores-appear-here-view-past-games").empty();
-          $(".scores-appear-here-view-todays-games").empty();
-          $(".scores-appear-here-view-future-games").empty();
-          $gameDivRow.empty();
-          val = $(this).attr("value");
-          console.log("You have chosen " + val);
-          var classNameForScore = "";
+  <script>
+    var url = "";
+    var val = "";
+    var $gameDivRow = $("<div>");
 
-          switch (val) {
-            case "View All Games":
-              url = "/api/games";
-              console.log("from btn", url);
-              $gameDivRow.html("");
-              classNameForScore = ".scores-appear-here-view-all-games";
-              break;
-            case "View Today's Games":
-              url = "/api/gamesbydate/today";
-              console.log("from btn", url);
-              $gameDivRow.html("");
-              classNameForScore = ".scores-appear-here-view-todays-games";
-              break;
-            case "View Past Games":
-              url = "/api/gamesbydate/past";
-              classNameForScore = ".scores-appear-here-view-past-games";
-              break;
-            case "View Future Games":
-              url = "/api/gamesbydate/future ";
-              classNameForScore = ".scores-appear-here-view-future-games";
-              break;
-            default:
+    function generateBtn() {
+      $(".btn").on("click", function () {
+        //
+        $(".scores-appear-here-view-all-games").empty();
+        $(".scores-appear-here-view-past-games").empty();
+        $(".scores-appear-here-view-todays-games").empty();
+        $(".scores-appear-here-view-future-games").empty();
+        $gameDivRow.empty();
+        val = $(this).attr("value");
+        console.log("You have chosen " + val);
+        var classNameForScore = "";
 
+        switch (val) {
+          case "View All Games":
+            url = "/api/games";
+            console.log("from btn", url);
+            $gameDivRow.html("");
+            classNameForScore = ".scores-appear-here-view-all-games";
+            break;
+          case "View Today's Games":
+            url = "/api/gamesbydate/today";
+            console.log("from btn", url);
+            $gameDivRow.html("");
+            classNameForScore = ".scores-appear-here-view-todays-games";
+            break;
+          case "View Past Games":
+            url = "/api/gamesbydate/past";
+            classNameForScore = ".scores-appear-here-view-past-games";
+            break;
+          case "View Future Games":
+            url = "/api/gamesbydate/future ";
+            classNameForScore = ".scores-appear-here-view-future-games";
+            break;
+          default:
             // code block
+        }
+        $.ajax({
+          url: url,
+          method: "GET"
+        }).then(function (data) {
+          console.log(data);
+          if (data.length === 0); {
+            var $head = $("<h3>");
+            $head.text("No games");
+            $(".scores-appear-here").prepend($head);
           }
           $.ajax({
             url: url,
             method: "GET"
-          }).then(function(data) {
+          }).then(function (data) {
             console.log(data);
-            if (data.length === 0);
-            {
+            if (data.length === 0) {
               var $head = $("<h3>");
               $head.text("No games");
-              $(".scores-appear-here").prepend($head);
+              $(classNameForScore).prepend($head);
             }
-            $.ajax({
-              url: url,
-              method: "GET"
-            }).then(function(data) {
-              console.log(data);
-              if (data.length === 0) {
-                var $head = $("<h3>");
-                $head.text("No games");
-                $(classNameForScore).prepend($head);
+
+            for (i = 0; i < data.length; i++) {
+              var homeTeamID = data[i].homeTeamId;
+              var visitorTeamID = data[i].visitorTeamId;
+
+              var homeTeamGoals = 0;
+              var visitorTeamGoals = 0;
+
+              //Sets up the tabular formatting
+
+              // $gameDivRow.addClass("row");
+
+              var $gameDiv = $("<div>");
+              // $gameDiv.addClass("col-lg-12 card ");
+
+              var $gameInfoDiv = $("<div>");
+              // $gameInfoDiv.addClass("col-lg-12 card text-left");
+
+              var $gameDataDiv = $("<div>", {
+                class: "row"
+              });
+              var $homeDiv = $("<div>", {
+                class: "col-6"
+              });
+              var $visitorDiv = $("<div>", {
+                class: "col-6"
+              });
+
+              var $gameHomeTeamPlayerGoalsDiv = $("<div>", {
+                class: "info"
+              });
+              // $gameHomeTeamPlayerGoalsDiv.addClass("col-lg-12 card text-left");
+
+              var $gameVisitorTeamPlayerGoalsDiv = $("<div>", {
+                class: "info"
+              });
+              // $gameVisitorTeamPlayerGoalsDiv.addClass("col-lg-12 card text-left");
+
+              var $gameHomeTeamNameDiv = $("<div>", {
+                class: "info"
+              });
+              // $gameHomeTeamNameDiv.addClass("col-lg-6  text-left");
+
+              var $gameVisitorTeamNameDiv = $("<div>", {
+                class: "info"
+              });
+              // $gameVisitorTeamNameDiv.addClass("col-lg-6 ");
+
+              var $gameHomeTeamScoreDiv = $("<div>", {
+                class: "info"
+              });
+              // $gameHomeTeamScoreDiv.addClass("col-lg-12 card text-left");
+
+              var $gameVisitorTeamScoreDiv = $("<div>", {
+                class: "info"
+              });
+              // $gameVisitorTeamScoreDiv.addClass("col-lg-12 card text-left");
+
+              //Retrieves various properties from the object and appends them to the div that
+              //displays the properties.
+
+              for (j = 0; j < data[i].Goals.length; j++) {
+                if (homeTeamID === data[i].Goals[j].TeamId) {
+                  homeTeamGoals++;
+
+                  if (homeTeamID === data[i].Goals[j].Player.TeamId) {
+                    $gameHomeTeamPlayerGoalsDiv.append(
+                      "Goal: #" +
+                      data[i].Goals[j].Player.jerseyNumber +
+                      " " +
+                      data[i].Goals[j].Player.firstName +
+                      " " +
+                      data[i].Goals[j].Player.lastName +
+                      " " +
+                      formatGoalTime(data[i].Goals[j].timeRemaining) +
+                      "<br>"
+                    );
+                  }
+                } else if (visitorTeamID === data[i].Goals[j].TeamId) {
+                  visitorTeamGoals++;
+
+                  if (visitorTeamID === data[i].Goals[j].Player.TeamId) {
+                    $gameVisitorTeamPlayerGoalsDiv.append(
+                      "Goal: #" +
+                      data[i].Goals[j].Player.jerseyNumber +
+                      " " +
+                      data[i].Goals[j].Player.firstName +
+                      " " +
+                      data[i].Goals[j].Player.lastName +
+                      " " +
+                      formatGoalTime(data[i].Goals[j].timeRemaining) +
+                      "<br>"
+                    );
+                  }
+                }
               }
 
-              for (i = 0; i < data.length; i++) {
-                var homeTeamID = data[i].homeTeamId;
-                var visitorTeamID = data[i].visitorTeamId;
+              $gameInfoDiv.css({
+                backgroundColor: "#ffe",
+                borderLeft: "5px solid #ccc"
+              });
+              $gameDiv.css({
+                border: "1px solid gray",
+                margin: "5px"
+              });
 
-                var homeTeamGoals = 0;
-                var visitorTeamGoals = 0;
+              // $gameDataDiv.css({
+              //     border: "1px solid gray",
+              //     margin: "5px"
+              // })
 
-                //Sets up the tabular formatting
+              $gameInfoDiv.append(
+                "<b>Game Date: </b> " +
+                moment(data[i].gameDate).format("ddd MMM Do YYYY h:mm a") +
+                "<br><br>"
+              );
 
-                // $gameDivRow.addClass("row");
+              $gameHomeTeamNameDiv.html(
+                "<b>Home Team: " + data[i].HomeTeam.teamName + "</b>"
+              );
 
-                var $gameDiv = $("<div>");
-                // $gameDiv.addClass("col-lg-12 card ");
+              $gameHomeTeamScoreDiv.html(
+                "<b>Goals: " + homeTeamGoals + "</b>"
+              );
 
-                var $gameInfoDiv = $("<div>");
-                // $gameInfoDiv.addClass("col-lg-12 card text-left");
+              $gameVisitorTeamNameDiv.html(
+                "<b>Visitor Team: " + data[i].VisitorTeam.teamName + "</b>"
+              );
 
-                var $gameDataDiv = $("<div>", {
-                  class: "row"
-                });
-                var $homeDiv = $("<div>", {
-                  class: "col-6"
-                });
-                var $visitorDiv = $("<div>", {
-                  class: "col-6"
-                });
+              $gameVisitorTeamScoreDiv.html(
+                "<b>Goals: " + visitorTeamGoals + "</b>"
+              );
 
-                var $gameHomeTeamPlayerGoalsDiv = $("<div>", {
-                  class: "info"
-                });
-                // $gameHomeTeamPlayerGoalsDiv.addClass("col-lg-12 card text-left");
+              $gameDataDiv.append($homeDiv);
+              $gameDataDiv.append($visitorDiv);
 
-                var $gameVisitorTeamPlayerGoalsDiv = $("<div>", {
-                  class: "info"
-                });
-                // $gameVisitorTeamPlayerGoalsDiv.addClass("col-lg-12 card text-left");
+              $homeDiv.append($gameHomeTeamNameDiv);
+              $homeDiv.append($gameHomeTeamScoreDiv);
+              $homeDiv.append($gameHomeTeamPlayerGoalsDiv);
+              $visitorDiv.append($gameVisitorTeamNameDiv);
+              $visitorDiv.append($gameVisitorTeamScoreDiv);
+              $visitorDiv.append($gameVisitorTeamPlayerGoalsDiv);
 
-                var $gameHomeTeamNameDiv = $("<div>", {
-                  class: "info"
-                });
-                // $gameHomeTeamNameDiv.addClass("col-lg-6  text-left");
+              $gameDiv.append($gameInfoDiv);
+              $gameDiv.append($gameDataDiv);
 
-                var $gameVisitorTeamNameDiv = $("<div>", {
-                  class: "info"
-                });
-                // $gameVisitorTeamNameDiv.addClass("col-lg-6 ");
+              //As per issue #79 only showed the "Real Time Score" button
+              //for today's games.
+              if (val === "View Today's Games") {
+                //Create a paragraph to hold the buttons.
+                var $p = $("<p>");
 
-                var $gameHomeTeamScoreDiv = $("<div>", {
-                  class: "info"
-                });
-                // $gameHomeTeamScoreDiv.addClass("col-lg-12 card text-left");
-
-                var $gameVisitorTeamScoreDiv = $("<div>", {
-                  class: "info"
-                });
-                // $gameVisitorTeamScoreDiv.addClass("col-lg-12 card text-left");
-
-                //Retrieves various properties from the object and appends them to the div that
-                //displays the properties.
-
-                for (j = 0; j < data[i].Goals.length; j++) {
-                  if (homeTeamID === data[i].Goals[j].TeamId) {
-                    homeTeamGoals++;
-
-                    if (homeTeamID === data[i].Goals[j].Player.TeamId) {
-                      $gameHomeTeamPlayerGoalsDiv.append(
-                        "Goal: #" +
-                          data[i].Goals[j].Player.jerseyNumber +
-                          " " +
-                          data[i].Goals[j].Player.firstName +
-                          " " +
-                          data[i].Goals[j].Player.lastName +
-                          " " +
-                          formatGoalTime(data[i].Goals[j].timeRemaining) +
-                          "<br>"
-                      );
-                    }
-                  } else if (visitorTeamID === data[i].Goals[j].TeamId) {
-                    visitorTeamGoals++;
-
-                    if (visitorTeamID === data[i].Goals[j].Player.TeamId) {
-                      $gameVisitorTeamPlayerGoalsDiv.append(
-                        "Goal: #" +
-                          data[i].Goals[j].Player.jerseyNumber +
-                          " " +
-                          data[i].Goals[j].Player.firstName +
-                          " " +
-                          data[i].Goals[j].Player.lastName +
-                          " " +
-                          formatGoalTime(data[i].Goals[j].timeRemaining) +
-                          "<br>"
-                      );
-                    }
-                  }
-
-                }
-
-//                 $gameInfoDiv.css({
-//                   backgroundColor: "#ffe",
-//                   borderLeft: "5px solid #ccc"
-//                 });
-                $gameDiv.css({
-                  border: "1px solid gray",
-                  margin: "5px"
-                });
-
-                // $gameDataDiv.css({
-                //     border: "1px solid gray",
-                //     margin: "5px"
-                // })
-
-                $gameInfoDiv.append(
-                  "<b>Game Date: </b> " +
-                    moment(data[i].gameDate).format("ddd MMM Do YYYY h:mm a") +
-                    "<br><br>"
-                );
-
-                $gameHomeTeamNameDiv.html(
-                  "<b>Home Team: " + data[i].HomeTeam.teamName + "</b>"
-                );
-
-                $gameHomeTeamScoreDiv.html(
-                  "<b>Goals: " + homeTeamGoals + "</b>"
-                );
-
-                $gameVisitorTeamNameDiv.html(
-                  "<b>Visitor Team: " + data[i].VisitorTeam.teamName + "</b>"
-                );
-
-                $gameVisitorTeamScoreDiv.html(
-                  "<b>Goals: " + visitorTeamGoals + "</b>"
-                );
-
-                $gameDataDiv.append($homeDiv);
-                $gameDataDiv.append($visitorDiv);
-
-                $homeDiv.append($gameHomeTeamNameDiv);
-                $homeDiv.append($gameHomeTeamScoreDiv);
-                $homeDiv.append($gameHomeTeamPlayerGoalsDiv);
-                $visitorDiv.append($gameVisitorTeamNameDiv);
-                $visitorDiv.append($gameVisitorTeamScoreDiv);
-                $visitorDiv.append($gameVisitorTeamPlayerGoalsDiv);
-
-                $gameDiv.append($gameInfoDiv);
-                $gameDiv.append($gameDataDiv);
-
-                //As per issue #79 only showed the "Real Time Score" button
-                //for today's games.
-                if (val === "View Today's Games") {
-                  //Create a paragraph to hold the buttons.
-                  var $p = $("<p>");
-
-                  // Create a button for each player
-                  var $btn = $("<button>");
-                  //Make the button blue for home team.
-                  $btn.addClass("btn btn-primary");
-                  /* Assign the data attribute with the gameID to the button.
+                // Create a button for each player
+                var $btn = $("<button>");
+                //Make the button blue for home team.
+                $btn.addClass("btn btn-primary");
+                /* Assign the data attribute with the gameID to the button.
               This data attribute will be used to identify the game ID
               */
-                  $btn.attr("data-game-id", data[i].id);
-                  $btn.attr("id", "game-id");
+                $btn.attr("data-game-id", data[i].id);
+                $btn.attr("id", "game-id");
 
-                  $btn.text("View Real Time Score Updates");
-                  //Append the button to the paragraph.
-                  $p.append($btn);
-                  // Append the button to the applicable home team modal.
-                  $($gameDiv).append($p);
-                }
-                $gameDivRow.append($gameDiv);
-
-                //Appends the row to the section that diplays the scoreboard.
-                $(classNameForScore).prepend($gameDivRow);
+                $btn.text("View Real Time Score Updates");
+                //Append the button to the paragraph.
+                $p.append($btn);
+                // Append the button to the applicable home team modal.
+                $($gameDiv).append($p);
               }
-            });
+              $gameDivRow.append($gameDiv);
+
+              //Appends the row to the section that diplays the scoreboard.
+              $(classNameForScore).prepend($gameDivRow);
+            }
           });
         });
-      }
-
-      generateBtn();
-
-      $("body").on("click", "#game-id", function(event) {
-        event.preventDefault();
-
-        // The playerID from the player selected from the model based on the data attribute.
-        var idPicked = $(this).attr("data-game-id");
-        sessionStorage.setItem("gamePicked", idPicked);
-
-        window.location.href = "/scoretracker";
-        // href="/gameselect"
       });
+    }
 
-      /*The function formatGoalTime takes the timeRemaining as a parameter
-          and uses Neil's logic from scorekeeper.js to derive the minutes, seconds,
-          an 10th seconds.  The function formatGoalTime returns a string that looks
-          like 04:57:2.
-          */
-      function formatGoalTime(timeRemaining) {
-        gameMinutes = Math.floor(timeRemaining / 600);
-        gameSeconds = Math.floor((timeRemaining - gameMinutes * 600) / 10);
-        game10ths = Math.floor(
-          timeRemaining - (gameMinutes * 600 + gameSeconds * 10)
-        );
-        if (gameMinutes < 10) {
-          gameMinutes = "0" + gameMinutes;
-        }
-        if (gameSeconds < 10) {
-          gameSeconds = "0" + gameSeconds;
-        }
-        if (game10ths < 10) {
-          game10ths = "0" + game10ths;
-        }
+    generateBtn();
 
-        return gameMinutes + ":" + gameSeconds + ":" + game10ths;
+    $("body").on("click", "#game-id", function (event) {
+      event.preventDefault();
+
+      // The playerID from the player selected from the model based on the data attribute.
+      var idPicked = $(this).attr("data-game-id");
+      sessionStorage.setItem("gamePicked", idPicked);
+
+      window.location.href = "/scoretracker";
+      // href="/gameselect"
+    });
+
+    /*The function formatGoalTime takes the timeRemaining as a parameter
+        and uses Neil's logic from scorekeeper.js to derive the minutes, seconds,
+        an 10th seconds.  The function formatGoalTime returns a string that looks
+        like 04:57:2.
+        */
+    function formatGoalTime(timeRemaining) {
+      gameMinutes = Math.floor(timeRemaining / 600);
+      gameSeconds = Math.floor((timeRemaining - gameMinutes * 600) / 10);
+      game10ths = Math.floor(
+        timeRemaining - (gameMinutes * 600 + gameSeconds * 10)
+      );
+      if (gameMinutes < 10) {
+        gameMinutes = "0" + gameMinutes;
       }
-    </script>
-  </body>
+      if (gameSeconds < 10) {
+        gameSeconds = "0" + gameSeconds;
+      }
+      if (game10ths < 10) {
+        game10ths = "0" + game10ths;
+      }
+
+      return gameMinutes + ":" + gameSeconds + ":" + game10ths;
+    }
+  </script>
+</body>
+
 </html>
