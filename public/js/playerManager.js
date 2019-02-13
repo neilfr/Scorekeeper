@@ -8,7 +8,7 @@ var $teamSelect = $("#team");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveplayer: function(player) {
+  saveplayer: function (player) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -18,13 +18,13 @@ var API = {
       data: JSON.stringify(player)
     });
   },
-  getplayers: function() {
+  getplayers: function () {
     return $.ajax({
       url: "api/players",
       type: "GET"
     });
   },
-  deleteplayer: function(id) {
+  deleteplayer: function (id) {
     return $.ajax({
       url: "api/players/" + id,
       type: "DELETE"
@@ -33,19 +33,19 @@ var API = {
 };
 
 // refreshplayers gets new players from the db and repopulates the list
-var refreshplayers = function() {
-  API.getplayers().then(function(data) {
-    var $players = data.map(function(player) {
+var refreshplayers = function () {
+  API.getplayers().then(function (data) {
+    var $players = data.map(function (player) {
       console.log(player);
       var $a = $("<a>")
         .text(
           player.firstName +
-            " " +
-            player.lastName +
-            ", Jersey:" +
-            player.jerseyNumber +
-            ", Team:" +
-            player.Team.teamName
+          " " +
+          player.lastName +
+          ", Jersey:" +
+          player.jerseyNumber +
+          ", Team:" +
+          player.Team.teamName
         )
         .attr("href", "/api/players/" + player.id);
 
@@ -72,7 +72,7 @@ var refreshplayers = function() {
 
 // handleFormSubmit is called whenever we submit a new player
 // Save the new player to the db and refresh the list
-var handleFormSubmit = function(event) {
+var handleFormSubmit = function (event) {
   event.preventDefault();
 
   var player = {
@@ -94,11 +94,14 @@ var handleFormSubmit = function(event) {
       "You must enter a player's first name, last name, description and pick a team"
     );
     return;
+  } else if (isNaN(player.jerseyNumber)) {
+    alert("Input a valid Jersey number")
+  } else {
+    API.saveplayer(player).then(function () {
+      refreshplayers();
+    });
   }
 
-  API.saveplayer(player).then(function() {
-    refreshplayers();
-  });
 
   $playerFirstName.val("");
   $playerLastName.val("");
@@ -108,12 +111,12 @@ var handleFormSubmit = function(event) {
 
 // handleDeleteBtnClick is called when a player's delete button is clicked
 // Remove the player from the db and refresh the list
-var handleDeleteBtnClick = function() {
+var handleDeleteBtnClick = function () {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  API.deleteplayer(idToDelete).then(function() {
+  API.deleteplayer(idToDelete).then(function () {
     refreshplayers();
   });
 };

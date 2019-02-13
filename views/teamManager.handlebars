@@ -1,18 +1,18 @@
 <div class="card text-center">
   <div class="card-header row">
-    <div class="col-8" style="margin:0;padding:0">
+    <div class="col-8">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a class="nav-link active" href="/teamManager">Team Manager</a>
+          <a class="nav-link active" href="/teamManager">Manage Teams</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/playerManager">Player Manager</a>
+          <a class="nav-link" href="/playerManager">Manage Players</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/gameManager">Game Manager</a>
+          <a class="nav-link" href="/gameManager">Manage Games</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/gamePicker">Game Picker</a>
+          <a class="nav-link" href="/gamePicker">Select Game</a>
         </li>
       </ul>
     </div>
@@ -21,12 +21,12 @@
   </div>
 </div>
 
-<div id="home">
+<div id="home" style="margin: 15px">
   <div class="container">
     <div class="row">
       <div class="col-8 offset-2">
-        {{!-- <h1>{{msg}}</h1> --}}
-        <h2>This is our Team Manager Page!</h2>
+
+        <h2>Manage Teams Page</h2>
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
             <label for="team-name">Team Name</label>

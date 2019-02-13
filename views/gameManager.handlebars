@@ -3,16 +3,16 @@
     <div class="col-8">
       <ul class="nav nav-tabs card-header-tabs">
         <li class="nav-item">
-          <a class="nav-link" href="/teamManager">Team Manager</a>
+          <a class="nav-link" href="/teamManager">Manage Teams</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/playerManager">Player Manager</a>
+          <a class="nav-link " href="/playerManager">Manage Players</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/gameManager">Game Manager</a>
+          <a class="nav-link active" href="/gameManager">Manage Games</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/gamePicker">Game Picker</a>
+          <a class="nav-link" href="/gamePicker">Select Game</a>
         </li>
       </ul>
     </div>
@@ -21,17 +21,17 @@
   </div>
 </div>
 
-<div id="home">
+<div id="home" style="margin:15px">
   <div class="container">
     <div class="row">
       <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Game Manager Page!</h2>
-        <form class="clearfix mb-4" action="POST">
+
+        <h2>Manage Games Page</h2>
+        <form id="manager-form" class="clearfix mb-4" action="POST">
 
           <div class="form-group">
             <label for="category">Select Home Team:</label>
-            <select class="custom-select" id="homeTeam">
+            <select class="form-control" id="homeTeam" placeholder="Home Team">
             </select>
           </div>
 
@@ -68,3 +68,13 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/gameManager.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="js/jquery.validate.min"></script>
+<script>
+  $("#manager-form").validate({
+    submitHandler: function (form) {
+      form.submit();
+    }
+  });
+  var validator = $("#manager-form").validate();
+  validator.form();
+</script>
