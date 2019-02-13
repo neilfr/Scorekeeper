@@ -162,51 +162,53 @@
     </div>
 
     <script>
-        var url = "";
-        var val = "";
-        var $gameDivRow = $("<div>");
+      var url = "";
+      var val = "";
+      var $gameDivRow = $("<div>");
 
-        function generateBtn() {
-          $(".btn").on("click", function() {
-            $(".scores-appear-here-view-all-games").empty();
-            $(".scores-appear-here-view-past-games").empty();
-            $(".scores-appear-here-view-todays-games").empty();
-            $(".scores-appear-here-view-future-games").empty();
-            $gameDivRow.empty();
-            val = $(this).attr("value");
-            console.log("You have chosen " + val);
-            var classNameForScore = "";
+      function generateBtn() {
+        $(".btn").on("click", function() {
+          //
+          $(".scores-appear-here-view-all-games").empty();
+          $(".scores-appear-here-view-past-games").empty();
+          $(".scores-appear-here-view-todays-games").empty();
+          $(".scores-appear-here-view-future-games").empty();
+          $gameDivRow.empty();
+          val = $(this).attr("value");
+          console.log("You have chosen " + val);
+          var classNameForScore = "";
 
-            switch (val) {
-              case "View All Games":
-                url = "/api/games";
-                console.log("from btn", url);
-                $gameDivRow.html("");
-                classNameForScore = ".scores-appear-here-view-all-games";
-                break;
-              case "View Today's Games":
-                url = "/api/gamesbydate/today";
-                console.log("from btn", url);
-                $gameDivRow.html("");
-                classNameForScore = ".scores-appear-here-view-todays-games";
-                break;
-              case "View Past Games":
-                url = "/api/gamesbydate/past";
-                classNameForScore = ".scores-appear-here-view-past-games";
-                break;
-              case "View Future Games":
-                url = "/api/gamesbydate/future ";
-                classNameForScore = ".scores-appear-here-view-future-games";
-                break;
-              default:
-              // code block
+          switch (val) {
+            case "View All Games":
+              url = "/api/games";
+              console.log("from btn", url);
+              $gameDivRow.html("");
+              classNameForScore = ".scores-appear-here-view-all-games";
+              break;
+            case "View Today's Games":
+              url = "/api/gamesbydate/today";
+              console.log("from btn", url);
+              $gameDivRow.html("");
+              classNameForScore = ".scores-appear-here-view-todays-games";
+              break;
+            case "View Past Games":
+              url = "/api/gamesbydate/past";
+              classNameForScore = ".scores-appear-here-view-past-games";
+              break;
+            case "View Future Games":
+              url = "/api/gamesbydate/future ";
+              classNameForScore = ".scores-appear-here-view-future-games";
+              break;
+            default:
+            // code block
           }
           $.ajax({
             url: url,
             method: "GET"
-          }).then(function (data) {
+          }).then(function(data) {
             console.log(data);
-            if (data.length === 0); {
+            if (data.length === 0);
+            {
               var $head = $("<h3>");
               $head.text("No games");
               $(".scores-appear-here").prepend($head);
@@ -317,7 +319,6 @@
                     }
                   }
                 }
-              }
 
                 $gameInfoDiv.css({
                   backgroundColor: "#ffe",
@@ -343,7 +344,9 @@
                   "<b>Home Team: " + data[i].HomeTeam.teamName + "</b>"
                 );
 
-                $gameHomeTeamScoreDiv.html("<b>Goals: " + homeTeamGoals + "</b>");
+                $gameHomeTeamScoreDiv.html(
+                  "<b>Goals: " + homeTeamGoals + "</b>"
+                );
 
                 $gameVisitorTeamNameDiv.html(
                   "<b>Visitor Team: " + data[i].VisitorTeam.teamName + "</b>"
@@ -377,8 +380,8 @@
                   //Make the button blue for home team.
                   $btn.addClass("btn btn-primary");
                   /* Assign the data attribute with the gameID to the button.
-          This data attribute will be used to identify the game ID
-          */
+              This data attribute will be used to identify the game ID
+              */
                   $btn.attr("data-game-id", data[i].id);
                   $btn.attr("id", "game-id");
 
@@ -400,7 +403,7 @@
 
       generateBtn();
 
-      $("body").on("click", "#game-id", function (event) {
+      $("body").on("click", "#game-id", function(event) {
         event.preventDefault();
 
         // The playerID from the player selected from the model based on the data attribute.
@@ -412,10 +415,10 @@
       });
 
       /*The function formatGoalTime takes the timeRemaining as a parameter
-      and uses Neil's logic from scorekeeper.js to derive the minutes, seconds,
-      an 10th seconds.  The function formatGoalTime returns a string that looks
-      like 04:57:2.
-      */
+          and uses Neil's logic from scorekeeper.js to derive the minutes, seconds,
+          an 10th seconds.  The function formatGoalTime returns a string that looks
+          like 04:57:2.
+          */
       function formatGoalTime(timeRemaining) {
         gameMinutes = Math.floor(timeRemaining / 600);
         gameSeconds = Math.floor((timeRemaining - gameMinutes * 600) / 10);
