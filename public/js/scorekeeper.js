@@ -14,6 +14,8 @@ var timeRemainingUponEvent;
 var totalHomeGoals = 0;
 var totalVisitorGoals = 0;
 
+initialize();
+
 //var socket = io("http://localhost:3000?gameId=" + gamePicked);
 var socket = io(
   window.location.protocol +
@@ -200,6 +202,11 @@ it would be good to make a function for this to make the code more efficient, et
     $.post("/api/goals", newGoal)
       .then(function() {
         socket.emit("goalEvent" + gamePicked);
+        $.get("/api/games/" + gamePicked).then(function(data) {
+          console.log("data received is:");
+          console.log(data);
+          refreshGoalInfo(data);
+        });
       })
       .catch(function(err) {
         console.log("error", err);
@@ -226,7 +233,7 @@ it would be good to make a function for this to make the code more efficient, et
       teamID: visitorTeamID,
       playerID: playerID
     };
-
+    /*
     totalVisitorGoals += 1;
     $("#vscore").text(totalVisitorGoals);
     if (totalVisitorGoals > totalHomeGoals) {
@@ -237,7 +244,7 @@ it would be good to make a function for this to make the code more efficient, et
     } else if (totalVisitorGoals === totalHomeGoals) {
       $("#hscore").removeClass("winner");
     }
-
+*/
     //Calling the post goal API route and passing the newGoal object
     //to create the goal record in the db with the contained data.
 
@@ -250,6 +257,11 @@ it would be good to make a function for this to make the code more efficient, et
       //   goalAnnounce(newGoal);
       .then(function() {
         socket.emit("goalEvent" + gamePicked);
+        $.get("/api/games/" + gamePicked).then(function(data) {
+          console.log("data received is:");
+          console.log(data);
+          refreshGoalInfo(data);
+        });
       })
       .catch(function(err) {
         console.log("error", err);
@@ -320,10 +332,26 @@ it would be good to make a function for this to make the code more efficient, et
   }, 100);
 });
 
-function goalAnnounce(goalData) {
-  //get game data for the current game so we can calculate the current game score
-  $.get("/api/games/" + gamePicked, function() {}).then(function(data) {
-    //push a goal announcement using socket.io
-    socket.emit("goalEvent" + gamePicked, data);
+function refreshGoalInfo(data) {
+  var homeScore = 0;
+  var visitorScore = 0;
+  var homeTeamID = data.HomeTeam.id;
+
+  for (i = 0; i < data.Goals.length; i++) {
+    if (data.Goals[i].TeamId === homeTeamID) {
+      homeScore++;
+    } else {
+      visitorScore++;
+    }
+  }
+  $("#hscore").html(homeScore);
+  $("#vscore").html(visitorScore);
+}
+
+function initialize() {
+  $.get("/api/games/" + gamePicked).then(function(data) {
+    console.log("data received is:");
+    console.log(data);
+    refreshGoalInfo(data);
   });
 }

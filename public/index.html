@@ -24,7 +24,8 @@
   <!-- Bootstrap-Core-CSS -->
   <!-- <link rel="stylesheet" href="../public/styles/styles.css" type="text/css" media="all" /> -->
   <!-- Style-CSS -->
-  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <!-- Font-Awesome-Icons-CSS -->
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -68,6 +69,7 @@
   text-decoration: none;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 5px 5px 3px rgb(43, 42, 42);
 }
 
 .button:after {
@@ -120,10 +122,19 @@
               <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/gameselect">Scores</a>
+              <a class="nav-link" href="/gameselect">View Scores</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/teamManager">Manage</a>
+              <a class="nav-link" href="/teamManager">Manage Team</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/playerManager">Manage Players</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/gameManager">Manage Games</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/gamePicker">Select Game</a>
             </li>
           </ul>
           <!-- Links -->
@@ -132,21 +143,16 @@
         <!-- Collapsible content -->
       </nav>
     </div>
-    <div class="container" style="padding-top:160px;padding-left:60px">
-      <div class="row">
-        <h1 class="text-center" style="padding-left:25px">Scorekeepers</h1>
+    <div class="container float-right col-6 text-center" style="padding-top:160px;padding-left:60px">
+      <div class="row text-center" style="margin-left:25px">
+        <h1>Scorekeepers</h1>
       </div>
-      <div class="row" style="padding-top:40px;">
-        <a href="/gameselect"> <button type="button" id="score-btn" class="btn btn-default button">Scores
+      <div class="row text-center" style="margin-top:60px">
+        <a href="/gameselect"> <button type="button" id="score-btn" class="btn btn-default button"><b>View Scores</b>
           </button></a>
-        <a href="/teamManager"><button type="button" id="manage-btn" class="btn btn-default button">Manage</button></a>
+        <a href="/teamManager"><button type="button" id="manage-btn" class="btn btn-default button"><b>Manage</b></button></a>
       </div>
     </div>
-    <div class="row text-center">
-          <div class="col-6"><a href="/gameselect"><button class="funkyButton" id="startGameSelect" href="">Game Select for Parent / Client / End User</button></a></div>
-    </div>
-
-    <i class="fa fa-group"></i>
 
     <footer class="page-footer footer">
       <div class="copy_right text-right ml-auto mr-sm-5 mr-4">
@@ -162,4 +168,3 @@
 </body>
 
 </html>
-
