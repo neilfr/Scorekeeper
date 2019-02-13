@@ -94,15 +94,14 @@ var handleFormSubmit = function (event) {
       "You must enter a player's first name, last name, description and pick a team"
     );
     return;
-  }
-
-  if (isNaN(player.jerseyNumber)) {
+  } else if (isNaN(player.jerseyNumber)) {
     alert("Input a valid Jersey number")
+  } else {
+    API.saveplayer(player).then(function () {
+      refreshplayers();
+    });
   }
 
-  API.saveplayer(player).then(function () {
-    refreshplayers();
-  });
 
   $playerFirstName.val("");
   $playerLastName.val("");
