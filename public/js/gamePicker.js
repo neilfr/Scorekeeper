@@ -7,7 +7,7 @@ var $gameList = $("#game-list");
 var API = {
   getgames: function() {
     return $.ajax({
-      url: "api/games",
+      url: "/api/gamesbydate/today",
       //url: "api/gamesbydate/today",
       type: "GET"
     });

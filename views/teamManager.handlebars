@@ -33,14 +33,14 @@
             <input type="text" id="team-name" class="form-control" aria-describedby="team-name"
               placeholder="Enter Team Name">
           </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
+          <button id="submit" class="btn funkyButton float-right" style="width:100px">Submit</button>
         </form>
         <h3>Teams:</h3>
         <ul id="team-list" class="list-group">
           {{#each teams}}
           <li data-id="{{this.id}}" class="list-group-item">
             <a href="api/teams/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
+            <button class="btn float-right delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
           </li>
           {{/each}}
         </ul>
