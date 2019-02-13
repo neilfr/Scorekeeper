@@ -27,7 +27,7 @@
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
         <h2>This is our Game Manager Page!</h2>
-        <form class="clearfix mb-4" action="POST">
+        <form id="manager-form" class="clearfix mb-4" action="POST">
 
           <div class="form-group">
             <label for="category">Select Home Team:</label>
@@ -68,3 +68,13 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/gameManager.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="js/jquery.validate.min"></script>
+<script>
+  $("#manager-form").validate({
+    submitHandler: function (form) {
+      form.submit();
+    }
+  });
+  var validator = $("#manager-form").validate();
+  validator.form();
+</script>

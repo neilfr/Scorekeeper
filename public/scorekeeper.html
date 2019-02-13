@@ -16,141 +16,145 @@
 </head>
 
 <body>
+  <div class="col-12" style="height:4px; margin-top:2px">
+    <a href="/"> <button type="button" class="btn btn-dark"> HOME</button></a>
+    <a href="/teamManager"> <button type="button" class="btn btn-dark"> MANAGE</button></a>
+    <div>
+      <h1 class="text-center heading scoreheading">Scorekeeper</h1>
+    </div>
 
-  <h1 class="text-center heading scoreheading">Scorekeeper</h1>
 
-  <div class="clockContainer">
-    <!-- <h1 class="text-center" id="gameClock">&nbsp;</h1> -->
-    <div id="timer" class="col-12 text-center">
+    <div class="clockContainer">
+      <!-- <h1 class="text-center" id="gameClock">&nbsp;</h1> -->
+      <div id="timer" class="col-12 text-center">
 
-      <div id="clockdiv" class="row ">
-        <div class="col-4  time-holder ">
-          <span class="minutes text-center"></span>
-          <div class="smalltext">Minutes</div>
-        </div>
-        <div class="col-4 time-holder">
-          <span class="seconds"></span>
-          <div class="smalltext">Seconds</div>
-        </div>
-        <div class="col-4 time-holder">
-          <span class="milliseconds"></span>
-          <div class="smalltext">10th</div>
+        <div id="clockdiv" class="row ">
+          <div class="col-4  time-holder ">
+            <span class="minutes text-center"></span>
+            <div class="smalltext">Minutes</div>
+          </div>
+          <div class="col-4 time-holder">
+            <span class="seconds"></span>
+            <div class="smalltext">Seconds</div>
+          </div>
+          <div class="col-4 time-holder">
+            <span class="milliseconds"></span>
+            <div class="smalltext">10th</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row controller text-center" style="margin:auto">
-
-    <div class="offset-1 col-lg-4 text-center">
-      <input id="start-game" class="btn btn-success" type="submit" value="Start Game" />
-    </div>
-
-
-
-    <div class="offset-2 col-lg-4 text-center">
-      <input id="stop-game" class="btn btn-danger" type="submit" value="Stop Game" />
-    </div>
-  </div>
-  <div class="container" style="margin-bottom:30px">
-
-    <div class="row display-row">
-      <div class="col-4 offset-1 text-center home-div">
-        <div class="col-12 ">
-          <h4>Home Team</h4>
-        </div>
-        <div class="col-12">
-          <h3 id="home-name"></h3>
+    <div class="row controller text-center">
+      <div class="offset-3 col-9">
+        <div class=" col-lg-4 text-center">
+          <input id="start-game" class="btn btn-success" type="submit" value="Start Game" />
         </div>
 
+        <div class=" col-lg-4 text-center">
+          <input id="stop-game" class="btn btn-danger" type="submit" value="Stop Game" />
+        </div>
       </div>
+    </div>
+    <div class="container" style="margin-bottom:30px">
 
-      <!-- <div class="col-6 text-center"></div>
+      <div class="row display-row">
+        <div class="col-4 offset-1 text-center home-div">
+          <div class="col-12 ">
+            <h4>Home Team</h4>
+          </div>
+          <div class="col-12">
+            <h3 id="home-name"></h3>
+          </div>
+
+        </div>
+
+        <!-- <div class="col-6 text-center"></div>
     <div class="col-lg-6 text-center">
       Home Team
     </div> -->
 
-      <!-- goal-div -->
-      <div class="col-2 text-center" style="margin-top:20px">
-        <div class="scorelog"><span id="hscore">0</span><span id="vscore">0</span></div>
+        <!-- goal-div -->
+        <div class="col-2 text-center" style="margin-top:20px">
+          <div class="scorelog" style="display:none"><span id="hscore"></span><span id="vscore"></span></div>
+        </div>
+
+        <!-- visitor div -->
+
+        <div class="col-4 text-center visitor-div">
+          <div class="col-12">
+            <h4>Visitor Team</h4>
+          </div>
+          <div class="col-12">
+            <h3 id="visitor-name"></h3>
+          </div>
+
+
+        </div>
+      </div>
+      <!-- ... -->
+      <div class="row">
+        <div class=" col-6 text-center">
+          <input id="home-team-goal" class="btn btn-primary game-button" type="submit" value="Home Team Goal"
+            data-toggle="modal" data-target="#selectHomeTeamPlayerModal" /><br />
+        </div>
+        <div class="col-6 text-center">
+          <input id="visitor-team-goal" class="btn btn-secondary game-button" type="submit" value="Visitor Team Goal"
+            data-toggle="modal" data-target="#selectVisitorTeamPlayerModal" /><br />
+        </div>
+      </div>
+      <div class="row">
+        <div class=" col-6 text-center">
+          <input id="home-team-penalty" class="btn btn-warning game-button" type="submit" value="Home Team Penalty" /><br />
+        </div>
+        <div class="col-6 text-center">
+          <input id="visitor-team-penalty" class="btn btn-dark game-button" type="submit" value="Visitor Team Penalty" /><br />
+        </div>
       </div>
 
-      <!-- visitor div -->
 
-      <div class="col-4 text-center visitor-div">
-        <div class="col-12">
-          <h4>Visitor Team</h4>
-        </div>
-        <div class="col-12">
-          <h3 id="visitor-name"></h3>
-        </div>
 
+
+    </div>
+    <!-- end of container-->
+
+
+
+
+
+
+
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <script type="text/javascript" src="./js/scorekeeper.js"></script>
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="selectHomeTeamPlayerModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="modal-title-hometeam"></h4>
+          </div>
+          <div class="modal-body" id="modal-body-hometeam">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
 
       </div>
     </div>
-    <!-- ... -->
-    <div class="row">
-      <div class=" col-6 text-center">
-        <input id="home-team-goal" class="btn btn-primary game-button" type="submit" value="Home Team Goal" data-toggle="modal"
-          data-target="#selectHomeTeamPlayerModal" /><br />
-      </div>
-      <div class="col-6 text-center">
-        <input id="visitor-team-goal" class="btn btn-secondary game-button" type="submit" value="Visitor Team Goal"
-          data-toggle="modal" data-target="#selectVisitorTeamPlayerModal" /><br />
-      </div>
-    </div>
-    <div class="row">
-      <div class=" col-6 text-center">
-        <input id="home-team-penalty" class="btn btn-warning game-button" type="submit" value="Home Team Penalty" /><br />
-      </div>
-      <div class="col-6 text-center">
-        <input id="visitor-team-penalty" class="btn btn-dark game-button" type="submit" value="Visitor Team Penalty" /><br />
-      </div>
-    </div>
-
-
-
-
-  </div>
-  <!-- end of container-->
-
-
-
-
-
-
-
-
-
-  <!-- jQuery -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
-  <script type="text/javascript" src="./js/scorekeeper.js"></script>
-
-
-
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="selectHomeTeamPlayerModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" id="modal-title-hometeam"></h4>
-        </div>
-        <div class="modal-body" id="modal-body-hometeam">
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
 
   </div>
 
