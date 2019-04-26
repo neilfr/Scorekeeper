@@ -37,6 +37,7 @@
 ## Near real-time updates
 
 - Score Tracker provides subscribers with near real-time game clock updates every 1/10th of a second along with goal updates
+
   ![](screenshots/updates.JPG)
 
 ## Game selector
